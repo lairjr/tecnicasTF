@@ -1,6 +1,6 @@
 package infrastructure;
 
-import org.apache.derby.jdbc.EmbeddedDataSource;
+import org.apache.derby.jdbc.EmbeddedDataSourceInterface;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -13,13 +13,13 @@ public class Database implements IDatabase {
     public static String USER_NAME = "app";
     public static String PASSWORD = "app";
     private static IDatabase instance;
-    private EmbeddedDataSource dataSource;
+    private EmbeddedDataSourceInterface dataSource;
 
-    private Database(EmbeddedDataSource dataSource) {
+    private Database(EmbeddedDataSourceInterface dataSource) {
         this.dataSource = dataSource;
     }
 
-    public static IDatabase getInstance(EmbeddedDataSource dataSource) {
+    public static IDatabase getInstance(EmbeddedDataSourceInterface dataSource) {
         if (instance == null) {
             dataSource.setDatabaseName(DB_NAME);
             dataSource.setCreateDatabase("create");
