@@ -2,7 +2,6 @@ import infrastructure.Database;
 import infrastructure.IDatabase;
 import org.apache.derby.jdbc.EmbeddedDataSourceInterface;
 import org.junit.*;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;

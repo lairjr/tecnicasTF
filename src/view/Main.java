@@ -2,11 +2,16 @@ package view;/**
  * Created by ljunior on 5/31/16.
  */
 
+import infrastructure.Database;
+import infrastructure.IDatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.apache.derby.jdbc.EmbeddedDataSource;
+
+import java.sql.Connection;
 
 public class Main extends Application {
 
