@@ -1,5 +1,6 @@
 package view;
 
+import domain.IDomainFacede;
 import dtos.FlightDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,12 +9,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import view.factories.IFlightVMFactory;
 import view.models.FlightVM;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class TicketsController implements Initializable {
+    private IDomainFacede domainFacede;
+    private IFlightVMFactory flightVMFactory;
+
     @FXML
     private TableView<FlightVM> flightsTable;
     @FXML
@@ -25,13 +31,11 @@ public class TicketsController implements Initializable {
     }
 
     public void searchFligths(ActionEvent actionEvent) {
-        ObservableList<FlightVM> flights = FXCollections.observableArrayList();
+        List<FlightDTO> filteredFligths = domainFacede.getFlights(null, null, null);
+        ObservableList<FlightVM> flightVMs = FXCollections.observableArrayList();
 
-        flights.add(new FlightVM(1));
-        flights.add(new FlightVM(2));
-        flights.add(new FlightVM(3));
-        flights.add(new FlightVM(4));
+        for (FlightDTO flight: filteredFligths) flightVMs.add(flightVMFactory.create(flight));
 
-        flightsTable.setItems(flights);
+        flightsTable.setItems(flightVMs);
     }
 }
