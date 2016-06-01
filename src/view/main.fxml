@@ -45,9 +45,9 @@
                               </AnchorPane>
                            </top>
                            <center>
-                              <TableView BorderPane.alignment="CENTER">
+                              <TableView BorderPane.alignment="CENTER" fx:id="flightsTable">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="Number" />
+                                  <TableColumn prefWidth="75.0" text="Number" fx:id="flightNumberColumn" />
                                   <TableColumn prefWidth="350.0" text="Destino" />
                                     <TableColumn prefWidth="121.0" text="Embarque" />
                                     <TableColumn prefWidth="124.0" text="Retorno" />
