@@ -37,6 +37,7 @@ public class FlightDao implements IFlightDao {
         return this.mockGetFlights();
     }
 
+    //TODO: get rid of theses mocks
     private List<FlightDTO> mockGetFlights() {
         return mockFlights;
     }
