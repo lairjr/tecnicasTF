@@ -1,13 +1,9 @@
 package view.models;
 
 import dtos.FlightDTO;
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 
-import java.util.Date;
-import java.util.Observable;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by ljunior on 6/1/16.
@@ -15,12 +11,17 @@ import java.util.Observable;
 public class FlightVM {
     private IntegerProperty number;
     private StringProperty arrivalLocale;
+    private StringProperty arrivalDate;
     private StringProperty departureLocale;
+    private StringProperty departureDate;
 
     public FlightVM(FlightDTO flightDTO) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         this.number = new SimpleIntegerProperty(flightDTO.getNumber());
         this.arrivalLocale = new SimpleStringProperty(flightDTO.getArrivalLocale());
+        this.arrivalDate = new SimpleStringProperty(dateFormat.format(flightDTO.getArrivalDate()));
         this.departureLocale = new SimpleStringProperty(flightDTO.getDepartureLocale());
+        this.departureDate = new SimpleStringProperty(dateFormat.format(flightDTO.getDepartureDate()));
     }
 
     public int getNumber() {
@@ -37,5 +38,13 @@ public class FlightVM {
 
     public StringProperty getDepartureLocale() {
         return departureLocale;
+    }
+
+    public StringProperty getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public StringProperty getDepartureDate() {
+        return departureDate;
     }
 }

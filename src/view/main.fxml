@@ -18,40 +18,37 @@
                      <children>
                         <BorderPane layoutY="1.0" prefHeight="441.0" prefWidth="843.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
                            <top>
-                              <AnchorPane prefHeight="60.0" prefWidth="842.0">
+                              <GridPane prefHeight="60.0" prefWidth="843.0" BorderPane.alignment="CENTER">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="341.0" minWidth="10.0" prefWidth="78.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="0.0" prefWidth="220.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="10.0" prefWidth="77.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="10.0" prefWidth="361.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="10.0" prefWidth="124.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
                                  <children>
-                                    <GridPane layoutX="131.0" prefHeight="60.0" prefWidth="843.0" BorderPane.alignment="CENTER">
-                                      <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="341.0" minWidth="10.0" prefWidth="78.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="0.0" prefWidth="220.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="10.0" prefWidth="77.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="10.0" prefWidth="361.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="10.0" prefWidth="124.0" />
-                                      </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
-                                       <children>
-                                          <Label prefHeight="18.0" prefWidth="75.0" text="Embarque" />
-                                          <Label text="Retorno" GridPane.columnIndex="2" />
-                                          <Label text="Destino" GridPane.rowIndex="1" />
-                                          <DatePicker GridPane.columnIndex="1" />
-                                          <DatePicker GridPane.columnIndex="3" />
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Button mnemonicParsing="false" onAction="#searchFligths" text="Pesquisar" GridPane.columnIndex="4" />
-                                       </children>
-                                    </GridPane>
+                                    <Label prefHeight="18.0" prefWidth="75.0" text="Embarque" />
+                                    <Label text="Retorno" GridPane.columnIndex="2" />
+                                    <Label text="Destino" GridPane.rowIndex="1" />
+                                    <DatePicker GridPane.columnIndex="1" />
+                                    <DatePicker GridPane.columnIndex="3" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Button mnemonicParsing="false" onAction="#searchFligths" text="Pesquisar" GridPane.columnIndex="4" />
                                  </children>
-                              </AnchorPane>
+                              </GridPane>
                            </top>
                            <center>
-                              <TableView fx:id="flightsTable" prefHeight="381.0" prefWidth="841.0" BorderPane.alignment="CENTER">
+                              <TableView fx:id="flightsTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                 <columns>
-                                  <TableColumn prefWidth="330.0" text="Destino" />
-                                    <TableColumn fx:id="flightArrivalLocaleColumn" prefWidth="59.0" text="Retorno" />
-                                    <TableColumn fx:id="flightDepartureLocaleColumn" prefWidth="151.0" text="Embarque" />
-                                  <TableColumn fx:id="flightNumberColumn" prefWidth="258.0" text="Number" />
+                                    <TableColumn fx:id="flightNumberColumn" prefWidth="77.0" text="Number" />
+                                    <TableColumn fx:id="flightDepartureDateColumn" prefWidth="115.0" text="Data Embarque" />
+                                    <TableColumn fx:id="flightDepartureLocaleColumn" prefWidth="264.0" text="Local Embarque" />
+                                    <TableColumn fx:id="flightArrivalDateColumn" prefWidth="108.0" text="Data Retorno" />
+                                    <TableColumn fx:id="flightArrivalLocaleColumn" prefWidth="276.0" text="Local Retorno" />
                                 </columns>
                               </TableView>
                            </center>

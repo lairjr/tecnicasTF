@@ -43,13 +43,19 @@ public class TicketsController implements Initializable {
     private TableColumn<FlightVM, String> flightArrivalLocaleColumn;
     @FXML
     private TableColumn<FlightVM, String> flightDepartureLocaleColumn;
+    @FXML
+    private TableColumn<FlightVM, String> flightDepartureDateColumn;
+    @FXML
+    private TableColumn<FlightVM, String> flightArrivalDateColumn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.solveDependencies();
         flightNumberColumn.setCellValueFactory(f -> f.getValue().numberProperty());
         flightArrivalLocaleColumn.setCellValueFactory(f -> f.getValue().getArrivalLocale());
+        flightArrivalDateColumn.setCellValueFactory(f -> f.getValue().getArrivalDate());
         flightDepartureLocaleColumn.setCellValueFactory(f -> f.getValue().getDepartureLocale());
+        flightDepartureDateColumn.setCellValueFactory(f -> f.getValue().getDepartureDate());
     }
 
     private void solveDependencies() {
