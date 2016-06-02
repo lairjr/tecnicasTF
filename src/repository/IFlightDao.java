@@ -12,5 +12,5 @@ import java.util.function.Predicate;
  */
 public interface IFlightDao {
     int insert(FlightDTO flight);
-    List<FlightDTO> getByDate(Date from, Date to);
+    List<FlightDTO> getFlightsByDateAndLocale(Date departureDate, Date arrivalDate, String departureLocale, String arrivalLocale);
 }
