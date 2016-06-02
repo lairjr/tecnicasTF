@@ -16,7 +16,9 @@ public class TicketService implements ITicketService {
 
     @Override
     public TicketDTO save(TicketDTO ticketDTO) {
-        return null;
+        if (ticketDTO.getNumber() == 0)
+            return ticketDao.insert(ticketDTO);
+        return ticketDao.update(ticketDTO);
     }
 
     @Override

@@ -10,4 +10,34 @@ public class TicketDTO {
     private FlightDTO flight;
     private int status;
     private int seat;
+
+    public TicketDTO() { }
+
+    public TicketDTO(int number) {
+        this.number = number;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public String getPassenger() {
+        return passenger;
+    }
+
+    public String getDocument() {
+        return document;
+    }
+
+    public FlightDTO getFlight() {
+        return flight;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public int getSeat() {
+        return seat;
+    }
 }

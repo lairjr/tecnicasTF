@@ -7,8 +7,7 @@ import org.junit.Test;
 import repository.ITicketDao;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by ljunior on 6/1/16.
@@ -31,6 +30,28 @@ public class TicketServiceTest {
         when(ticketDao.getByNumber(number)).thenReturn(ticket);
 
         TicketDTO returnedTicket = ticketService.getByNumber(number);
+        assertEquals(returnedTicket, ticket);
+    }
+
+    @Test
+    public void saveShouldReturnInsertRepositoryCall() {
+        TicketDTO ticket = new TicketDTO();
+
+        when(ticketDao.insert(ticket)).thenReturn(ticket);
+
+        TicketDTO returnedTicket = ticketService.save(ticket);
+        verify(ticketDao, times(1)).insert(ticket);
+        assertEquals(returnedTicket, ticket);
+    }
+
+    @Test
+    public void saveShouldReturnUpdateRepositoryCall() {
+        TicketDTO ticket = new TicketDTO(1234);
+
+        when(ticketDao.update(ticket)).thenReturn(ticket);
+
+        TicketDTO returnedTicket = ticketService.save(ticket);
+        verify(ticketDao, times(1)).update(ticket);
         assertEquals(returnedTicket, ticket);
     }
 }

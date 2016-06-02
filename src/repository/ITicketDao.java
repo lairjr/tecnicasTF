@@ -7,4 +7,6 @@ import dtos.TicketDTO;
  */
 public interface ITicketDao {
     TicketDTO getByNumber(int number);
+    TicketDTO insert(TicketDTO ticket);
+    TicketDTO update(TicketDTO ticket);
 }
