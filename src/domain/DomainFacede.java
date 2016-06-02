@@ -19,7 +19,7 @@ public class DomainFacede implements IDomainFacede {
     }
 
     @Override
-    public List<FlightDTO> getFlights(Date departure, Date arrival, String from, String destination) {
+    public List<FlightDTO> getFlightsByDateAndLocale(Date departure, Date arrival, String from, String destination) {
         return flightService.getFlightsByDateAndLocale(departure, arrival, from, destination);
     }
 

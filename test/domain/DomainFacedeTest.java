@@ -41,7 +41,7 @@ public class DomainFacedeTest {
 
         when(flightService.getFlightsByDateAndLocale(fromDate, toDate, from, to)).
                 thenReturn(mockFlights);
-        List<FlightDTO> returnedFlights = domainFacede.getFlights(fromDate, toDate, from, to);
+        List<FlightDTO> returnedFlights = domainFacede.getFlightsByDateAndLocale(fromDate, toDate, from, to);
 
         assertEquals(mockFlights, returnedFlights);
     }
