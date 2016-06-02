@@ -7,4 +7,5 @@ import dtos.TicketDTO;
  */
 public interface ITicketService {
     TicketDTO save(TicketDTO ticketDTO);
+    TicketDTO getByNumber(int ticketNumber);
 }

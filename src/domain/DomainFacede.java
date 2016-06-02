@@ -27,4 +27,9 @@ public class DomainFacede implements IDomainFacede {
     public TicketDTO saveTicket(TicketDTO ticketDTO) {
         return ticketService.save(ticketDTO);
     }
+
+    @Override
+    public TicketDTO getTicket(int ticketNumber) {
+        return ticketService.getByNumber(ticketNumber);
+    }
 }

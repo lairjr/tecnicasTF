@@ -4,6 +4,7 @@ import dtos.FlightDTO;
 import dtos.TicketDTO;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Matchers;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -52,5 +53,15 @@ public class DomainFacedeTest {
 
         TicketDTO returnedTicket = domainFacede.saveTicket(ticket);
         assertEquals(ticket, ticket);
+    }
+
+    @Test
+    public void getTicketShouldReturnServiceCall() {
+        TicketDTO ticket = new TicketDTO();
+        int ticketNumber = 1234;
+        when(ticketService.getByNumber(ticketNumber)).thenReturn(ticket);
+
+        TicketDTO returnedTicket = domainFacede.getTicket(ticketNumber);
+        assertEquals(ticket, returnedTicket);
     }
 }
