@@ -9,5 +9,5 @@ import java.util.List;
  * Created by ljunior on 5/31/16.
  */
 public interface IFlightService {
-    List<FlightDTO> getFlightsByDate(Date from, Date to);
+    List<FlightDTO> getFlightsByDateAndLocale(Date departureDate, Date arrivalDate, String departureLocale, String arrivalLocale);
 }
