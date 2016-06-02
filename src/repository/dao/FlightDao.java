@@ -21,11 +21,6 @@ public class FlightDao implements IFlightDao {
 
     @Override
     public int insert(FlightDTO flight) {
-        try {
-            Connection con = db.getConnection();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         return 0;
     }
 
