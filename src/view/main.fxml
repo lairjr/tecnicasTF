@@ -34,12 +34,12 @@
                                     <Label prefHeight="18.0" prefWidth="108.0" text="Data Embarque" />
                                     <Label text="Data Retorno" GridPane.columnIndex="2" />
                                     <Label text="Local Embarque" GridPane.rowIndex="1" />
-                                    <DatePicker GridPane.columnIndex="1" fx:id="_departureDate" />
-                                    <DatePicker GridPane.columnIndex="3" fx:id="_arrivalDate" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="_departureLocal" />
+                                    <DatePicker fx:id="_departureDate" GridPane.columnIndex="1" />
+                                    <DatePicker fx:id="_ar" GridPane.columnIndex="3" />
+                                    <TextField fx:id="_departureLocal" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Button mnemonicParsing="false" onAction="#searchFligths" text="Pesquisar" GridPane.columnIndex="4" />
                                     <Label text="Local Retorno" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                    <TextField GridPane.columnIndex="3" GridPane.rowIndex="1" fx:id="_arrivalLocal"/>
+                                    <TextField fx:id="_arrivalLocal" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                            </top>
@@ -61,45 +61,12 @@
             </Tab>
           <Tab text="Ticket Purchase">
                <content>
-                  <Pane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <BorderPane layoutX="1.0" layoutY="1.0" prefHeight="336.0" prefWidth="673.0">
-                           <bottom>
-                              <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                <items>
-                                  <Button mnemonicParsing="false" text="Salvar" />
-                                </items>
-                              </ToolBar>
-                           </bottom>
-                           <center>
-                              <GridPane prefHeight="326.0" prefWidth="600.0" BorderPane.alignment="TOP_LEFT">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="331.0" minWidth="0.0" prefWidth="108.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="628.0" minWidth="10.0" prefWidth="246.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="628.0" minWidth="10.0" prefWidth="319.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints maxHeight="93.0" minHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="232.0" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
-                                  <RowConstraints maxHeight="196.0" minHeight="0.0" prefHeight="36.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="190.0" minHeight="0.0" prefHeight="39.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="190.0" minHeight="10.0" prefHeight="141.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label text="Nome" />
-                                    <TextField prefHeight="27.0" prefWidth="389.0" GridPane.columnIndex="1" />
-                                    <Label text="Documento" GridPane.rowIndex="1" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <CheckBox mnemonicParsing="false" text="Internacional" GridPane.columnIndex="2" />
-                                    <Label text="Voo Ida" GridPane.rowIndex="2" />
-                                 </children>
-                              </GridPane>
-                           </center>
-                        </BorderPane>
-                     </children>
-                  </Pane>
+                  <fx:include fx:id="ticketsTab" source="views/tickets.fxml" />
                </content></Tab>
-          <Tab text="Check-in" />
+          <Tab text="Check-in">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+               </content></Tab>
         </tabs>
       </TabPane>
    </children>
