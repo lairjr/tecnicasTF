@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.FlightsController">
+    <children>
+        <AnchorPane prefHeight="443.0" prefWidth="843.0">
+            <children>
+                <BorderPane layoutY="1.0" prefHeight="441.0" prefWidth="843.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="1.0">
+                    <top>
+                        <GridPane prefHeight="60.0" prefWidth="843.0" BorderPane.alignment="CENTER">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="341.0" minWidth="10.0" prefWidth="106.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="0.0" prefWidth="248.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="10.0" prefWidth="104.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="10.0" prefWidth="261.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="602.0" minWidth="10.0" prefWidth="124.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+                                <Label prefHeight="18.0" prefWidth="108.0" text="Data Embarque" />
+                                <Label text="Data Retorno" GridPane.columnIndex="2" />
+                                <Label text="Local Embarque" GridPane.rowIndex="1" />
+                                <DatePicker fx:id="_departureDate" GridPane.columnIndex="1" />
+                                <DatePicker fx:id="_arrivalDate" GridPane.columnIndex="3" />
+                                <TextField fx:id="_departureLocal" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Button mnemonicParsing="false" onAction="#searchFligths" text="Pesquisar" GridPane.columnIndex="4" />
+                                <Label text="Local Retorno" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                <TextField fx:id="_arrivalLocal" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                            </children>
+                        </GridPane>
+                    </top>
+                    <center>
+                        <TableView fx:id="flightsTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <columns>
+                                <TableColumn fx:id="flightNumberColumn" prefWidth="77.0" text="Number" />
+                                <TableColumn fx:id="flightDepartureDateColumn" prefWidth="115.0" text="Data Embarque" />
+                                <TableColumn fx:id="flightDepartureLocaleColumn" prefWidth="264.0" text="Local Embarque" />
+                                <TableColumn fx:id="flightArrivalDateColumn" prefWidth="108.0" text="Data Retorno" />
+                                <TableColumn fx:id="flightArrivalLocaleColumn" prefWidth="276.0" text="Local Retorno" />
+                            </columns>
+                        </TableView>
+                    </center>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+    </children>
+</GridPane>

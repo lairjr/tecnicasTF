@@ -1,4 +1,4 @@
-package view;
+package view.controllers;
 
 import domain.DomainFacede;
 import domain.IDomainFacede;
@@ -7,7 +7,6 @@ import domain.ITicketService;
 import domain.services.FlightService;
 import domain.services.TicketService;
 import dtos.FlightDTO;
-import dtos.TicketDTO;
 import infrastructure.Database;
 import infrastructure.IDatabase;
 import javafx.collections.FXCollections;
@@ -15,7 +14,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import org.apache.derby.jdbc.EmbeddedDataSource;
 import repository.IFlightDao;
 import repository.ITicketDao;
@@ -30,7 +32,10 @@ import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class TicketsController implements Initializable {
+/**
+ * Created by ljunior on 6/23/16.
+ */
+public class FlightsController implements Initializable {
     private IDomainFacede domainFacede;
     private IFlightVMFactory flightVMFactory;
 
@@ -89,9 +94,5 @@ public class TicketsController implements Initializable {
         for (FlightDTO flight: filteredFligths) flightVMs.add(flightVMFactory.create(flight));
 
         flightsTable.setItems(flightVMs);
-    }
-
-    public void setDependecies(IDomainFacede domainFacede) {
-        this.domainFacede = domainFacede;
     }
 }
