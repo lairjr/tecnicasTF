@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.matches;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -51,7 +52,7 @@ public class DomainFacedeTest {
         TicketDTO ticket = new TicketDTO();
         when(ticketService.save(ticket)).thenReturn(ticket);
 
-        TicketDTO returnedTicket = domainFacede.saveTicket(ticket);
+        TicketDTO returnedTicket = domainFacede.saveTicket(Matchers.anyString(), Matchers.anyInt(), Matchers.anyInt());
         assertEquals(ticket, ticket);
     }
 

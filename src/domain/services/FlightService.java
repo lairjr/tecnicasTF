@@ -18,6 +18,11 @@ public class FlightService implements IFlightService {
     }
 
     @Override
+    public FlightDTO getFlightByNumber(int flightNumber) {
+        return flightDao.getFlightByNumber(flightNumber);
+    }
+
+    @Override
     public List<FlightDTO> getFlightsByDateAndLocale(Date departureDate, Date arrivalDate, String departureLocale, String arrivalLocale) {
         return flightDao.getFlightsByDateAndLocale(departureDate, arrivalDate, departureLocale, arrivalLocale);
     }

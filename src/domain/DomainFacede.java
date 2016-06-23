@@ -19,13 +19,23 @@ public class DomainFacede implements IDomainFacede {
     }
 
     @Override
+    public FlightDTO getFlightByNumber(int flightNumber) {
+        return flightService.getFlightByNumber(flightNumber);
+    }
+
+    @Override
     public List<FlightDTO> getFlightsByDateAndLocale(Date departure, Date arrival, String from, String destination) {
         return flightService.getFlightsByDateAndLocale(departure, arrival, from, destination);
     }
 
     @Override
-    public TicketDTO saveTicket(TicketDTO ticketDTO) {
-        return ticketService.save(ticketDTO);
+    public TicketDTO saveTicket(String passengerName, int outboundFlight, int inboundFlight) {
+        TicketDTO ticket = new TicketDTO(
+                inboundFlight,
+                outboundFlight,
+                passengerName
+        );
+        return null;
     }
 
     @Override

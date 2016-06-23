@@ -74,7 +74,7 @@ public class TicketsController implements Initializable {
         IFlightService flightService = new FlightService(flightDao);
         ITicketDao ticketDao = new TicketDao();
         ITicketService ticketService = new TicketService(ticketDao);
-        this.domainFacede = new DomainFacede(flightService, ticketService);
+        domainFacede = new DomainFacede(flightService, ticketService);
     }
 
     public void searchFligths(ActionEvent actionEvent) {

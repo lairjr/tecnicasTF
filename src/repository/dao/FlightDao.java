@@ -23,13 +23,18 @@ public class FlightDao implements IFlightDao {
         mockFlights = new ArrayList<>();
 
         mockFlights.add(new FlightDTO(1, "Porto Alegre", "Orlando", new java.sql.Date(2016, 10, 20), new java.sql.Date(2016, 10, 30)));
-        mockFlights.add(new FlightDTO(1, "Porto Alegre", "New York", new java.sql.Date(2016, 10, 21), new java.sql.Date(2016, 10, 29)));
-        mockFlights.add(new FlightDTO(1, "Orlando", "Porto Alegre", new java.sql.Date(2016, 10, 22), new java.sql.Date(2016, 10, 28)));
+        mockFlights.add(new FlightDTO(2, "Porto Alegre", "New York", new java.sql.Date(2016, 10, 21), new java.sql.Date(2016, 10, 29)));
+        mockFlights.add(new FlightDTO(3, "Orlando", "Porto Alegre", new java.sql.Date(2016, 10, 22), new java.sql.Date(2016, 10, 28)));
     }
 
     @Override
     public int insert(FlightDTO flight) {
         return 0;
+    }
+
+    @Override
+    public FlightDTO getFlightByNumber(int flightNumber) {
+        return mockFlights.get(flightNumber);
     }
 
     @Override

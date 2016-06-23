@@ -17,6 +17,10 @@ public class TicketDTO {
         this.number = number;
     }
 
+    public TicketDTO(int inboundFlight, int outboundFlight, String passengerName) {
+        passenger = passengerName;
+    }
+
     public int getNumber() {
         return number;
     }

@@ -15,10 +15,24 @@
                <Label layoutX="14.0" layoutY="26.0" text="Nome Passageiro:" />
                <Label layoutX="14.0" layoutY="57.0" text="Documento:" />
                <Label layoutX="20.0" layoutY="93.0" text="Voo Ida:" />
-               <Label layoutX="20.0" layoutY="125.0" text="Voo Volta:" />
+               <Label layoutX="422.0" layoutY="93.0" text="Voo Volta:" />
                <Separator layoutY="83.0" prefHeight="0.0" prefWidth="843.0" />
-               <TextField fx:id="departureFlightNumber" layoutX="140.0" layoutY="88.0" prefHeight="27.0" prefWidth="98.0" />
-               <TextField fx:id="arrivalFlightNumber" layoutX="140.0" layoutY="120.0" prefHeight="27.0" prefWidth="98.0" />
+               <TextField fx:id="_outboundFlightNumber" layoutX="140.0" layoutY="88.0" prefHeight="27.0" prefWidth="98.0" />
+               <TextField fx:id="_arrivalFlightNumber" layoutX="579.0" layoutY="88.0" prefHeight="27.0" prefWidth="98.0" />
+            <Button layoutX="247.0" layoutY="88.0" mnemonicParsing="false" onAction="#searchDeparture" text="Confirmar" />
+            <Button layoutX="686.0" layoutY="88.0" mnemonicParsing="false" onAction="#searchArrival" text="Confirmar" />
+            <Label layoutX="20.0" layoutY="128.0" text="Data:" />
+            <Label fx:id="_outboundFlightDate" layoutX="142.0" layoutY="128.0" prefHeight="17.0" prefWidth="271.0" />
+            <Label layoutX="20.0" layoutY="160.0" text="Local:" />
+            <Label layoutX="20.0" layoutY="190.0" text="Destino:" />
+            <Label fx:id="_outboundDeparture" layoutX="140.0" layoutY="160.0" prefHeight="17.0" prefWidth="271.0" />
+            <Label fx:id="_outboundArrival" layoutX="142.0" layoutY="190.0" prefHeight="17.0" prefWidth="271.0" />
+            <ToolBar layoutY="403.0" prefHeight="40.0" prefWidth="843.0">
+              <items>
+                <Button mnemonicParsing="false" text="Salvar" />
+              </items>
+            </ToolBar>
+            <TextField fx:id="_passengerName" layoutX="140.0" layoutY="21.0" prefHeight="27.0" prefWidth="262.0" />
            </children>
    </AnchorPane>
    </children>

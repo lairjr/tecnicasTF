@@ -30,10 +30,4 @@ public class TicketsControllerTest {
         domainFacede = mock(IDomainFacede.class);
         ticketsController.setDependecies(domainFacede);
     }
-
-    @Test
-    public void saveTicketCallFacede() {
-        ticketsController.saveTicket();
-        verify(domainFacede, times(1)).saveTicket(Matchers.any(TicketDTO.class));
-    }
 }
