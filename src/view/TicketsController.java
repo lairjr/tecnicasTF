@@ -15,9 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import org.apache.derby.jdbc.EmbeddedDataSource;
 import repository.IFlightDao;
 import repository.ITicketDao;
@@ -28,6 +26,7 @@ import view.factories.IFlightVMFactory;
 import view.models.FlightVM;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -47,6 +46,14 @@ public class TicketsController implements Initializable {
     private TableColumn<FlightVM, String> flightDepartureDateColumn;
     @FXML
     private TableColumn<FlightVM, String> flightArrivalDateColumn;
+    @FXML
+    private TextField _arrivalLocal;
+    @FXML
+    private DatePicker _arrivalDate;
+    @FXML
+    private TextField _departureLocal;
+    @FXML
+    private DatePicker _departureDate;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -71,16 +78,17 @@ public class TicketsController implements Initializable {
     }
 
     public void searchFligths(ActionEvent actionEvent) {
-        List<FlightDTO> filteredFligths = domainFacede.getFlightsByDateAndLocale(null, null, null, null);
+        String arrivalLocal = _arrivalLocal.getText();
+        Date arrivalDate = _arrivalDate.getValue() != null ? Date.valueOf(_arrivalDate.getValue()) : null;
+        String departureLocal = _departureLocal.getText();
+        Date departureDate = _departureDate.getValue() != null ? Date.valueOf(_departureDate.getValue()) : null;
+
+        List<FlightDTO> filteredFligths = domainFacede.getFlightsByDateAndLocale(departureDate, arrivalDate, departureLocal, arrivalLocal);
         ObservableList<FlightVM> flightVMs = FXCollections.observableArrayList();
 
         for (FlightDTO flight: filteredFligths) flightVMs.add(flightVMFactory.create(flight));
 
         flightsTable.setItems(flightVMs);
-    }
-
-    public void saveTicket() {
-        domainFacede.saveTicket(new TicketDTO());
     }
 
     public void setDependecies(IDomainFacede domainFacede) {

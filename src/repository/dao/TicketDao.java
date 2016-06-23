@@ -14,11 +14,11 @@ public class TicketDao implements ITicketDao {
 
     @Override
     public TicketDTO insert(TicketDTO ticket) {
-        return null;
+        return new TicketDTO(1);
     }
 
     @Override
     public TicketDTO update(TicketDTO ticket) {
-        return null;
+        return new TicketDTO(2);
     }
 }
