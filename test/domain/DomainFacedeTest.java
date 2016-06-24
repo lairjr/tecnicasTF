@@ -2,6 +2,7 @@ package domain;
 
 import dtos.FlightDTO;
 import dtos.TicketDTO;
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Matchers;
@@ -52,7 +53,7 @@ public class DomainFacedeTest {
         TicketDTO ticket = new TicketDTO();
         when(ticketService.save(ticket)).thenReturn(ticket);
 
-        TicketDTO returnedTicket = domainFacede.saveTicket(Matchers.anyString(), Matchers.anyInt(), Matchers.anyInt());
+        TicketDTO returnedTicket = domainFacede.saveTicket(Matchers.anyInt(), Matchers.anyString(), Matchers.anyString(), Matchers.anyInt(), Matchers.anyInt(), Matchers.anyInt(), Matchers.anyInt(), Matchers.anyInt());
         assertEquals(ticket, ticket);
     }
 

@@ -37,11 +37,16 @@ public class DomainFacede implements IDomainFacede {
     }
 
     @Override
-    public TicketDTO saveTicket(String passengerName, int outboundFlight, int inboundFlight) {
+    public TicketDTO saveTicket(int number, String passengerName, String document, int outboundFlight, int outboundSeat, int inboundFlight, int inboundSeat, int status) {
         TicketDTO ticket = new TicketDTO(
-                inboundFlight,
+                number,
+                passengerName,
+                document,
                 outboundFlight,
-                passengerName
+                outboundSeat,
+                inboundFlight,
+                inboundSeat,
+                status
         );
 
         return ticketService.save(ticket);

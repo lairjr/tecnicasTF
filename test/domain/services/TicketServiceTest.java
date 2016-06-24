@@ -46,7 +46,7 @@ public class TicketServiceTest {
 
     @Test
     public void saveShouldReturnUpdateRepositoryCall() {
-        TicketDTO ticket = new TicketDTO(1234);
+        TicketDTO ticket = new TicketDTO(1234, null, null, 0, 0, 0, 0, 0);
 
         when(ticketDao.update(ticket)).thenReturn(ticket);
 

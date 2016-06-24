@@ -7,18 +7,30 @@ public class TicketDTO {
     private int number;
     private String passenger;
     private String document;
-    private FlightDTO flight;
+    private int outboundFlightNumber;
+    private int outboundSeat;
+    private int inboundFlightNumber;
+    private int inboundSeat;
     private int status;
-    private int seat;
 
     public TicketDTO() { }
 
-    public TicketDTO(int number) {
-        this.number = number;
-    }
-
-    public TicketDTO(int inboundFlight, int outboundFlight, String passengerName) {
-        passenger = passengerName;
+    public TicketDTO(int number,
+                     String passenger,
+                     String document,
+                     int outboundFlightNumber,
+                     int outboundSeat,
+                     int inboundFlightNumber,
+                     int inboundSeat,
+                     int status) {
+        number = number;
+        passenger = passenger;
+        document = document;
+        outboundFlightNumber = outboundFlightNumber;
+        outboundSeat = outboundSeat;
+        inboundFlightNumber = inboundFlightNumber;
+        inboundSeat = inboundSeat;
+        status = status;
     }
 
     public int getNumber() {
@@ -33,15 +45,15 @@ public class TicketDTO {
         return document;
     }
 
-    public FlightDTO getFlight() {
-        return flight;
-    }
+    public int getOutboundFlightNumber() { return outboundFlightNumber; }
+
+    public int getInboundFlightNumber() { return inboundFlightNumber; }
+
+    public int getOutboundSeat() { return outboundSeat; }
+
+    public int getInboundSeat() { return inboundSeat; }
 
     public int getStatus() {
         return status;
-    }
-
-    public int getSeat() {
-        return seat;
     }
 }

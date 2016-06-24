@@ -12,6 +12,6 @@ import java.util.List;
 public interface IDomainFacede {
     FlightDTO getFlightByNumber(int flightNumber);
     List<FlightDTO> getFlightsByDateAndLocale(Date departure, Date arrival, String from, String destination);
-    TicketDTO saveTicket(String passengerName, int outboundFlight, int inboundFlight);
+    TicketDTO saveTicket(int number, String passengerName, String document, int outboundFlight, int outboundSeat, int inboundFlight, int inboundSeat, int status);
     TicketDTO getTicket(int ticketNumber);
 }

@@ -40,6 +40,8 @@ public class TicketsController implements Initializable {
     @FXML
     private TextField _outboundFlightNumber;
     @FXML
+    private TextField _document;
+    @FXML
     private Label _outboundFlightDate;
     @FXML
     private Label _outboundDeparture;
@@ -72,10 +74,15 @@ public class TicketsController implements Initializable {
     }
 
     public void saveTicket() {
-        String passengerName =_passengerName.getText();
+        int ticketNumber = 0;
+        String passengerName = _passengerName.getText();
+        String document = _document.getText();
         int outboundFlight = Integer.parseInt(_outboundFlightNumber.getText());
+        int outboundSeat = 0;
         int inboundFlight = Integer.parseInt(_inboundFlightNumber.getText());
+        int inboundSeat = 0;
+        int status = 0;
 
-        TicketDTO ticket = domainFacede.saveTicket(passengerName, outboundFlight, inboundFlight);
+        TicketDTO ticket = domainFacede.saveTicket(ticketNumber, passengerName, document, outboundFlight, outboundSeat, inboundFlight, inboundSeat, status);
     };
 }
