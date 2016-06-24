@@ -28,7 +28,7 @@ public class DomainFacedeTest {
         flightService = mock(IFlightService.class);
         ticketService = mock(ITicketService.class);
 
-        domainFacede = new DomainFacede(flightService, ticketService);
+        domainFacede = DomainFacede.getInstance(flightService, ticketService);
     }
 
     @Test

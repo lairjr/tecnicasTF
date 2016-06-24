@@ -20,9 +20,7 @@ import view.factories.IFlightVMFactory;
  * Created by ljunior on 6/23/16.
  */
 public class IoCContainer {
-    private IoCContainer() {
-
-    }
+    private IoCContainer() { }
 
     public static IDomainFacede getDomainFacede() {
         EmbeddedDataSource dataSource = new EmbeddedDataSource();

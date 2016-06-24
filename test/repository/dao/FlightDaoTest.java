@@ -22,7 +22,7 @@ public class FlightDaoTest {
     @Before
     public void setUp() {
         database = mock(IDatabase.class);
-        flightDao = new FlightDao(database);
+        flightDao = FlightDao.getInstance(database);
     }
 
     @Test
