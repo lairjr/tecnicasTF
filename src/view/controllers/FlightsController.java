@@ -9,6 +9,7 @@ import domain.services.TicketService;
 import dtos.FlightDTO;
 import infrastructure.Database;
 import infrastructure.IDatabase;
+import infrastructure.ioc.IoCContainer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -62,7 +63,11 @@ public class FlightsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        this.solveDependencies();
+        solveDependencies();
+        bindTableCollumns();
+    }
+
+    private void bindTableCollumns() {
         flightNumberColumn.setCellValueFactory(f -> f.getValue().numberProperty());
         flightArrivalLocaleColumn.setCellValueFactory(f -> f.getValue().getArrivalLocale());
         flightArrivalDateColumn.setCellValueFactory(f -> f.getValue().getArrivalDate());
@@ -71,15 +76,8 @@ public class FlightsController implements Initializable {
     }
 
     private void solveDependencies() {
-        flightVMFactory = new FlightVMFactory();
-
-        EmbeddedDataSource dataSource = new EmbeddedDataSource();
-        IDatabase database = Database.getInstance(dataSource);
-        IFlightDao flightDao = new FlightDao(database);
-        IFlightService flightService = new FlightService(flightDao);
-        ITicketDao ticketDao = new TicketDao();
-        ITicketService ticketService = new TicketService(ticketDao);
-        domainFacede = new DomainFacede(flightService, ticketService);
+        flightVMFactory = IoCContainer.getFlightVMFactory();
+        domainFacede = IoCContainer.getDomainFacede();
     }
 
     public void searchFligths(ActionEvent actionEvent) {

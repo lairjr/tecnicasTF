@@ -10,6 +10,7 @@ import dtos.FlightDTO;
 import dtos.TicketDTO;
 import infrastructure.Database;
 import infrastructure.IDatabase;
+import infrastructure.ioc.IoCContainer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -51,15 +52,8 @@ public class TicketsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        flightVMFactory = new FlightVMFactory();
-
-        EmbeddedDataSource dataSource = new EmbeddedDataSource();
-        IDatabase database = Database.getInstance(dataSource);
-        IFlightDao flightDao = new FlightDao(database);
-        IFlightService flightService = new FlightService(flightDao);
-        ITicketDao ticketDao = new TicketDao();
-        ITicketService ticketService = new TicketService(ticketDao);
-        domainFacede = new DomainFacede(flightService, ticketService);
+        flightVMFactory = IoCContainer.getFlightVMFactory();
+        domainFacede = IoCContainer.getDomainFacede();
     }
 
     public void searchDeparture() {

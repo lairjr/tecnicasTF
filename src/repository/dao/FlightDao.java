@@ -14,10 +14,11 @@ import java.util.List;
  * Created by ljunior on 5/31/16.
  */
 public class FlightDao implements IFlightDao {
+    private static FlightDao instance;
     private IDatabase db;
     private List<FlightDTO> mockFlights;
 
-    public FlightDao(IDatabase database) {
+    private FlightDao(IDatabase database) {
         db = database;
 
         mockFlights = new ArrayList<>();
@@ -25,6 +26,13 @@ public class FlightDao implements IFlightDao {
         mockFlights.add(new FlightDTO(1, "Porto Alegre", "Orlando", new java.sql.Date(2016, 10, 20), new java.sql.Date(2016, 10, 30)));
         mockFlights.add(new FlightDTO(2, "Porto Alegre", "New York", new java.sql.Date(2016, 10, 21), new java.sql.Date(2016, 10, 29)));
         mockFlights.add(new FlightDTO(3, "Orlando", "Porto Alegre", new java.sql.Date(2016, 10, 22), new java.sql.Date(2016, 10, 28)));
+    }
+
+    public static FlightDao getInstance(IDatabase database) {
+        if (instance == null)
+            instance = new FlightDao(database);
+
+        return instance;
     }
 
     @Override

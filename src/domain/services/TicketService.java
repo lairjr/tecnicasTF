@@ -2,16 +2,25 @@ package domain.services;
 
 import domain.ITicketService;
 import dtos.TicketDTO;
+import groovy.lang.Singleton;
 import repository.ITicketDao;
 
 /**
  * Created by ljunior on 6/1/16.
  */
 public class TicketService implements ITicketService {
+    private static TicketService instance;
     private ITicketDao ticketDao;
 
-    public TicketService(ITicketDao ticketDao) {
+    private TicketService(ITicketDao ticketDao) {
         this.ticketDao = ticketDao;
+    }
+
+    public static TicketService getInstance(ITicketDao ticketDao) {
+        if (instance == null)
+            instance = new TicketService(ticketDao);
+
+        return instance;
     }
 
     @Override

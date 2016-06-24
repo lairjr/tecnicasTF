@@ -15,11 +15,13 @@
           <Tab text="Ticket Purchase">
                <content>
                   <fx:include fx:id="ticketsTab" source="views/tickets.fxml" />
-               </content></Tab>
+               </content>
+          </Tab>
           <Tab text="Check-in">
                <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
-               </content></Tab>
+                   <fx:include fx:id="checkinTab" source="views/checkin.fxml" />
+               </content>
+          </Tab>
         </tabs>
       </TabPane>
    </children>

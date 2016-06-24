@@ -29,7 +29,7 @@
             <Label fx:id="_outboundArrival" layoutX="142.0" layoutY="190.0" prefHeight="17.0" prefWidth="271.0" />
             <ToolBar layoutY="403.0" prefHeight="40.0" prefWidth="843.0">
               <items>
-                <Button mnemonicParsing="false" text="Salvar" />
+                <Button mnemonicParsing="false" text="Salvar" onAction="#saveTicket" />
               </items>
             </ToolBar>
             <TextField fx:id="_passengerName" layoutX="140.0" layoutY="21.0" prefHeight="27.0" prefWidth="262.0" />

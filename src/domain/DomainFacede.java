@@ -10,12 +10,20 @@ import java.util.List;
  * Created by ljunior on 6/1/16.
  */
 public class DomainFacede implements IDomainFacede {
+    private static DomainFacede instance;
     private IFlightService flightService;
     private ITicketService ticketService;
 
-    public DomainFacede(IFlightService flightService, ITicketService ticketService) {
+    private DomainFacede(IFlightService flightService, ITicketService ticketService) {
         this.flightService = flightService;
         this.ticketService = ticketService;
+    }
+
+    public static DomainFacede getInstance(IFlightService flightService, ITicketService ticketService) {
+        if (instance == null)
+            instance = new DomainFacede(flightService, ticketService);
+
+        return instance;
     }
 
     @Override
@@ -35,7 +43,8 @@ public class DomainFacede implements IDomainFacede {
                 outboundFlight,
                 passengerName
         );
-        return null;
+
+        return ticketService.save(ticket);
     }
 
     @Override
