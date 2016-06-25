@@ -4,6 +4,7 @@ package view;/**
 
 import infrastructure.Database;
 import infrastructure.IDatabase;
+import infrastructure.ioc.IoCContainer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +22,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        IDatabase database = IoCContainer.getDatabase();
+        database.createOrCheckDatabase();
+
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Trabalho Técnicas");
         primaryStage.setScene(new Scene(root));

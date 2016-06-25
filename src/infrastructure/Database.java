@@ -3,8 +3,10 @@ package infrastructure;
 import org.apache.derby.jdbc.EmbeddedDataSourceInterface;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.ResultSet;
 
 /**
  * Created by ljunior on 5/31/16.
@@ -15,6 +17,7 @@ public class Database implements IDatabase {
     public static String PASSWORD = "app";
     private static IDatabase instance;
     private EmbeddedDataSourceInterface dataSource;
+    private Connection conn;
 
     private Database(EmbeddedDataSourceInterface dataSource) {
         this.dataSource = dataSource;
@@ -37,78 +40,77 @@ public class Database implements IDatabase {
         return dataSource.getConnection();
     }
 
-    public static void createDB(EmbeddedDataSourceInterface dataSource) throws Exception {
-        try (Connection con = getInstance(dataSource).getConnection();
-             Statement sta = con.createStatement()) {
-            String sqlPassenger = "CREATE TABLE PASSENGERS("
-                    + "ID_PASSENGER CHAR(9) PRIMARY KEY NOT NULL,"
-                    + "NAME VARCHAR(150) NOT NULL)";
-            sta.executeUpdate(sqlPassenger);
-            String sqlAirport = "CREATE TABLE AIRPORTS("
-                    + "ID_AIRPORT CHAR(3) PRIMARY KEY NOT NULL,"
-                    + "NAME VARCHAR (150) NOT NULL)";
-            sta.executeUpdate(sqlAirport);
-            String sqlAirLine = "CREATE TABLE AIRLINE("
-                    + "ID_AIRLINE CHAR(2) PRIMARY KEY NOT NULL,"
-                    + "NAME VARCHAR (150) NOT NULL)";
-            sta.executeUpdate(sqlAirLine);
-            String sqlFlights = "CREATE TABLE FLIGHTS("
-                    + "ID_FLIGHT CHAR(7) PRIMARY KEY NOT NULL,"
-                    + "SCHEDULE TIMESTAMP NOT NULL,"
-                    + "INTERNATIONAL BOOLEAN NOT NULL,"
-                    + "FROM CHAR(3) NOT NULL,"
-                    + "TO CHAR(3) NOT NULL,"
-                    + "ID_AIRLINE CHAR(2) NOT NULL)";
-            sta.executeUpdate(sqlFlights);
-            String sqlFlight1 = "ALTER TABLE FLIGHTS"
-                    + "ADD CONSTRAINT FK_FLIGHTS_AIRPORTS_FROM FOREIGN KEY (FROM) REFERENCES AIRPORTS (ID_AIRPORT)";
-            sta.executeUpdate(sqlFlight1);
-            String sqlFlight2 = "ALTER TABLE FLIGHTS"
-                    + "ADD CONSTRAINT FK_FLIGHTS_AIRPORTS_TO FOREIGN KEY (TO) REFERENCES AIRPORTS (ID_AIRPORT)";
-            sta.executeUpdate(sqlFlight2);
-            String sqlFlight3 = "ALTER TABLE FLIGHTS"
-                    + "ADD CONSTRAINT FK_FLIGHTS_AIRLINES FOREIGN KEY (ID_AIRLINE) REFERENCES AIRLINES (ID_AIRLINE)";
-            sta.executeUpdate(sqlFlight2);
-            String sqlPassage = "CREATE TABLE PASSAGES("
-                    + "ID_PASSAGE CHAR(3) NOT NULL,"
-                    + "ID_FLIGHT CHAR(7) NOT NULL,"
-                    + "ID_PASSENGER CHAR(9) NOT NULL,"
-                    + "DOC_TYPE VARCHAR(50) NOT NULL,"
-                    + "STATUS VARCHAR(50) NOT NULL)";
-            sta.executeUpdate(sqlPassage);
-            String sqlPassage1 = "ALTER TABLE PASSAGES"
-                    + "ADD CONSTRAINT PK_PASSAGES PRIMARY KEY (ID_PASSAGE,ID_FLIGHT)";
-            sta.executeUpdate(sqlPassage1);
-            String sqlPassage2 = "ALTER TABLE PASSAGES"
-                    + "ADD CONSTRAINT FK_PASSAGES_FLIGHTS FOREIGN KEY (ID_FLIGHT) REFERENCES FLIGHTS (ID_FLIGHT)";
-            sta.executeUpdate(sqlPassage2);
-            String sqlPassage3 = "ALTER TABLE PASSAGES"
-                    + "ADD CONSTRAINT FK_PASSAGES_PASSENGERS FOREIGN KEY (ID_PASSENGER) REFERENCES PASSENGERS (ID_PASSENGER)";
-            sta.executeUpdate(sqlPassage3);
-            String sqlSeat = "CREATE TABLE SEATS("
-                    + "ID_SEAT CHAR(3) NOT NULL,"
-                    + "ID_FLIGHT CHAR(7) NOT NULL,"
-                    + "OCCUPIED BOOLEAN NOT NULL)";
-            sta.executeUpdate(sqlSeat);
-            String sqlSeat1 = "ALTER TABLE SEATS"
-                    + "ADD CONSTRAINT PK_SEATS PRIMARY KEY (ID_SEAT,ID_FLIGHT)";
-            sta.executeUpdate(sqlSeat1);
-            String sqlSeat2 = "ALTER TABLE SEATS"
-                    + "ADD CONSTRAINT FK_SEATS_FLIGHTS FOREIGN KEY (ID_FLIGHT) REFERENCES FLIGHTS (ID_FLIGHT)";
-            sta.executeUpdate(sqlSeat2);
-            String sqlPromotion = "CREATE TABLE PROMOTIONS("
-                    + "ID_PROMOTION CHAR(3) PRIMARY KEY NOT NULL,"
-                    + "DESCRIPTIONS CHAR(250),"
-                    + "PERCENTAGE NUMERIC(3) NOT NULL)";
-            sta.executeUpdate(sqlPromotion);
-            String sqlPromotionFlight = "CREATE TABLE PROMOTIONS_FLIGHTS("
-                    + "ID_PROMOTION CHAR(3) NOT NULL,"
-                    + "ID_FLIGHT CHAR(7) NOT NULL)";
-            sta.executeUpdate(sqlPromotionFlight);
-            String sqlPromotionFlight1 = "ALTER TABLE PROMOTIONS_FLIGHTS"
-                    + "ADD CONSTRAINT PK_PROMOTIONS_FLIGHTS PRIMARY KEY (ID_PROMOTION,ID_FLIGHT)";
-            sta.executeUpdate(sqlPromotionFlight1);
+    @Override
+    public void createOrCheckDatabase() throws SQLException {
+        //dropTable(Constants.Flights.TABLE_NAME);
+        createOrCheckSeats();
+        createOrCheckFlights();
+        createOrCheckTickets();
+    }
+
+    private void dropTable(String table) {
+        try (Connection conn = this.getConnection()) {
+            Statement s = conn.createStatement();
+            s.execute("DROP TABLE " + table);
+        }catch (SQLException e) {
+
         }
-        
+    }
+
+    private void createOrCheckTable(String table, String sqlQuery) throws SQLException {
+        try (Connection conn = this.getConnection()) {
+            ResultSet rs = conn.getMetaData().getTables(null, null, table, null);
+
+            if (!rs.next()) {
+                Statement sql = conn.createStatement();
+
+                sql.execute(sqlQuery);
+            }
+
+            conn.close();
+        }
+    }
+
+    private void createOrCheckSeats() throws SQLException {
+        StringBuilder sqlQuery = new StringBuilder();
+
+        sqlQuery.append(" CREATE TABLE " + Constants.Seats.TABLE_NAME +  " ( ");
+        sqlQuery.append(Constants.Seats.SeatId + " INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),");
+        sqlQuery.append(Constants.Seats.FlightId + " INT NOT NULL, ");
+        sqlQuery.append(Constants.Seats.Occupied + " INT NOT NULL ");
+        sqlQuery.append(" ) ");
+
+        createOrCheckTable(Constants.Seats.TABLE_NAME , sqlQuery.toString());
+    }
+
+    private void createOrCheckFlights() throws SQLException {
+        StringBuilder sqlQuery = new StringBuilder();
+
+        sqlQuery.append(" CREATE TABLE " + Constants.Flights.TABLE_NAME + " ( ");
+        sqlQuery.append(Constants.Flights.FlightId + " INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), ");
+        sqlQuery.append(Constants.Flights.DepartureLocal + " VARCHAR(50), ");
+        sqlQuery.append(Constants.Flights.DepartureDate + " TIMESTAMP, ");
+        sqlQuery.append(Constants.Flights.ArrivalLocal + " VARCHAR(50), ");
+        sqlQuery.append(Constants.Flights.ArrivalDate + " TIMESTAMP, ");
+        sqlQuery.append(Constants.Flights.International + " INT ");
+        sqlQuery.append(" ) ");
+
+        createOrCheckTable(Constants.Flights.TABLE_NAME, sqlQuery.toString());
+    }
+
+    private void createOrCheckTickets() throws SQLException {
+        StringBuilder sqlQuery = new StringBuilder();
+
+        sqlQuery.append(" CREATE TABLE " + Constants.Tickets.TABLE_NAME +  " ( ");
+        sqlQuery.append(Constants.Tickets.TicketId + " INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), ");
+        sqlQuery.append(Constants.Tickets.Passenger + " VARCHAR(50) NOT NULL, ");
+        sqlQuery.append(Constants.Tickets.Document + " INT NOT NULL, ");
+        sqlQuery.append(Constants.Tickets.OutboundFlightId + " INT NOT NULL, ");
+        sqlQuery.append(Constants.Tickets.OutboundSeatId + " INT, ");
+        sqlQuery.append(Constants.Tickets.InboundFlightId + " INT, ");
+        sqlQuery.append(Constants.Tickets.InboundSeatId + " INT ");
+        sqlQuery.append(" ) ");
+
+        createOrCheckTable(Constants.Tickets.TABLE_NAME, sqlQuery.toString());
     }
 }

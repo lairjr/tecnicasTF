@@ -39,4 +39,9 @@ public class IoCContainer {
     public static IFlightVMFactory getFlightVMFactory() {
         return FlightVMFactory.getInstance();
     }
+
+    public static IDatabase getDatabase() {
+        EmbeddedDataSource dataSource = new EmbeddedDataSource();
+        return Database.getInstance(dataSource);
+    }
 }

@@ -1,6 +1,8 @@
 package dtos;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -10,16 +12,16 @@ public class FlightDTO {
     private int number;
     private String departureLocale;
     private String arrivalLocale;
-    private Date departureDate;
-    private Date arrivalDate;
+    private LocalDateTime departureDate;
+    private LocalDateTime arrivalDate;
     private List<SeatDTO> seats;
+    private int international;
 
-    public FlightDTO(int number, String departureLocale, String arrivalLocale, Date departureDate, Date arrivalDate) {
+    public FlightDTO(int number, String departureLocale, String arrivalLocale, Date departureDate, Date arrivalDate, int international) {
         this.setNumber(number);
-        this.setDepartureDate(departureDate);
         this.setDepartureLocale(departureLocale);
         this.setArrivalLocale(arrivalLocale);
-        this.setArrivalDate(arrivalDate);
+        this.international = international;
     }
 
     public int getNumber() {
@@ -46,20 +48,12 @@ public class FlightDTO {
         this.arrivalLocale = arrivalLocale;
     }
 
-    public Date getDepartureDate() {
+    public LocalDateTime getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
-        this.departureDate = departureDate;
-    }
-
-    public Date getArrivalDate() {
+    public LocalDateTime getArrivalDate() {
         return arrivalDate;
-    }
-
-    public void setArrivalDate(Date arrivalDate) {
-        this.arrivalDate = arrivalDate;
     }
 
     public List<SeatDTO> getSeats() {
@@ -68,5 +62,9 @@ public class FlightDTO {
 
     public void setSeats(List<SeatDTO> seats) {
         this.seats = seats;
+    }
+
+    public int getInternational() {
+        return international;
     }
 }
