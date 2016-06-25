@@ -19,7 +19,7 @@ public class TicketServiceTest {
     @Before
     public void setUp() {
         ticketDao = mock(ITicketDao.class);
-        ticketService = TicketService.getInstance(ticketDao);
+        ticketService = TicketService.getInstance(ticketDao, null);
     }
 
     @Test

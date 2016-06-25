@@ -10,8 +10,10 @@ import infrastructure.Database;
 import infrastructure.IDatabase;
 import org.apache.derby.jdbc.EmbeddedDataSource;
 import repository.IFlightDao;
+import repository.ISeatDao;
 import repository.ITicketDao;
 import repository.dao.FlightDao;
+import repository.dao.SeatDao;
 import repository.dao.TicketDao;
 import view.factories.FlightVMFactory;
 import view.factories.IFlightVMFactory;
@@ -27,8 +29,9 @@ public class IoCContainer {
         IDatabase database = Database.getInstance(dataSource);
         IFlightDao flightDao = FlightDao.getInstance(database);
         ITicketDao ticketDao = TicketDao.getInstance(database);
-        IFlightService flightService = FlightService.getInstance(flightDao);
-        ITicketService ticketService = TicketService.getInstance(ticketDao);
+        ISeatDao seatDao = SeatDao.getInstance(database);
+        IFlightService flightService = FlightService.getInstance(flightDao, seatDao);
+        ITicketService ticketService = TicketService.getInstance(ticketDao, flightService);
 
         return DomainFacede.getInstance(flightService, ticketService);
     }

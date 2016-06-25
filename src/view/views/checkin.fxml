@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.CheckBox?>
 
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.CheckinController">
     <children>
@@ -14,9 +15,56 @@
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="Localizador:" />
             <TextField fx:id="_ticketNumber" layoutX="105.0" layoutY="9.0" prefHeight="27.0" prefWidth="91.0" />
-            <Button layoutX="206.0" layoutY="9.0" mnemonicParsing="false" text="Confirmar" onAction="#searchTicket" />
+            <Button layoutX="206.0" layoutY="9.0" mnemonicParsing="false" onAction="#searchTicket" text="Confirmar" />
             <Label layoutX="14.0" layoutY="47.0" text="Passageiro:" />
             <Label fx:id="_passengerName" layoutX="105.0" layoutY="47.0" prefHeight="17.0" prefWidth="265.0" />
+             <Separator layoutY="76.0" prefHeight="2.0" prefWidth="843.0" />
+             <Label layoutX="14.0" layoutY="90.0" text="Voo de ida" />
+             <Label fx:id="_outboundFlightInfo" layoutX="14.0" layoutY="110.0" prefHeight="17.0" prefWidth="408.0" text="" />
+             <Button layoutX="209.0" layoutY="85.0" mnemonicParsing="false" onAction="#checkInOutbound" text="Check-in" />
+             <CheckBox fx:id="_outboundSeat1" layoutX="14.0" layoutY="120.0" />
+             <CheckBox fx:id="_outboundSeat2" layoutX="14.0" layoutY="140.0" />
+             <CheckBox fx:id="_outboundSeat3" layoutX="14.0" layoutY="180.0" />
+             <CheckBox fx:id="_outboundSeat4" layoutX="14.0" layoutY="200.0" />
+             <CheckBox fx:id="_outboundSeat5" layoutX="34.0" layoutY="120.0" />
+             <CheckBox fx:id="_outboundSeat6" layoutX="34.0" layoutY="140.0" />
+             <CheckBox fx:id="_outboundSeat7" layoutX="34.0" layoutY="180.0" />
+             <CheckBox fx:id="_outboundSeat8" layoutX="34.0" layoutY="200.0" />
+             <CheckBox fx:id="_outboundSeat9" layoutX="54.0" layoutY="120.0" />
+             <CheckBox fx:id="_outboundSeat10" layoutX="54.0" layoutY="140.0" />
+             <CheckBox fx:id="_outboundSeat11" layoutX="54.0" layoutY="180.0" />
+             <CheckBox fx:id="_outboundSeat12" layoutX="54.0" layoutY="200.0" />
+             <CheckBox fx:id="_outboundSeat13" layoutX="74.0" layoutY="120.0" />
+             <CheckBox fx:id="_outboundSeat14" layoutX="74.0" layoutY="140.0" />
+             <CheckBox fx:id="_outboundSeat15" layoutX="74.0" layoutY="180.0" />
+             <CheckBox fx:id="_outboundSeat16" layoutX="74.0" layoutY="200.0" />
+             <CheckBox fx:id="_outboundSeat17" layoutX="94.0" layoutY="120.0" />
+             <CheckBox fx:id="_outboundSeat18" layoutX="94.0" layoutY="140.0" />
+             <CheckBox fx:id="_outboundSeat19" layoutX="94.0" layoutY="180.0" />
+             <CheckBox fx:id="_outboundSeat20" layoutX="94.0" layoutY="200.0" />
+             <CheckBox fx:id="_outboundSeat21" layoutX="114.0" layoutY="120.0" />
+             <CheckBox fx:id="_outboundSeat22" layoutX="114.0" layoutY="140.0" />
+             <CheckBox fx:id="_outboundSeat23" layoutX="114.0" layoutY="180.0" />
+             <CheckBox fx:id="_outboundSeat24" layoutX="114.0" layoutY="200.0" />
+             <CheckBox fx:id="_outboundSeat25" layoutX="134.0" layoutY="120.0" />
+             <CheckBox fx:id="_outboundSeat26" layoutX="134.0" layoutY="140.0" />
+             <CheckBox fx:id="_outboundSeat27" layoutX="134.0" layoutY="180.0" />
+             <CheckBox fx:id="_outboundSeat28" layoutX="134.0" layoutY="200.0" />
+             <CheckBox fx:id="_outboundSeat29" layoutX="154.0" layoutY="120.0" />
+             <CheckBox fx:id="_outboundSeat30" layoutX="154.0" layoutY="140.0" />
+             <CheckBox fx:id="_outboundSeat31" layoutX="154.0" layoutY="180.0" />
+             <CheckBox fx:id="_outboundSeat32" layoutX="154.0" layoutY="200.0" />
+             <CheckBox fx:id="_outboundSeat33" layoutX="174.0" layoutY="120.0" />
+             <CheckBox fx:id="_outboundSeat34" layoutX="174.0" layoutY="140.0" />
+             <CheckBox fx:id="_outboundSeat35" layoutX="174.0" layoutY="180.0" />
+             <CheckBox fx:id="_outboundSeat36" layoutX="174.0" layoutY="200.0" />
+             <CheckBox fx:id="_outboundSeat37" layoutX="194.0" layoutY="120.0" />
+             <CheckBox fx:id="_outboundSeat38" layoutX="194.0" layoutY="140.0" />
+             <CheckBox fx:id="_outboundSeat39" layoutX="194.0" layoutY="180.0" />
+             <CheckBox fx:id="_outboundSeat40" layoutX="194.0" layoutY="200.0" />
+            <Separator layoutX="-1.0" layoutY="235.0" prefHeight="3.0" prefWidth="843.0" />
+             <Label layoutX="14.0" layoutY="250.0" text="Voo de volta" />
+             <Button layoutX="209.0" layoutY="250.0" mnemonicParsing="false" onAction="#checkInInbound" text="Check-in" />
          </children></AnchorPane>
     </children>
    <columnConstraints>

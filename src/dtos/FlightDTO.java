@@ -1,6 +1,7 @@
 package dtos;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  * Created by ljunior on 5/31/16.
@@ -11,6 +12,7 @@ public class FlightDTO {
     private String arrivalLocale;
     private Date departureDate;
     private Date arrivalDate;
+    private List<SeatDTO> seats;
 
     public FlightDTO(int number, String departureLocale, String arrivalLocale, Date departureDate, Date arrivalDate) {
         this.setNumber(number);
@@ -58,5 +60,13 @@ public class FlightDTO {
 
     public void setArrivalDate(Date arrivalDate) {
         this.arrivalDate = arrivalDate;
+    }
+
+    public List<SeatDTO> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<SeatDTO> seats) {
+        this.seats = seats;
     }
 }

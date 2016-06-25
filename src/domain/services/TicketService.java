@@ -1,5 +1,6 @@
 package domain.services;
 
+import domain.IFlightService;
 import domain.ITicketService;
 import dtos.TicketDTO;
 import groovy.lang.Singleton;
@@ -11,14 +12,16 @@ import repository.ITicketDao;
 public class TicketService implements ITicketService {
     private static TicketService instance;
     private ITicketDao ticketDao;
+    private IFlightService flightService;
 
-    private TicketService(ITicketDao ticketDao) {
+    private TicketService(ITicketDao ticketDao, IFlightService flightService) {
         this.ticketDao = ticketDao;
+        this.flightService = flightService;
     }
 
-    public static TicketService getInstance(ITicketDao ticketDao) {
+    public static TicketService getInstance(ITicketDao ticketDao, IFlightService flightService) {
         if (instance == null)
-            instance = new TicketService(ticketDao);
+            instance = new TicketService(ticketDao, flightService);
 
         return instance;
     }
@@ -32,6 +35,10 @@ public class TicketService implements ITicketService {
 
     @Override
     public TicketDTO getByNumber(int ticketNumber) {
-        return ticketDao.getByNumber(ticketNumber);
+        TicketDTO ticketDTO = ticketDao.getByNumber(ticketNumber);
+        ticketDTO.setInboundFlight(flightService.getFlightByNumber(ticketDTO.getInboundFlightNumber()));
+        ticketDTO.setOutboundFlight(flightService.getFlightByNumber(ticketDTO.getOutboundFlightNumber()));
+
+        return ticketDTO;
     }
 }

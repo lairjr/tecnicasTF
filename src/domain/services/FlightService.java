@@ -3,6 +3,7 @@ package domain.services;
 import domain.IFlightService;
 import dtos.FlightDTO;
 import repository.IFlightDao;
+import repository.ISeatDao;
 import repository.dao.FlightDao;
 
 import java.util.Date;
@@ -14,21 +15,25 @@ import java.util.List;
 public class FlightService implements IFlightService {
     private static FlightService instance;
     private IFlightDao flightDao;
+    private ISeatDao seatDao;
 
-    private FlightService(IFlightDao flightDao) {
+    private FlightService(IFlightDao flightDao, ISeatDao seatDao) {
         this.flightDao = flightDao;
+        this.seatDao = seatDao;
     }
 
-    public static FlightService getInstance(IFlightDao flightDao) {
+    public static FlightService getInstance(IFlightDao flightDao, ISeatDao seatDao) {
         if (instance == null)
-            instance = new FlightService(flightDao);
+            instance = new FlightService(flightDao, seatDao);
 
         return instance;
     }
 
     @Override
     public FlightDTO getFlightByNumber(int flightNumber) {
-        return flightDao.getFlightByNumber(flightNumber);
+        FlightDTO flightDTO = flightDao.getFlightByNumber(flightNumber);
+        flightDTO.setSeats(seatDao.getSeatsByFlightNumber(flightDTO.getNumber()));
+        return flightDTO;
     }
 
     @Override
