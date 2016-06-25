@@ -9,6 +9,7 @@ public class Constants {
         public static final String SeatId = "SEAT_ID";
         public static final String FlightId = "FLIGHT_ID";
         public static final String Occupied = "OCCUPIED";
+        public static final String Number = "NUMBER";
     }
 
     public class Flights {

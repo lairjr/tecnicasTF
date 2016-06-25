@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface ISeatDao {
     List<SeatDTO> getSeatsByFlightNumber(int flightNumber);
+    int insert(SeatDTO seat);
 }

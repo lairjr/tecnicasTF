@@ -11,4 +11,5 @@ import java.util.List;
 public interface IFlightService {
     FlightDTO getFlightByNumber(int flightNumber);
     List<FlightDTO> getFlightsByDateAndLocale(Date departureDate, Date arrivalDate, String departureLocale, String arrivalLocale);
+    int insert(FlightDTO flight);
 }

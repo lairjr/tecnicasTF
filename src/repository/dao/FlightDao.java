@@ -1,13 +1,11 @@
 package repository.dao;
 
 import dtos.FlightDTO;
+import infrastructure.Constants;
 import infrastructure.IDatabase;
 import repository.IFlightDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,22 +38,42 @@ public class FlightDao implements IFlightDao {
     @Override
     public int insert(FlightDTO flight) {
         StringBuilder sql = new StringBuilder();
-        int rowsAffected = 0;
+
+        sql.append(" INSERT INTO " + Constants.Flights.TABLE_NAME);
+        sql.append(" ( ");
+
+        sql.append(Constants.Flights.DepartureLocal + ", ");
+        sql.append(Constants.Flights.DepartureDate + ", ");
+        sql.append(Constants.Flights.ArrivalLocal + ", ");
+        sql.append(Constants.Flights.ArrivalDate + ", ");
+        sql.append(Constants.Flights.International);
+
+        sql.append(" ) VALUES (?, ?, ?, ?, ? ) ");
+
+        int flightId = 0;
 
         try (Connection conn = db.getConnection()) {
-            PreparedStatement ps = conn.prepareStatement(sql.toString());
-            ps.setString(0, flight.getDepartureLocale());
-            ps.setTimestamp(1, Timestamp.valueOf(flight.getDepartureDate()));
-            ps.setString(2, flight.getArrivalLocale());
-            ps.setTimestamp(3, Timestamp.valueOf(flight.getArrivalDate()));
-            ps.setInt(4, flight.getInternational());
+            PreparedStatement ps = conn.prepareStatement(sql.toString(), new String[] { Constants.Flights.FlightId });
+            ps.setString(1, flight.getDepartureLocale());
+            ps.setTimestamp(2, Timestamp.valueOf(flight.getDepartureDate()));
+            ps.setString(3, flight.getArrivalLocale());
+            ps.setTimestamp(4, Timestamp.valueOf(flight.getArrivalDate()));
+            ps.setInt(5, flight.getInternational() ? 1 : 0);
 
-            rowsAffected = ps.executeUpdate();
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            rs.next();
+
+            flightId = rs.getInt(Constants.Flights.FlightId);
+
+            conn.close();
         } catch (SQLException e) {
 
         }
 
-        return rowsAffected;
+        return flightId;
     }
 
     @Override

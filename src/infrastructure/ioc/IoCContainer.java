@@ -8,6 +8,7 @@ import domain.services.FlightService;
 import domain.services.TicketService;
 import infrastructure.Database;
 import infrastructure.IDatabase;
+import infrastructure.mocks.FlightGenerator;
 import org.apache.derby.jdbc.EmbeddedDataSource;
 import repository.IFlightDao;
 import repository.ISeatDao;
@@ -43,5 +44,15 @@ public class IoCContainer {
     public static IDatabase getDatabase() {
         EmbeddedDataSource dataSource = new EmbeddedDataSource();
         return Database.getInstance(dataSource);
+    }
+
+    public static FlightGenerator getFlightGenerator() {
+        EmbeddedDataSource dataSource = new EmbeddedDataSource();
+        IDatabase database = Database.getInstance(dataSource);
+        IFlightDao flightDao = FlightDao.getInstance(database);
+        ISeatDao seatDao = SeatDao.getInstance(database);
+        IFlightService flightService = FlightService.getInstance(flightDao, seatDao);
+
+        return FlightGenerator.getInstance(flightService);
     }
 }

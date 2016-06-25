@@ -42,7 +42,7 @@ public class Database implements IDatabase {
 
     @Override
     public void createOrCheckDatabase() throws SQLException {
-        //dropTable(Constants.Flights.TABLE_NAME);
+        //dropTable(Constants.Seats.TABLE_NAME);
         createOrCheckSeats();
         createOrCheckFlights();
         createOrCheckTickets();
@@ -77,6 +77,7 @@ public class Database implements IDatabase {
         sqlQuery.append(" CREATE TABLE " + Constants.Seats.TABLE_NAME +  " ( ");
         sqlQuery.append(Constants.Seats.SeatId + " INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),");
         sqlQuery.append(Constants.Seats.FlightId + " INT NOT NULL, ");
+        sqlQuery.append(Constants.Seats.Number + " INT NOT NULL, ");
         sqlQuery.append(Constants.Seats.Occupied + " INT NOT NULL ");
         sqlQuery.append(" ) ");
 

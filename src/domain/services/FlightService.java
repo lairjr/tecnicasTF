@@ -2,10 +2,14 @@ package domain.services;
 
 import domain.IFlightService;
 import dtos.FlightDTO;
+import dtos.SeatDTO;
 import repository.IFlightDao;
 import repository.ISeatDao;
 import repository.dao.FlightDao;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -39,5 +43,15 @@ public class FlightService implements IFlightService {
     @Override
     public List<FlightDTO> getFlightsByDateAndLocale(Date departureDate, Date arrivalDate, String departureLocale, String arrivalLocale) {
         return flightDao.getFlightsByDateAndLocale(departureDate, arrivalDate, departureLocale, arrivalLocale);
+    }
+
+    @Override
+    public int insert(FlightDTO flight) {
+        int flightId = flightDao.insert(flight);
+        for (int x = 1; x < 40; x++) {
+            SeatDTO seat = new SeatDTO(flightId, x, false);
+            seatDao.insert(seat);
+        }
+        return flightId;
     }
 }

@@ -9,27 +9,29 @@ import java.util.List;
  * Created by ljunior on 5/31/16.
  */
 public class FlightDTO {
-    private int number;
+    private int flightId;
     private String departureLocale;
     private String arrivalLocale;
     private LocalDateTime departureDate;
     private LocalDateTime arrivalDate;
     private List<SeatDTO> seats;
-    private int international;
+    private boolean international;
 
-    public FlightDTO(int number, String departureLocale, String arrivalLocale, Date departureDate, Date arrivalDate, int international) {
-        this.setNumber(number);
-        this.setDepartureLocale(departureLocale);
-        this.setArrivalLocale(arrivalLocale);
+    public FlightDTO(int flightId, String departureLocale, String arrivalLocale, LocalDateTime departureDate, LocalDateTime arrivalDate, boolean international) {
+        this.flightId = flightId;
+        this.departureLocale = departureLocale;
+        this.departureDate = departureDate;
+        this.arrivalDate = arrivalDate;
+        this.arrivalLocale = arrivalLocale;
         this.international = international;
     }
 
     public int getNumber() {
-        return number;
+        return flightId;
     }
 
     public void setNumber(int number) {
-        this.number = number;
+        this.flightId = number;
     }
 
     public String getDepartureLocale() {
@@ -64,7 +66,7 @@ public class FlightDTO {
         this.seats = seats;
     }
 
-    public int getInternational() {
+    public boolean getInternational() {
         return international;
     }
 }
