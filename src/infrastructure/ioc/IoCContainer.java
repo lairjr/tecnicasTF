@@ -6,6 +6,10 @@ import domain.IFlightService;
 import domain.ITicketService;
 import domain.services.FlightService;
 import domain.services.TicketService;
+import dtos.factories.FlightDTOFactory;
+import dtos.factories.IFlightDTOFactory;
+import dtos.factories.ISeatDTOFactory;
+import dtos.factories.SeatDTOFactory;
 import infrastructure.Database;
 import infrastructure.IDatabase;
 import infrastructure.mocks.FlightGenerator;
@@ -28,10 +32,12 @@ public class IoCContainer {
     public static IDomainFacede getDomainFacede() {
         EmbeddedDataSource dataSource = new EmbeddedDataSource();
         IDatabase database = Database.getInstance(dataSource);
-        IFlightDao flightDao = FlightDao.getInstance(database);
+        ISeatDTOFactory seatDTOFactory = SeatDTOFactory.getInstance();
+        IFlightDTOFactory flightDTOFactory = FlightDTOFactory.getInstance();
+        IFlightDao flightDao = FlightDao.getInstance(database, flightDTOFactory);
         ITicketDao ticketDao = TicketDao.getInstance(database);
-        ISeatDao seatDao = SeatDao.getInstance(database);
-        IFlightService flightService = FlightService.getInstance(flightDao, seatDao);
+        ISeatDao seatDao = SeatDao.getInstance(database, seatDTOFactory);
+        IFlightService flightService = FlightService.getInstance(flightDao, seatDao, seatDTOFactory);
         ITicketService ticketService = TicketService.getInstance(ticketDao, flightService);
 
         return DomainFacede.getInstance(flightService, ticketService);
@@ -49,9 +55,11 @@ public class IoCContainer {
     public static FlightGenerator getFlightGenerator() {
         EmbeddedDataSource dataSource = new EmbeddedDataSource();
         IDatabase database = Database.getInstance(dataSource);
-        IFlightDao flightDao = FlightDao.getInstance(database);
-        ISeatDao seatDao = SeatDao.getInstance(database);
-        IFlightService flightService = FlightService.getInstance(flightDao, seatDao);
+        ISeatDTOFactory seatDTOFactory = SeatDTOFactory.getInstance();
+        IFlightDTOFactory flightDTOFactory = FlightDTOFactory.getInstance();
+        IFlightDao flightDao = FlightDao.getInstance(database, flightDTOFactory);
+        ISeatDao seatDao = SeatDao.getInstance(database, seatDTOFactory);
+        IFlightService flightService = FlightService.getInstance(flightDao, seatDao, seatDTOFactory);
 
         return FlightGenerator.getInstance(flightService);
     }

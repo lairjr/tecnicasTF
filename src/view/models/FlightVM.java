@@ -3,7 +3,7 @@ package view.models;
 import dtos.FlightDTO;
 import javafx.beans.property.*;
 
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by ljunior on 6/1/16.
@@ -16,12 +16,12 @@ public class FlightVM {
     private StringProperty departureDate;
 
     public FlightVM(FlightDTO flightDTO) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        this.number = new SimpleIntegerProperty(flightDTO.getNumber());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        this.number = new SimpleIntegerProperty(flightDTO.getFlightId());
         this.arrivalLocale = new SimpleStringProperty(flightDTO.getArrivalLocale());
-        this.arrivalDate = new SimpleStringProperty(dateFormat.format(flightDTO.getArrivalDate()));
+        this.arrivalDate = new SimpleStringProperty(flightDTO.getArrivalDate().format(formatter));
         this.departureLocale = new SimpleStringProperty(flightDTO.getDepartureLocale());
-        this.departureDate = new SimpleStringProperty(dateFormat.format(flightDTO.getDepartureDate()));
+        this.departureDate = new SimpleStringProperty(flightDTO.getDepartureDate().format(formatter));
     }
 
     public int getNumber() {

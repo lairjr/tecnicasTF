@@ -27,7 +27,7 @@ public class FlightServiceTest {
     @Before
     public void setUp() {
         flightDao = mock(IFlightDao.class);
-        flightService = FlightService.getInstance(flightDao, null);
+        flightService = FlightService.getInstance(flightDao, null, null);
     }
 
     @Test

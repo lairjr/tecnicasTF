@@ -3,13 +3,10 @@ package domain.services;
 import domain.IFlightService;
 import dtos.FlightDTO;
 import dtos.SeatDTO;
+import dtos.factories.ISeatDTOFactory;
 import repository.IFlightDao;
 import repository.ISeatDao;
-import repository.dao.FlightDao;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -18,25 +15,30 @@ import java.util.List;
  */
 public class FlightService implements IFlightService {
     private static FlightService instance;
-    private IFlightDao flightDao;
-    private ISeatDao seatDao;
+    private final IFlightDao flightDao;
+    private final ISeatDTOFactory seatDTOFactory;
+    private final ISeatDao seatDao;
 
-    private FlightService(IFlightDao flightDao, ISeatDao seatDao) {
+    private FlightService(IFlightDao flightDao, ISeatDao seatDao, ISeatDTOFactory seatDTOFactory) {
         this.flightDao = flightDao;
         this.seatDao = seatDao;
+        this.seatDTOFactory = seatDTOFactory;
     }
 
-    public static FlightService getInstance(IFlightDao flightDao, ISeatDao seatDao) {
+    public static FlightService getInstance(IFlightDao flightDao, ISeatDao seatDao, ISeatDTOFactory seatDTOFactory) {
         if (instance == null)
-            instance = new FlightService(flightDao, seatDao);
+            instance = new FlightService(flightDao, seatDao, seatDTOFactory);
 
         return instance;
     }
 
     @Override
     public FlightDTO getFlightByNumber(int flightNumber) {
-        FlightDTO flightDTO = flightDao.getFlightByNumber(flightNumber);
-        flightDTO.setSeats(seatDao.getSeatsByFlightNumber(flightDTO.getNumber()));
+        FlightDTO flightDTO = flightDao.getFlightById(flightNumber);
+
+        List<SeatDTO> seats = seatDao.getSeatsByFlightId(flightDTO.getFlightId());
+        flightDTO.setSeats(seats);
+
         return flightDTO;
     }
 
@@ -48,10 +50,12 @@ public class FlightService implements IFlightService {
     @Override
     public int insert(FlightDTO flight) {
         int flightId = flightDao.insert(flight);
+
         for (int x = 1; x < 40; x++) {
-            SeatDTO seat = new SeatDTO(flightId, x, false);
+            SeatDTO seat = seatDTOFactory.create(flightId, x, false);
             seatDao.insert(seat);
         }
+
         return flightId;
     }
 }

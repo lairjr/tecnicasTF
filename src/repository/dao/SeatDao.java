@@ -1,15 +1,14 @@
 package repository.dao;
 
+import dtos.FlightDTO;
 import dtos.SeatDTO;
 import dtos.TicketDTO;
+import dtos.factories.ISeatDTOFactory;
 import infrastructure.Constants;
 import infrastructure.IDatabase;
 import repository.ISeatDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,33 +16,50 @@ import java.util.List;
  * Created by ljunior on 6/25/16.
  */
 public class SeatDao implements ISeatDao {
-    private IDatabase db;
     private static SeatDao instance;
-    private List<SeatDTO> mockSeats;
+    private IDatabase db;
+    private ISeatDTOFactory seatDTOFactory;
 
-    private SeatDao(IDatabase database) {
+    private SeatDao(IDatabase database, ISeatDTOFactory seatDTOFactory) {
         db = database;
-
-        mockSeats = new ArrayList<>();
-
-        mockSeats.add(new SeatDTO(1, 1, false));
-        mockSeats.add(new SeatDTO(1, 2, false));
-        mockSeats.add(new SeatDTO(1, 3, true));
-        mockSeats.add(new SeatDTO(1, 4, false));
-        mockSeats.add(new SeatDTO(1, 5, true));
-        mockSeats.add(new SeatDTO(1, 6, false));
+        this.seatDTOFactory = seatDTOFactory;
     }
 
-    public static SeatDao getInstance(IDatabase database) {
+    public static SeatDao getInstance(IDatabase database, ISeatDTOFactory seatDTOFactory) {
         if (instance == null);
-            instance = new SeatDao(database);
+            instance = new SeatDao(database, seatDTOFactory);
 
         return instance;
     }
 
     @Override
-    public List<SeatDTO> getSeatsByFlightNumber(int flightNumber) {
-        return mockSeats;
+    public List<SeatDTO> getSeatsByFlightId(int flightId) {
+        StringBuilder sql = new StringBuilder();
+        List<SeatDTO> seatDTOs = new ArrayList<>();
+
+        sql.append(" SELECT * FROM ");
+        sql.append(Constants.Seats.TABLE_NAME);
+        sql.append(" WHERE ");
+        sql.append(Constants.Seats.FlightId + " = ? ");
+
+        try (Connection conn = db.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql.toString());
+
+            ps.setInt(1, flightId);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                seatDTOs.add(seatDTOFactory.create(rs));
+            }
+
+            conn.close();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return seatDTOs;
     }
 
     @Override

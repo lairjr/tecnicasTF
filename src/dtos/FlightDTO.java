@@ -1,7 +1,5 @@
 package dtos;
 
-import java.sql.Date;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,12 +24,8 @@ public class FlightDTO {
         this.international = international;
     }
 
-    public int getNumber() {
+    public int getFlightId() {
         return flightId;
-    }
-
-    public void setNumber(int number) {
-        this.flightId = number;
     }
 
     public String getDepartureLocale() {

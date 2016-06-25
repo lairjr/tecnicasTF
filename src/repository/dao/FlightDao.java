@@ -1,11 +1,13 @@
 package repository.dao;
 
 import dtos.FlightDTO;
+import dtos.factories.IFlightDTOFactory;
 import infrastructure.Constants;
 import infrastructure.IDatabase;
 import repository.IFlightDao;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,21 +18,16 @@ import java.util.List;
 public class FlightDao implements IFlightDao {
     private static FlightDao instance;
     private IDatabase db;
-    private List<FlightDTO> mockFlights;
+    private IFlightDTOFactory flightDTOFactory;
 
-    private FlightDao(IDatabase database) {
+    private FlightDao(IDatabase database, IFlightDTOFactory flightDTOFactory) {
         db = database;
-
-        mockFlights = new ArrayList<>();
-//
-//        mockFlights.add(new FlightDTO(1, "Porto Alegre", "Orlando", new java.sql.Date(2016, 10, 20), new java.sql.Date(2016, 10, 30)));
-//        mockFlights.add(new FlightDTO(2, "Porto Alegre", "New York", new java.sql.Date(2016, 10, 21), new java.sql.Date(2016, 10, 29)));
-//        mockFlights.add(new FlightDTO(3, "Orlando", "Porto Alegre", new java.sql.Date(2016, 10, 22), new java.sql.Date(2016, 10, 28)));
+        this.flightDTOFactory = flightDTOFactory;
     }
 
-    public static FlightDao getInstance(IDatabase database) {
+    public static FlightDao getInstance(IDatabase database, IFlightDTOFactory flightDTOFactory) {
         if (instance == null)
-            instance = new FlightDao(database);
+            instance = new FlightDao(database, flightDTOFactory);
 
         return instance;
     }
@@ -53,36 +50,78 @@ public class FlightDao implements IFlightDao {
         int flightId = 0;
 
         try (Connection conn = db.getConnection()) {
-            PreparedStatement ps = conn.prepareStatement(sql.toString(), new String[] { Constants.Flights.FlightId });
+            PreparedStatement ps = conn.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, flight.getDepartureLocale());
             ps.setTimestamp(2, Timestamp.valueOf(flight.getDepartureDate()));
             ps.setString(3, flight.getArrivalLocale());
             ps.setTimestamp(4, Timestamp.valueOf(flight.getArrivalDate()));
             ps.setInt(5, flight.getInternational() ? 1 : 0);
 
-            ps.executeUpdate();
+            int rows = ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
 
             rs.next();
 
-            flightId = rs.getInt(Constants.Flights.FlightId);
+            flightId = rs.getInt(1);
 
             conn.close();
         } catch (SQLException e) {
-
+            System.out.println(e);
         }
 
         return flightId;
     }
 
     @Override
-    public FlightDTO getFlightByNumber(int flightNumber) {
-        return mockFlights.get(flightNumber);
+    public FlightDTO getFlightById(int flightId) {
+        StringBuilder sql = new StringBuilder();
+        FlightDTO flightDTO = null;
+
+        sql.append(" SELECT * FROM ");
+        sql.append(Constants.Flights.TABLE_NAME);
+        sql.append(" WHERE ");
+        sql.append(Constants.Flights.FlightId + " = ? ");
+
+        try (Connection conn = db.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql.toString());
+
+            ps.setInt(1, flightId);
+
+            ResultSet rs = ps.executeQuery();
+
+            rs.next();
+
+            flightDTO = flightDTOFactory.create(rs);
+        } catch (Exception e) {
+
+        }
+
+        return flightDTO;
     }
 
     @Override
     public List<FlightDTO> getFlightsByDateAndLocale(Date departureDate, Date arrivalDate, String departureLocale, String arrivalLocale) {
-        return mockFlights;
+        StringBuilder sql = new StringBuilder();
+        List<FlightDTO> flightDTOs = new ArrayList<>();
+
+        sql.append(" SELECT * FROM ");
+        sql.append(Constants.Flights.TABLE_NAME);
+
+        try (Connection conn = db.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql.toString());
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                flightDTOs.add(flightDTOFactory.create(rs));
+            }
+
+            conn.close();
+
+        } catch (SQLException e) {
+
+        }
+
+        return flightDTOs;
     }
 }

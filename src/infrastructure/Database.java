@@ -42,7 +42,8 @@ public class Database implements IDatabase {
 
     @Override
     public void createOrCheckDatabase() throws SQLException {
-        //dropTable(Constants.Seats.TABLE_NAME);
+        dropTable(Constants.Seats.TABLE_NAME);
+        dropTable(Constants.Seats.TABLE_NAME);
         createOrCheckSeats();
         createOrCheckFlights();
         createOrCheckTickets();
@@ -51,9 +52,11 @@ public class Database implements IDatabase {
     private void dropTable(String table) {
         try (Connection conn = this.getConnection()) {
             Statement s = conn.createStatement();
+            s.execute("DELETE FROM " + table);
             s.execute("DROP TABLE " + table);
+            conn.close();
         }catch (SQLException e) {
-
+            System.out.println(e);
         }
     }
 
