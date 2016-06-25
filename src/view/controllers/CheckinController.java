@@ -16,7 +16,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 /**
  * Created by ljunior on 6/23/16.
@@ -223,7 +222,129 @@ public class CheckinController implements Initializable {
         _outboundCheckboxes.add(_outboundSeat40);
     }
 
+    @FXML
+    private CheckBox _inboundSeat1;
+    @FXML
+    private CheckBox _inboundSeat2;
+    @FXML
+    private CheckBox _inboundSeat3;
+    @FXML
+    private CheckBox _inboundSeat4;
+    @FXML
+    private CheckBox _inboundSeat5;
+    @FXML
+    private CheckBox _inboundSeat6;
+    @FXML
+    private CheckBox _inboundSeat7;
+    @FXML
+    private CheckBox _inboundSeat8;
+    @FXML
+    private CheckBox _inboundSeat9;
+    @FXML
+    private CheckBox _inboundSeat10;
+    @FXML
+    private CheckBox _inboundSeat11;
+    @FXML
+    private CheckBox _inboundSeat12;
+    @FXML
+    private CheckBox _inboundSeat13;
+    @FXML
+    private CheckBox _inboundSeat14;
+    @FXML
+    private CheckBox _inboundSeat15;
+    @FXML
+    private CheckBox _inboundSeat16;
+    @FXML
+    private CheckBox _inboundSeat17;
+    @FXML
+    private CheckBox _inboundSeat18;
+    @FXML
+    private CheckBox _inboundSeat19;
+    @FXML
+    private CheckBox _inboundSeat20;
+    @FXML
+    private CheckBox _inboundSeat21;
+    @FXML
+    private CheckBox _inboundSeat22;
+    @FXML
+    private CheckBox _inboundSeat23;
+    @FXML
+    private CheckBox _inboundSeat24;
+    @FXML
+    private CheckBox _inboundSeat25;
+    @FXML
+    private CheckBox _inboundSeat26;
+    @FXML
+    private CheckBox _inboundSeat27;
+    @FXML
+    private CheckBox _inboundSeat28;
+    @FXML
+    private CheckBox _inboundSeat29;
+    @FXML
+    private CheckBox _inboundSeat30;
+    @FXML
+    private CheckBox _inboundSeat31;
+    @FXML
+    private CheckBox _inboundSeat32;
+    @FXML
+    private CheckBox _inboundSeat33;
+    @FXML
+    private CheckBox _inboundSeat34;
+    @FXML
+    private CheckBox _inboundSeat35;
+    @FXML
+    private CheckBox _inboundSeat36;
+    @FXML
+    private CheckBox _inboundSeat37;
+    @FXML
+    private CheckBox _inboundSeat38;
+    @FXML
+    private CheckBox _inboundSeat39;
+    @FXML
+    private CheckBox _inboundSeat40;
+
     private void setInboundCheckboxes() {
         _inboundCheckboxes = new ArrayList<>();
+
+        _inboundCheckboxes.add(_inboundSeat1);
+        _inboundCheckboxes.add(_inboundSeat2);
+        _inboundCheckboxes.add(_inboundSeat3);
+        _inboundCheckboxes.add(_inboundSeat4);
+        _inboundCheckboxes.add(_inboundSeat5);
+        _inboundCheckboxes.add(_inboundSeat6);
+        _inboundCheckboxes.add(_inboundSeat7);
+        _inboundCheckboxes.add(_inboundSeat8);
+        _inboundCheckboxes.add(_inboundSeat9);
+        _inboundCheckboxes.add(_inboundSeat10);
+        _inboundCheckboxes.add(_inboundSeat11);
+        _inboundCheckboxes.add(_inboundSeat12);
+        _inboundCheckboxes.add(_inboundSeat13);
+        _inboundCheckboxes.add(_inboundSeat14);
+        _inboundCheckboxes.add(_inboundSeat15);
+        _inboundCheckboxes.add(_inboundSeat16);
+        _inboundCheckboxes.add(_inboundSeat17);
+        _inboundCheckboxes.add(_inboundSeat18);
+        _inboundCheckboxes.add(_inboundSeat19);
+        _inboundCheckboxes.add(_inboundSeat20);
+        _inboundCheckboxes.add(_inboundSeat21);
+        _inboundCheckboxes.add(_inboundSeat22);
+        _inboundCheckboxes.add(_inboundSeat23);
+        _inboundCheckboxes.add(_inboundSeat24);
+        _inboundCheckboxes.add(_inboundSeat25);
+        _inboundCheckboxes.add(_inboundSeat26);
+        _inboundCheckboxes.add(_inboundSeat27);
+        _inboundCheckboxes.add(_inboundSeat28);
+        _inboundCheckboxes.add(_inboundSeat29);
+        _inboundCheckboxes.add(_inboundSeat30);
+        _inboundCheckboxes.add(_inboundSeat31);
+        _inboundCheckboxes.add(_inboundSeat32);
+        _inboundCheckboxes.add(_inboundSeat33);
+        _inboundCheckboxes.add(_inboundSeat34);
+        _inboundCheckboxes.add(_inboundSeat35);
+        _inboundCheckboxes.add(_inboundSeat36);
+        _inboundCheckboxes.add(_inboundSeat37);
+        _inboundCheckboxes.add(_inboundSeat38);
+        _inboundCheckboxes.add(_inboundSeat39);
+        _inboundCheckboxes.add(_inboundSeat40);
     }
 }

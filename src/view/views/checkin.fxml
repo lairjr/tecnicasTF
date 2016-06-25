@@ -65,6 +65,46 @@
             <Separator layoutX="-1.0" layoutY="235.0" prefHeight="3.0" prefWidth="843.0" />
              <Label layoutX="14.0" layoutY="250.0" text="Voo de volta" />
              <Button layoutX="209.0" layoutY="250.0" mnemonicParsing="false" onAction="#checkInInbound" text="Check-in" />
+             <CheckBox fx:id="_inboundSeat1" layoutX="14.0" layoutY="280.0" />
+             <CheckBox fx:id="_inboundSeat2" layoutX="14.0" layoutY="300.0" />
+             <CheckBox fx:id="_inboundSeat3" layoutX="14.0" layoutY="340.0" />
+             <CheckBox fx:id="_inboundSeat4" layoutX="14.0" layoutY="360.0" />
+             <CheckBox fx:id="_inboundSeat5" layoutX="34.0" layoutY="280.0" />
+             <CheckBox fx:id="_inboundSeat6" layoutX="34.0" layoutY="300.0" />
+             <CheckBox fx:id="_inboundSeat7" layoutX="34.0" layoutY="340.0" />
+             <CheckBox fx:id="_inboundSeat8" layoutX="34.0" layoutY="360.0" />
+             <CheckBox fx:id="_inboundSeat9" layoutX="54.0" layoutY="280.0" />
+             <CheckBox fx:id="_inboundSeat10" layoutX="54.0" layoutY="300.0" />
+             <CheckBox fx:id="_inboundSeat11" layoutX="54.0" layoutY="340.0" />
+             <CheckBox fx:id="_inboundSeat12" layoutX="54.0" layoutY="360.0" />
+             <CheckBox fx:id="_inboundSeat13" layoutX="74.0" layoutY="280.0" />
+             <CheckBox fx:id="_inboundSeat14" layoutX="74.0" layoutY="300.0" />
+             <CheckBox fx:id="_inboundSeat15" layoutX="74.0" layoutY="340.0" />
+             <CheckBox fx:id="_inboundSeat16" layoutX="74.0" layoutY="360.0" />
+             <CheckBox fx:id="_inboundSeat17" layoutX="94.0" layoutY="280.0" />
+             <CheckBox fx:id="_inboundSeat18" layoutX="94.0" layoutY="300.0" />
+             <CheckBox fx:id="_inboundSeat19" layoutX="94.0" layoutY="340.0" />
+             <CheckBox fx:id="_inboundSeat20" layoutX="94.0" layoutY="360.0" />
+             <CheckBox fx:id="_inboundSeat21" layoutX="114.0" layoutY="280.0" />
+             <CheckBox fx:id="_inboundSeat22" layoutX="114.0" layoutY="300.0" />
+             <CheckBox fx:id="_inboundSeat23" layoutX="114.0" layoutY="340.0" />
+             <CheckBox fx:id="_inboundSeat24" layoutX="114.0" layoutY="360.0" />
+             <CheckBox fx:id="_inboundSeat25" layoutX="134.0" layoutY="280.0" />
+             <CheckBox fx:id="_inboundSeat26" layoutX="134.0" layoutY="300.0" />
+             <CheckBox fx:id="_inboundSeat27" layoutX="134.0" layoutY="340.0" />
+             <CheckBox fx:id="_inboundSeat28" layoutX="134.0" layoutY="360.0" />
+             <CheckBox fx:id="_inboundSeat29" layoutX="154.0" layoutY="280.0" />
+             <CheckBox fx:id="_inboundSeat30" layoutX="154.0" layoutY="300.0" />
+             <CheckBox fx:id="_inboundSeat31" layoutX="154.0" layoutY="340.0" />
+             <CheckBox fx:id="_inboundSeat32" layoutX="154.0" layoutY="360.0" />
+             <CheckBox fx:id="_inboundSeat33" layoutX="174.0" layoutY="280.0" />
+             <CheckBox fx:id="_inboundSeat34" layoutX="174.0" layoutY="300.0" />
+             <CheckBox fx:id="_inboundSeat35" layoutX="174.0" layoutY="340.0" />
+             <CheckBox fx:id="_inboundSeat36" layoutX="174.0" layoutY="360.0" />
+             <CheckBox fx:id="_inboundSeat37" layoutX="194.0" layoutY="280.0" />
+             <CheckBox fx:id="_inboundSeat38" layoutX="194.0" layoutY="300.0" />
+             <CheckBox fx:id="_inboundSeat39" layoutX="194.0" layoutY="340.0" />
+             <CheckBox fx:id="_inboundSeat40" layoutX="194.0" layoutY="360.0" />
          </children></AnchorPane>
     </children>
    <columnConstraints>

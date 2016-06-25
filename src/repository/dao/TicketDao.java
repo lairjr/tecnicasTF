@@ -45,10 +45,4 @@ public class TicketDao implements ITicketDao {
 
     @Override
     public TicketDTO update(TicketDTO ticket) { return mockTickets.get(2); }
-
-
-    //TODO: get rid of theses mocks
-    private List<TicketDTO> mockGetTickets() {
-        return mockTickets;
-    }
 }

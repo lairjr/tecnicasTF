@@ -47,11 +47,6 @@ public class FlightDao implements IFlightDao {
 
     @Override
     public List<FlightDTO> getFlightsByDateAndLocale(Date departureDate, Date arrivalDate, String departureLocale, String arrivalLocale) {
-        return this.mockGetFlights();
-    }
-
-    //TODO: get rid of theses mocks
-    private List<FlightDTO> mockGetFlights() {
         return mockFlights;
     }
 }
