@@ -27,6 +27,67 @@ public class CheckinController implements Initializable {
     private Label _passengerName;
     @FXML
     private TextField _ticketNumber;
+
+    private List<CheckBox> _outboundCheckboxes;
+    private List<CheckBox> _inboundCheckboxes;
+    private TicketDTO ticketDTO;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        solveDependencies();
+        setInboundCheckboxes();
+        setOutboundCheckboxes();
+    }
+
+    private void solveDependencies() {
+        domainFacede = IoCContainer.getDomainFacede();
+    }
+
+    private int getSelectedCheckbox(List<CheckBox> checkboxes) {
+        for (CheckBox checkbox: checkboxes) {
+            if (checkbox.isSelected() && !checkbox.isDisable())
+                return checkboxes.indexOf(checkbox) + 1;
+        }
+        return -1;
+    }
+
+    public void searchTicket() {
+        int ticketNumber = Integer.parseInt(_ticketNumber.getText());
+
+        ticketDTO = domainFacede.getTicket(ticketNumber);
+
+        displayTicket();
+    }
+
+    public void checkInInbound() {
+        flightCheckIn(_inboundCheckboxes, ticketDTO.getInboundFlightNumber());
+    }
+
+    public void checkInOutbound() {
+        flightCheckIn(_outboundCheckboxes, ticketDTO.getOutboundFlightNumber());
+    }
+
+    private void flightCheckIn(List<CheckBox> checkboxes, int flightNumber) {
+        int selectedSeat = getSelectedCheckbox(checkboxes);
+        domainFacede.saveSeat(flightNumber, selectedSeat);
+    }
+
+    private void displayTicket() {
+        _passengerName.setText(ticketDTO.getPassenger());
+        displayFlight(ticketDTO.getOutboundFlight(), _outboundCheckboxes);
+        displayFlight(ticketDTO.getInboundFlight(), _inboundCheckboxes);
+    }
+
+    private void displayFlight(FlightDTO flight, List<CheckBox> checkboxes) {
+        for (SeatDTO seat: flight.getSeats()) {
+            CheckBox checkbox = checkboxes.get(seat.getNumber() - 1);
+            checkbox.setDisable(seat.getStatus());
+            checkbox.setSelected(seat.getStatus());
+        }
+    }
+
+    /* Checkboxes declaration */
+
     @FXML
     private CheckBox _outboundSeat1;
     @FXML
@@ -67,20 +128,46 @@ public class CheckinController implements Initializable {
     private CheckBox _outboundSeat19;
     @FXML
     private CheckBox _outboundSeat20;
-
-    private List<CheckBox> _outboundCheckboxes;
-    private List<CheckBox> _inboundCheckboxes;
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        solveDependencies();
-        setInboundCheckboxes();
-        setOutboundCheckboxes();
-    }
-
-    private void solveDependencies() {
-        domainFacede = IoCContainer.getDomainFacede();
-    }
+    @FXML
+    private CheckBox _outboundSeat21;
+    @FXML
+    private CheckBox _outboundSeat22;
+    @FXML
+    private CheckBox _outboundSeat23;
+    @FXML
+    private CheckBox _outboundSeat24;
+    @FXML
+    private CheckBox _outboundSeat25;
+    @FXML
+    private CheckBox _outboundSeat26;
+    @FXML
+    private CheckBox _outboundSeat27;
+    @FXML
+    private CheckBox _outboundSeat28;
+    @FXML
+    private CheckBox _outboundSeat29;
+    @FXML
+    private CheckBox _outboundSeat30;
+    @FXML
+    private CheckBox _outboundSeat31;
+    @FXML
+    private CheckBox _outboundSeat32;
+    @FXML
+    private CheckBox _outboundSeat33;
+    @FXML
+    private CheckBox _outboundSeat34;
+    @FXML
+    private CheckBox _outboundSeat35;
+    @FXML
+    private CheckBox _outboundSeat36;
+    @FXML
+    private CheckBox _outboundSeat37;
+    @FXML
+    private CheckBox _outboundSeat38;
+    @FXML
+    private CheckBox _outboundSeat39;
+    @FXML
+    private CheckBox _outboundSeat40;
 
     private void setOutboundCheckboxes() {
         _outboundCheckboxes = new ArrayList<>();
@@ -105,44 +192,29 @@ public class CheckinController implements Initializable {
         _outboundCheckboxes.add(_outboundSeat18);
         _outboundCheckboxes.add(_outboundSeat19);
         _outboundCheckboxes.add(_outboundSeat20);
+        _outboundCheckboxes.add(_outboundSeat21);
+        _outboundCheckboxes.add(_outboundSeat22);
+        _outboundCheckboxes.add(_outboundSeat23);
+        _outboundCheckboxes.add(_outboundSeat24);
+        _outboundCheckboxes.add(_outboundSeat25);
+        _outboundCheckboxes.add(_outboundSeat26);
+        _outboundCheckboxes.add(_outboundSeat27);
+        _outboundCheckboxes.add(_outboundSeat28);
+        _outboundCheckboxes.add(_outboundSeat29);
+        _outboundCheckboxes.add(_outboundSeat30);
+        _outboundCheckboxes.add(_outboundSeat31);
+        _outboundCheckboxes.add(_outboundSeat32);
+        _outboundCheckboxes.add(_outboundSeat33);
+        _outboundCheckboxes.add(_outboundSeat34);
+        _outboundCheckboxes.add(_outboundSeat35);
+        _outboundCheckboxes.add(_outboundSeat36);
+        _outboundCheckboxes.add(_outboundSeat37);
+        _outboundCheckboxes.add(_outboundSeat38);
+        _outboundCheckboxes.add(_outboundSeat39);
+        _outboundCheckboxes.add(_outboundSeat40);
     }
 
     private void setInboundCheckboxes() {
-
-    }
-
-    public void searchTicket() {
-        int ticketNumber = Integer.parseInt(_ticketNumber.getText());
-
-        TicketDTO ticket = domainFacede.getTicket(ticketNumber);
-
-        displayTicket(ticket);
-    }
-
-    public void checkInInbound() {
-
-    }
-
-    public void checkInOutbound() {
-
-    }
-
-    private void displayTicket(TicketDTO ticket) {
-        _passengerName.setText(ticket.getPassenger());
-        displayFlight(ticket.getOutboundFlight(), _outboundCheckboxes);
-        displayFlight(ticket.getInboundFlight(), _inboundCheckboxes);
-    }
-
-    private void displayFlight(FlightDTO flight, List<CheckBox> checkboxes) {
-        for (SeatDTO seat: flight.getSeats()) {
-            CheckBox checkbox = checkboxes.get(seat.getNumber() - 1);
-            checkbox.setDisable(seat.getStatus());
-            checkbox.setSelected(seat.getStatus());
-        }
-    }
-
-
-    private javafx.scene.control.CheckBox getInboundSeatCheckbox(SeatDTO seat) {
-        return _outboundSeat2;
+        _inboundCheckboxes = new ArrayList<>();
     }
 }
