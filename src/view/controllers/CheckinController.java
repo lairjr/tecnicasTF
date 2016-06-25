@@ -7,6 +7,7 @@ import dtos.TicketDTO;
 import infrastructure.ioc.IoCContainer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.CheckBox;
@@ -69,7 +70,15 @@ public class CheckinController implements Initializable {
 
     private void flightCheckIn(List<CheckBox> checkboxes, int flightNumber) {
         int selectedSeat = getSelectedCheckbox(checkboxes);
-        domainFacede.saveSeat(flightNumber, selectedSeat);
+        if (selectedSeat > 0)
+            domainFacede.saveSeat(flightNumber, selectedSeat);
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Malandrinho");
+            alert.setHeaderText("Seleciona um voo malandrinho!");
+
+            alert.showAndWait();
+        }
     }
 
     private void displayTicket() {

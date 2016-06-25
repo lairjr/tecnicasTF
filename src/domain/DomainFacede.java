@@ -1,6 +1,7 @@
 package domain;
 
 import dtos.FlightDTO;
+import dtos.SeatDTO;
 import dtos.TicketDTO;
 
 import java.sql.Date;
@@ -55,5 +56,10 @@ public class DomainFacede implements IDomainFacede {
     @Override
     public TicketDTO getTicket(int ticketNumber) {
         return ticketService.getByNumber(ticketNumber);
+    }
+
+    @Override
+    public SeatDTO saveSeat(int flightNumber, int seatNumber) {
+        return null;
     }
 }
