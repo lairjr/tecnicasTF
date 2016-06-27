@@ -71,7 +71,7 @@ public class TicketDao implements ITicketDao {
         sql.append(Constants.Tickets.InboundFlightId + ", ");
         sql.append(Constants.Tickets.InboundSeatId);
 
-        sql.append(" ) ");
+        sql.append(" ) VALUES (? ,?, ?, ?, ?, ?) ");
 
         try (Connection conn = db.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);

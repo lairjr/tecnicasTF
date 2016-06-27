@@ -39,6 +39,7 @@ public class DomainFacede implements IDomainFacede {
 
     @Override
     public TicketDTO saveTicket(int number, String passengerName, String document, int outboundFlight, int outboundSeat, int inboundFlight, int inboundSeat, int status) {
+        //TODO: Trocar por factory
         TicketDTO ticket = new TicketDTO(
                 number,
                 passengerName,

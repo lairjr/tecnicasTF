@@ -13,6 +13,7 @@ import infrastructure.IDatabase;
 import infrastructure.ioc.IoCContainer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -42,6 +43,12 @@ public class TicketsController implements Initializable {
     @FXML
     private TextField _document;
     @FXML
+    private Label _inboundFlightDate;
+    @FXML
+    private Label _inboundDeparture;
+    @FXML
+    private Label _inboundArrival;
+    @FXML
     private Label _outboundFlightDate;
     @FXML
     private Label _outboundDeparture;
@@ -59,18 +66,25 @@ public class TicketsController implements Initializable {
     }
 
     public void searchDeparture() {
-        int flightNumber = Integer.parseInt(_outboundFlightNumber.getText());
+        int flightId = Integer.parseInt(_outboundFlightNumber.getText());
 
-        FlightDTO flight = domainFacede.getFlightByNumber(flightNumber);
+        FlightDTO flight = domainFacede.getFlightByNumber(flightId);
         FlightVM flightVM = flightVMFactory.create(flight);
 
-        _outboundDeparture.setText(flight.getDepartureLocale());
-        _outboundArrival.setText(flight.getArrivalLocale());
-        _outboundFlightDate.setText(flight.getDepartureDate().toString());
+        _outboundDeparture.setText(flightVM.getDepartureLocale().getValue());
+        _outboundArrival.setText(flightVM.getArrivalLocale().getValue());
+        _outboundFlightDate.setText(flightVM.getDepartureDate().getValue());
     }
 
     public void searchArrival() {
-        String flightNumber = _arrivalFlightNumber.getText();
+        int flightId = Integer.parseInt(_inboundFlightNumber.getText());
+
+        FlightDTO flight = domainFacede.getFlightByNumber(flightId);
+        FlightVM flightVM = flightVMFactory.create(flight);
+
+        _inboundDeparture.setText(flightVM.getDepartureLocale().getValue());
+        _inboundArrival.setText(flightVM.getArrivalLocale().getValue());
+        _inboundFlightDate.setText(flightVM.getDepartureDate().getValue());
     }
 
     public void saveTicket() {
@@ -84,5 +98,15 @@ public class TicketsController implements Initializable {
         int status = 0;
 
         TicketDTO ticket = domainFacede.saveTicket(ticketNumber, passengerName, document, outboundFlight, outboundSeat, inboundFlight, inboundSeat, status);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Salvar Ticket");
+
+        if (ticket.getTicketId() == 0) {
+            alert.setHeaderText("Erro ao salvar!");
+        } else {
+            alert.setHeaderText("Sucesso! \n Número do localizador: " + ticket.getTicketId());
+        }
+        alert.showAndWait();
     };
 }
