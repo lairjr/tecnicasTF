@@ -15,5 +15,6 @@ public interface IDomainFacede {
     List<FlightDTO> getFlightsByDateAndLocale(Date departure, Date arrival, String from, String destination);
     TicketDTO saveTicket(int number, String passengerName, String document, int outboundFlight, int outboundSeat, int inboundFlight, int inboundSeat, int status);
     TicketDTO getTicket(int ticketNumber);
-    SeatDTO saveSeat(int flightNumber, int seatNumber);
+    TicketDTO saveInbountSeat(int ticketId, int flightId, int seatNumber);
+    TicketDTO saveOutboundSeat(int ticketId, int flightId, int seatNumber);
 }

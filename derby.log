@@ -1,4 +1,4 @@
-Mon Jun 27 09:57:50 BRT 2016 Thread[JavaFX Application Thread,5,main] Cleanup action starting
+Mon Jun 27 10:53:35 BRT 2016 Thread[JavaFX Application Thread,5,main] Cleanup action starting
 java.sql.SQLException: Failed to start database 'tecnicasDB' with class loader sun.misc.Launcher$AppClassLoader@610455d6, see the next exception for details.
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)
 	at org.apache.derby.impl.jdbc.SQLExceptionFactory.getSQLException(Unknown Source)

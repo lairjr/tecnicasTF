@@ -60,7 +60,12 @@ public class DomainFacede implements IDomainFacede {
     }
 
     @Override
-    public SeatDTO saveSeat(int flightNumber, int seatNumber) {
-        return null;
+    public TicketDTO saveInbountSeat(int ticketId, int flightId, int seatNumber) {
+        return ticketService.saveInbountSeat(ticketId, flightId, seatNumber);
+    }
+
+    @Override
+    public TicketDTO saveOutboundSeat(int ticketId, int flightId, int seatNumber) {
+        return ticketService.saveOutbountSeat(ticketId, flightId, seatNumber);
     }
 }

@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Function;
 
 /**
  * Created by ljunior on 6/23/16.
@@ -60,23 +61,22 @@ public class CheckinController implements Initializable {
     }
 
     public void checkInInbound() {
-        flightCheckIn(_inboundCheckboxes, ticketDTO.getInboundFlightNumber());
+        int selectedSeat = getSelectedCheckbox(_inboundCheckboxes);
+        if (selectedSeat == 0) {
+            displaySelectSeatMsg();
+        } else {
+            ticketDTO = domainFacede.saveInbountSeat(ticketDTO.getTicketId(), ticketDTO.getInboundFlightNumber(), selectedSeat);
+            displayTicket();
+        }
     }
 
     public void checkInOutbound() {
-        flightCheckIn(_outboundCheckboxes, ticketDTO.getOutboundFlightNumber());
-    }
-
-    private void flightCheckIn(List<CheckBox> checkboxes, int flightNumber) {
-        int selectedSeat = getSelectedCheckbox(checkboxes);
-        if (selectedSeat > 0)
-            domainFacede.saveSeat(flightNumber, selectedSeat);
-        else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Malandrinho");
-            alert.setHeaderText("Seleciona um voo malandrinho!");
-
-            alert.showAndWait();
+        int selectedSeat = getSelectedCheckbox(_outboundCheckboxes);
+        if (selectedSeat == 0) {
+            displaySelectSeatMsg();
+        } else {
+            ticketDTO = domainFacede.saveOutboundSeat(ticketDTO.getTicketId(), ticketDTO.getOutboundFlightNumber(), selectedSeat);
+            displayTicket();
         }
     }
 
@@ -84,6 +84,14 @@ public class CheckinController implements Initializable {
         _passengerName.setText(ticketDTO.getPassenger());
         displayFlight(ticketDTO.getOutboundFlight(), _outboundCheckboxes);
         displayFlight(ticketDTO.getInboundFlight(), _inboundCheckboxes);
+    }
+
+    private void displaySelectSeatMsg() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Malandrinho");
+        alert.setHeaderText("Seleciona um voo malandrinho!");
+
+        alert.showAndWait();
     }
 
     private void displayFlight(FlightDTO flight, List<CheckBox> checkboxes) {

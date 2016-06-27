@@ -92,4 +92,35 @@ public class SeatDao implements ISeatDao {
 
         return rowsAffected;
     }
+
+    @Override
+    public int update(SeatDTO seat) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append(" UPDATE " + Constants.Seats.TABLE_NAME + " SET ");
+
+        sql.append(Constants.Seats.Occupied + " = ? ");
+
+        sql.append(" WHERE ");
+
+        sql.append(Constants.Seats.FlightId + " = ? AND ");
+        sql.append(Constants.Seats.Number + " = ? ");
+
+        int rowsAffected = 0;
+
+        try (Connection conn = db.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql.toString());
+            ps.setInt(1, seat.getOccupied() ? 1 : 0);
+            ps.setInt(2, seat.getFlightId());
+            ps.setInt(3, seat.getNumber());
+
+            rowsAffected = ps.executeUpdate();
+
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return rowsAffected;
+    }
 }
