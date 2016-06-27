@@ -4,7 +4,7 @@ package dtos;
  * Created by ljunior on 6/1/16.
  */
 public class TicketDTO {
-    private int number;
+    private int ticketId;
     private String passenger;
     private String document;
     private int outboundFlightNumber;
@@ -17,7 +17,7 @@ public class TicketDTO {
 
     public TicketDTO() { }
 
-    public TicketDTO(int number,
+    public TicketDTO(int ticketId,
                      String passenger,
                      String document,
                      int outboundFlightNumber,
@@ -25,7 +25,7 @@ public class TicketDTO {
                      int inboundFlightNumber,
                      int inboundSeat,
                      int status) {
-        this.number = number;
+        this.ticketId = ticketId;
         this.passenger = passenger;
         this.document = document;
         this.outboundFlightNumber = outboundFlightNumber;
@@ -35,8 +35,8 @@ public class TicketDTO {
         this.status = status;
     }
 
-    public int getNumber() {
-        return number;
+    public int getTicketId() {
+        return ticketId;
     }
 
     public String getPassenger() {
@@ -73,5 +73,9 @@ public class TicketDTO {
 
     public void setInboundFlight(FlightDTO inboundFlight) {
         this.inboundFlight = inboundFlight;
+    }
+
+    public void setTicketId(int ticketId) {
+        this.ticketId = ticketId;
     }
 }

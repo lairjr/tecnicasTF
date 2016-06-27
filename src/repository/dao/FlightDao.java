@@ -57,7 +57,7 @@ public class FlightDao implements IFlightDao {
             ps.setTimestamp(4, Timestamp.valueOf(flight.getArrivalDate()));
             ps.setInt(5, flight.getInternational() ? 1 : 0);
 
-            int rows = ps.executeUpdate();
+            ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
 

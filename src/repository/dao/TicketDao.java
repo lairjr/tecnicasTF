@@ -2,9 +2,12 @@ package repository.dao;
 
 import dtos.FlightDTO;
 import dtos.TicketDTO;
+import dtos.factories.ITicketDTOFactory;
+import infrastructure.Constants;
 import infrastructure.IDatabase;
 import repository.ITicketDao;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,35 +17,123 @@ import java.util.List;
 public class TicketDao implements ITicketDao {
     private static TicketDao instance;
     private IDatabase db;
-    private List<TicketDTO> mockTickets;
+    private ITicketDTOFactory ticketDTOFactory;
 
-    private TicketDao(IDatabase database) {
+    private TicketDao(IDatabase database, ITicketDTOFactory ticketDTOFactory) {
         db = database;
-
-        mockTickets = new ArrayList<>();
-
-        mockTickets.add(new TicketDTO(1, "Fulano", "1234", 1, 2, 3, 4, 1));
-        mockTickets.add(new TicketDTO(2, "Ciclano", "1235", 2, 3, 2, 1, 1));
-        mockTickets.add(new TicketDTO(3, "Beltrano", "5421", 3, 5, 1, 2, 1));
+        this.ticketDTOFactory = ticketDTOFactory;
     }
 
-    public static TicketDao getInstance(IDatabase database) {
+    public static TicketDao getInstance(IDatabase database, ITicketDTOFactory ticketDTOFactory) {
         if (instance == null)
-            instance = new TicketDao(database);
+            instance = new TicketDao(database, ticketDTOFactory);
 
         return instance;
     }
 
     @Override
-    public TicketDTO getByNumber(int number) {
-        return mockTickets.get(number);
+    public TicketDTO getByNumber(int ticketId) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append(" SELECT * FROM " + Constants.Tickets.TABLE_NAME);
+
+        sql.append(" WHERE ");
+
+        sql.append(Constants.Tickets.TicketId + " = ? ");
+
+        try (Connection conn = db.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql.toString());
+            ps.setInt(1, ticketId);
+
+            ResultSet rs = ps.executeQuery();
+
+            rs.next();
+
+            return ticketDTOFactory.create(rs);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return null;
     }
 
     @Override
     public TicketDTO insert(TicketDTO ticket) {
-        return mockTickets.get(1);
+        StringBuilder sql = new StringBuilder();
+
+        sql.append(" INSERT INTO " + Constants.Tickets.TABLE_NAME);
+        sql.append(" ( ");
+
+        sql.append(Constants.Tickets.Passenger + ", ");
+        sql.append(Constants.Tickets.Document + ", ");
+        sql.append(Constants.Tickets.OutboundFlightId + ", ");
+        sql.append(Constants.Tickets.OutboundSeatId + ", ");
+        sql.append(Constants.Tickets.InboundFlightId + ", ");
+        sql.append(Constants.Tickets.InboundSeatId);
+
+        sql.append(" ) ");
+
+        try (Connection conn = db.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
+
+            ps.setString(1, ticket.getPassenger());
+            ps.setInt(2, Integer.parseInt(ticket.getDocument()));
+            ps.setInt(3, ticket.getOutboundFlightNumber());
+            ps.setInt(4, ticket.getOutboundSeat());
+            ps.setInt(5, ticket.getInboundFlightNumber());
+            ps.setInt(6, ticket.getInboundSeat());
+
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+
+            rs.next();
+
+            ticket.setTicketId(rs.getInt(1));
+
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return ticket;
     }
 
     @Override
-    public TicketDTO update(TicketDTO ticket) { return mockTickets.get(2); }
+    public TicketDTO update(TicketDTO ticket) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append(" UPDATE " + Constants.Tickets.TABLE_NAME);
+        sql.append(" SET ");
+
+        sql.append(Constants.Tickets.Passenger + " = ?, ");
+        sql.append(Constants.Tickets.Document + " = ?, ");
+        sql.append(Constants.Tickets.OutboundFlightId + " = ?, ");
+        sql.append(Constants.Tickets.OutboundSeatId + " = ?, ");
+        sql.append(Constants.Tickets.InboundFlightId + " = ?, ");
+        sql.append(Constants.Tickets.InboundSeatId + " = ? ");
+
+        sql.append(" WHERE ");
+
+        sql.append(Constants.Tickets.TicketId + " = ? ");
+
+        try (Connection conn = db.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql.toString());
+
+            ps.setString(1, ticket.getPassenger());
+            ps.setInt(2, Integer.parseInt(ticket.getDocument()));
+            ps.setInt(3, ticket.getOutboundFlightNumber());
+            ps.setInt(4, ticket.getOutboundSeat());
+            ps.setInt(5, ticket.getInboundFlightNumber());
+            ps.setInt(6, ticket.getInboundSeat());
+            ps.setInt(7, ticket.getTicketId());
+
+            ps.executeUpdate();
+
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return ticket; }
 }

@@ -3,7 +3,6 @@ package domain.services;
 import domain.IFlightService;
 import domain.ITicketService;
 import dtos.TicketDTO;
-import groovy.lang.Singleton;
 import repository.ITicketDao;
 
 /**
@@ -28,7 +27,7 @@ public class TicketService implements ITicketService {
 
     @Override
     public TicketDTO save(TicketDTO ticketDTO) {
-        if (ticketDTO.getNumber() == 0)
+        if (ticketDTO.getTicketId() == 0)
             return ticketDao.insert(ticketDTO);
         return ticketDao.update(ticketDTO);
     }
