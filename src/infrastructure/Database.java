@@ -42,9 +42,9 @@ public class Database implements IDatabase {
 
     @Override
     public void createOrCheckDatabase() throws SQLException {
-//        dropTable(Constants.Seats.TABLE_NAME);
-//        dropTable(Constants.Flights.TABLE_NAME);
-//        dropTable(Constants.Tickets.TABLE_NAME);
+        dropTable(Constants.Seats.TABLE_NAME);
+        dropTable(Constants.Flights.TABLE_NAME);
+        dropTable(Constants.Tickets.TABLE_NAME);
         createOrCheckSeats();
         createOrCheckFlights();
         createOrCheckTickets();
@@ -97,7 +97,8 @@ public class Database implements IDatabase {
         sqlQuery.append(Constants.Flights.DepartureDate + " TIMESTAMP, ");
         sqlQuery.append(Constants.Flights.ArrivalLocal + " VARCHAR(50), ");
         sqlQuery.append(Constants.Flights.ArrivalDate + " TIMESTAMP, ");
-        sqlQuery.append(Constants.Flights.International + " INT ");
+        sqlQuery.append(Constants.Flights.International + " INT, ");
+        sqlQuery.append(Constants.Flights.Price + " INT ");
         sqlQuery.append(" ) ");
 
         createOrCheckTable(Constants.Flights.TABLE_NAME, sqlQuery.toString());

@@ -14,14 +14,16 @@ public class FlightDTO {
     private LocalDateTime arrivalDate;
     private List<SeatDTO> seats;
     private boolean international;
+    private int price;
 
-    public FlightDTO(int flightId, String departureLocale, String arrivalLocale, LocalDateTime departureDate, LocalDateTime arrivalDate, boolean international) {
+    public FlightDTO(int flightId, String departureLocale, String arrivalLocale, LocalDateTime departureDate, LocalDateTime arrivalDate, boolean international, int price) {
         this.flightId = flightId;
         this.departureLocale = departureLocale;
         this.departureDate = departureDate;
         this.arrivalDate = arrivalDate;
         this.arrivalLocale = arrivalLocale;
         this.international = international;
+        this.price = price;
     }
 
     public int getFlightId() {
@@ -62,5 +64,9 @@ public class FlightDTO {
 
     public boolean getInternational() {
         return international;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }

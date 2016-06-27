@@ -27,8 +27,8 @@ public class Main extends Application {
         IDatabase database = IoCContainer.getDatabase();
         database.createOrCheckDatabase();
 
-//        FlightGenerator flightGenerator = IoCContainer.getFlightGenerator();
-//        flightGenerator.generateFlightsMocks();
+        FlightGenerator flightGenerator = IoCContainer.getFlightGenerator();
+        flightGenerator.generateFlightsMocks();
 
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Trabalho Técnicas");

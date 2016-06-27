@@ -53,6 +53,8 @@ public class FlightsController implements Initializable {
     @FXML
     private TableColumn<FlightVM, String> flightArrivalDateColumn;
     @FXML
+    private TableColumn<FlightVM, Number> flightPriceColumn;
+    @FXML
     private TextField _arrivalLocal;
     @FXML
     private DatePicker _arrivalDate;
@@ -73,6 +75,7 @@ public class FlightsController implements Initializable {
         flightArrivalDateColumn.setCellValueFactory(f -> f.getValue().getArrivalDate());
         flightDepartureLocaleColumn.setCellValueFactory(f -> f.getValue().getDepartureLocale());
         flightDepartureDateColumn.setCellValueFactory(f -> f.getValue().getDepartureDate());
+        flightPriceColumn.setCellValueFactory(f -> f.getValue().getPriceProperty());
     }
 
     private void solveDependencies() {

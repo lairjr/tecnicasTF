@@ -51,7 +51,7 @@ public class FlightService implements IFlightService {
     public int insert(FlightDTO flight) {
         int flightId = flightDao.insert(flight);
 
-        for (int x = 1; x < 40; x++) {
+        for (int x = 1; x <= 40; x++) {
             SeatDTO seat = seatDTOFactory.create(flightId, x, false);
             seatDao.insert(seat);
         }

@@ -20,6 +20,7 @@ public class Constants {
         public static final String ArrivalLocal = "ARRIVAL_LOCAL";
         public static final String ArrivalDate = "ARRIVAL_DATE";
         public static final String International = "INTERNATIONAL";
+        public static final String Price = "PRICE";
     }
 
     public class Tickets {

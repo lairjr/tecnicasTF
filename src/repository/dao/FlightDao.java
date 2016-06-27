@@ -43,9 +43,10 @@ public class FlightDao implements IFlightDao {
         sql.append(Constants.Flights.DepartureDate + ", ");
         sql.append(Constants.Flights.ArrivalLocal + ", ");
         sql.append(Constants.Flights.ArrivalDate + ", ");
-        sql.append(Constants.Flights.International);
+        sql.append(Constants.Flights.International + ", ");
+        sql.append(Constants.Flights.Price);
 
-        sql.append(" ) VALUES (?, ?, ?, ?, ? ) ");
+        sql.append(" ) VALUES (?, ?, ?, ?, ?, ? ) ");
 
         int flightId = 0;
 
@@ -56,6 +57,7 @@ public class FlightDao implements IFlightDao {
             ps.setString(3, flight.getArrivalLocale());
             ps.setTimestamp(4, Timestamp.valueOf(flight.getArrivalDate()));
             ps.setInt(5, flight.getInternational() ? 1 : 0);
+            ps.setInt(6, flight.getPrice());
 
             ps.executeUpdate();
 

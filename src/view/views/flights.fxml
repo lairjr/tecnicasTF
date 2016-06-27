@@ -43,10 +43,11 @@
                         <TableView fx:id="flightsTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                             <columns>
                                 <TableColumn fx:id="flightNumberColumn" prefWidth="77.0" text="Number" />
-                                <TableColumn fx:id="flightDepartureDateColumn" prefWidth="115.0" text="Data Embarque" />
-                                <TableColumn fx:id="flightDepartureLocaleColumn" prefWidth="264.0" text="Local Embarque" />
-                                <TableColumn fx:id="flightArrivalDateColumn" prefWidth="108.0" text="Data Retorno" />
-                                <TableColumn fx:id="flightArrivalLocaleColumn" prefWidth="276.0" text="Local Retorno" />
+                                <TableColumn fx:id="flightDepartureDateColumn" prefWidth="211.0" text="Data Embarque" />
+                                <TableColumn fx:id="flightDepartureLocaleColumn" prefWidth="121.0" text="Local Embarque" />
+                                <TableColumn fx:id="flightArrivalDateColumn" prefWidth="206.0" text="Data Retorno" />
+                                <TableColumn fx:id="flightArrivalLocaleColumn" prefWidth="132.0" text="Local Retorno" />
+                                <TableColumn fx:id="flightPriceColumn" prefWidth="95.0" text="Preço" />
                             </columns>
                         </TableView>
                     </center>
@@ -54,4 +55,10 @@
             </children>
         </AnchorPane>
     </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
 </GridPane>

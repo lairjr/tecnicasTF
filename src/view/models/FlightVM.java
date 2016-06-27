@@ -14,6 +14,7 @@ public class FlightVM {
     private StringProperty arrivalDate;
     private StringProperty departureLocale;
     private StringProperty departureDate;
+    private IntegerProperty price;
 
     public FlightVM(FlightDTO flightDTO) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -22,6 +23,7 @@ public class FlightVM {
         this.arrivalDate = new SimpleStringProperty(flightDTO.getArrivalDate().format(formatter));
         this.departureLocale = new SimpleStringProperty(flightDTO.getDepartureLocale());
         this.departureDate = new SimpleStringProperty(flightDTO.getDepartureDate().format(formatter));
+        this.price = new SimpleIntegerProperty(flightDTO.getPrice());
     }
 
     public int getNumber() {
@@ -47,4 +49,6 @@ public class FlightVM {
     public StringProperty getDepartureDate() {
         return departureDate;
     }
+
+    public IntegerProperty getPriceProperty() { return price; }
 }

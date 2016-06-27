@@ -30,6 +30,7 @@ public class FlightDTOFactory implements IFlightDTOFactory {
             LocalDateTime flightDepartureDate = rs.getTimestamp(Constants.Flights.DepartureDate).toLocalDateTime();
             LocalDateTime flightArrivalDate = rs.getTimestamp(Constants.Flights.ArrivalDate).toLocalDateTime();
             boolean international = rs.getInt(Constants.Flights.International) == 1;
+            int price = rs.getInt(Constants.Flights.Price);
 
             FlightDTO flightDTO = new FlightDTO(
                     flightId,
@@ -37,7 +38,8 @@ public class FlightDTOFactory implements IFlightDTOFactory {
                     arrivalLocal,
                     flightDepartureDate,
                     flightArrivalDate,
-                    international);
+                    international,
+                    price);
 
             return flightDTO;
         }
