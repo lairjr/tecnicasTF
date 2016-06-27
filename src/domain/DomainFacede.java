@@ -2,7 +2,6 @@ package domain;
 
 import dtos.FlightDTO;
 import dtos.TicketDTO;
-import dtos.factories.ITicketDTOFactory;
 
 import java.sql.Date;
 import java.util.List;
@@ -38,8 +37,8 @@ public class DomainFacede implements IDomainFacede {
     }
 
     @Override
-    public TicketDTO saveTicket(int ticketId, String passenger, String document, int outboundFlightId, int outboundSeat, int inboundFlightId, int inboundSeat, int status) {
-        return ticketService.save(ticketId, passenger, document, outboundFlightId, outboundSeat, inboundFlightId, inboundSeat, status);
+    public TicketDTO saveTicket(int ticketId, String passenger, String document, int outboundFlightId, int outboundSeat, int inboundFlightId, int inboundSeat, int status, int price) {
+        return ticketService.save(ticketId, passenger, document, outboundFlightId, outboundSeat, inboundFlightId, inboundSeat, status, price);
     }
 
     @Override

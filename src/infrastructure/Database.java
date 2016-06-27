@@ -114,7 +114,8 @@ public class Database implements IDatabase {
         sqlQuery.append(Constants.Tickets.OutboundFlightId + " INT NOT NULL, ");
         sqlQuery.append(Constants.Tickets.OutboundSeatId + " INT, ");
         sqlQuery.append(Constants.Tickets.InboundFlightId + " INT, ");
-        sqlQuery.append(Constants.Tickets.InboundSeatId + " INT ");
+        sqlQuery.append(Constants.Tickets.InboundSeatId + " INT, ");
+        sqlQuery.append(Constants.Tickets.Price + " INT ");
         sqlQuery.append(" ) ");
 
         createOrCheckTable(Constants.Tickets.TABLE_NAME, sqlQuery.toString());

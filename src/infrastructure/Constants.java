@@ -32,5 +32,6 @@ public class Constants {
         public static final String OutboundSeatId = "OUTBOUND_SEAT_ID";
         public static final String InboundFlightId = "INBOUND_FLIGT_ID";
         public static final String InboundSeatId = "INBOUND_SEAT_ID";
+        public static final String Price = "PRICE";
     }
 }

@@ -55,9 +55,12 @@ public class TicketsController implements Initializable {
     @FXML
     private Label _outboundArrival;
     @FXML
-    private TextField _arrivalFlightNumber;
+    private Label _tripPrice;
     @FXML
     private TextField _inboundFlightNumber;
+
+    private FlightDTO outboundFlight;
+    private FlightDTO inboundFlight;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -68,23 +71,27 @@ public class TicketsController implements Initializable {
     public void searchDeparture() {
         int flightId = Integer.parseInt(_outboundFlightNumber.getText());
 
-        FlightDTO flight = domainFacede.getFlightByNumber(flightId);
-        FlightVM flightVM = flightVMFactory.create(flight);
+        outboundFlight = domainFacede.getFlightByNumber(flightId);
+        FlightVM flightVM = flightVMFactory.create(outboundFlight);
 
         _outboundDeparture.setText(flightVM.getDepartureLocale().getValue());
         _outboundArrival.setText(flightVM.getArrivalLocale().getValue());
         _outboundFlightDate.setText(flightVM.getDepartureDate().getValue());
+
+        updatePrice();
     }
 
     public void searchArrival() {
         int flightId = Integer.parseInt(_inboundFlightNumber.getText());
 
-        FlightDTO flight = domainFacede.getFlightByNumber(flightId);
-        FlightVM flightVM = flightVMFactory.create(flight);
+        inboundFlight = domainFacede.getFlightByNumber(flightId);
+        FlightVM flightVM = flightVMFactory.create(inboundFlight);
 
         _inboundDeparture.setText(flightVM.getDepartureLocale().getValue());
         _inboundArrival.setText(flightVM.getArrivalLocale().getValue());
         _inboundFlightDate.setText(flightVM.getDepartureDate().getValue());
+
+        updatePrice();
     }
 
     public void saveTicket() {
@@ -96,8 +103,9 @@ public class TicketsController implements Initializable {
         int inboundFlight = Integer.parseInt(_inboundFlightNumber.getText());
         int inboundSeat = 0;
         int status = 0;
+        int price = Integer.parseInt(_tripPrice.getText());
 
-        TicketDTO ticket = domainFacede.saveTicket(ticketNumber, passengerName, document, outboundFlight, outboundSeat, inboundFlight, inboundSeat, status);
+        TicketDTO ticket = domainFacede.saveTicket(ticketNumber, passengerName, document, outboundFlight, outboundSeat, inboundFlight, inboundSeat, status, price);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Salvar Ticket");
@@ -108,5 +116,12 @@ public class TicketsController implements Initializable {
             alert.setHeaderText("Sucesso! \n Número do localizador: " + ticket.getTicketId());
         }
         alert.showAndWait();
-    };
+    }
+
+    private void updatePrice() {
+        Integer price = outboundFlight != null ? outboundFlight.getPrice() : 0;
+        price += inboundFlight != null ? inboundFlight.getPrice() : 0;
+
+        _tripPrice.setText(price.toString());
+    }
 }

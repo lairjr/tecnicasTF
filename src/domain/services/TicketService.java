@@ -36,8 +36,8 @@ public class TicketService implements ITicketService {
     }
 
     @Override
-    public TicketDTO save(int ticketId, String passenger, String document, int outboundFlightId, int outboundSeat, int inboundFlightId, int inboundSeat, int status) {
-        TicketDTO ticketDTO = ticketDTOFactory.create(ticketId, passenger, document, outboundFlightId, outboundSeat, inboundFlightId, inboundSeat, status);
+    public TicketDTO save(int ticketId, String passenger, String document, int outboundFlightId, int outboundSeat, int inboundFlightId, int inboundSeat, int status, int price) {
+        TicketDTO ticketDTO = ticketDTOFactory.create(ticketId, passenger, document, outboundFlightId, outboundSeat, inboundFlightId, inboundSeat, status, price);
 
         if (ticketDTO.getTicketId() == 0)
             return ticketDao.insert(ticketDTO);

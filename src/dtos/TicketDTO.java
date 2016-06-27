@@ -14,6 +14,7 @@ public class TicketDTO {
     private FlightDTO inboundFlight;
     private int inboundSeat;
     private int status;
+    private int price;
 
     public TicketDTO() { }
 
@@ -24,11 +25,13 @@ public class TicketDTO {
                      int outboundSeat,
                      int inboundFlightNumber,
                      int inboundSeat,
-                     int status) {
+                     int status,
+                     int price) {
         this.ticketId = ticketId;
         this.passenger = passenger;
         this.document = document;
         this.outboundFlightNumber = outboundFlightNumber;
+        this.price = price;
         this.setOutboundSeat(outboundSeat);
         this.inboundFlightNumber = inboundFlightNumber;
         this.setInboundSeat(inboundSeat);
@@ -86,4 +89,6 @@ public class TicketDTO {
     public void setInboundSeat(int inboundSeat) {
         this.inboundSeat = inboundSeat;
     }
+
+    public int getPrice() { return price; }
 }

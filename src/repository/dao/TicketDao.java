@@ -69,9 +69,10 @@ public class TicketDao implements ITicketDao {
         sql.append(Constants.Tickets.OutboundFlightId + ", ");
         sql.append(Constants.Tickets.OutboundSeatId + ", ");
         sql.append(Constants.Tickets.InboundFlightId + ", ");
-        sql.append(Constants.Tickets.InboundSeatId);
+        sql.append(Constants.Tickets.InboundSeatId + ", ");
+        sql.append(Constants.Tickets.Price);
 
-        sql.append(" ) VALUES (? ,?, ?, ?, ?, ?) ");
+        sql.append(" ) VALUES (? ,?, ?, ?, ?, ?, ?) ");
 
         try (Connection conn = db.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
@@ -82,6 +83,7 @@ public class TicketDao implements ITicketDao {
             ps.setInt(4, ticket.getOutboundSeat());
             ps.setInt(5, ticket.getInboundFlightNumber());
             ps.setInt(6, ticket.getInboundSeat());
+            ps.setInt(7, ticket.getPrice());
 
             ps.executeUpdate();
 
@@ -111,7 +113,8 @@ public class TicketDao implements ITicketDao {
         sql.append(Constants.Tickets.OutboundFlightId + " = ?, ");
         sql.append(Constants.Tickets.OutboundSeatId + " = ?, ");
         sql.append(Constants.Tickets.InboundFlightId + " = ?, ");
-        sql.append(Constants.Tickets.InboundSeatId + " = ? ");
+        sql.append(Constants.Tickets.InboundSeatId + " = ?, ");
+        sql.append(Constants.Tickets.Price + " = ? ");
 
         sql.append(" WHERE ");
 
@@ -126,7 +129,8 @@ public class TicketDao implements ITicketDao {
             ps.setInt(4, ticket.getOutboundSeat());
             ps.setInt(5, ticket.getInboundFlightNumber());
             ps.setInt(6, ticket.getInboundSeat());
-            ps.setInt(7, ticket.getTicketId());
+            ps.setInt(7, ticket.getPrice());
+            ps.setInt(8, ticket.getTicketId());
 
             ps.executeUpdate();
 

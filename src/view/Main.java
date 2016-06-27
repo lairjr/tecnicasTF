@@ -24,11 +24,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        IDatabase database = IoCContainer.getDatabase();
-        database.createOrCheckDatabase();
-
-        FlightGenerator flightGenerator = IoCContainer.getFlightGenerator();
-        flightGenerator.generateFlightsMocks();
+//        IDatabase database = IoCContainer.getDatabase();
+//        database.createOrCheckDatabase();
+//
+//        FlightGenerator flightGenerator = IoCContainer.getFlightGenerator();
+//        flightGenerator.generateFlightsMocks();
 
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Trabalho Técnicas");
