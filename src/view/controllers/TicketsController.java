@@ -58,6 +58,8 @@ public class TicketsController implements Initializable {
     private Label _tripPrice;
     @FXML
     private TextField _inboundFlightNumber;
+    @FXML
+    private TextField _searchTicketId;
 
     private FlightDTO outboundFlight;
     private FlightDTO inboundFlight;
@@ -116,6 +118,31 @@ public class TicketsController implements Initializable {
             alert.setHeaderText("Sucesso! \n Número do localizador: " + ticket.getTicketId());
         }
         alert.showAndWait();
+    }
+
+    public void searchTicketId() {
+        int ticketId = Integer.parseInt(_searchTicketId.getText());
+
+        TicketDTO ticket = domainFacede.getTicket(ticketId);
+
+        _passengerName.setText(ticket.getPassenger());
+        _document.setText(ticket.getDocument());
+
+        FlightVM flightVM = flightVMFactory.create(ticket.getInboundFlight());
+
+        _inboundFlightNumber.setText(String.valueOf(ticket.getInboundFlightNumber()));
+        _inboundDeparture.setText(flightVM.getDepartureLocale().getValue());
+        _inboundArrival.setText(flightVM.getArrivalLocale().getValue());
+        _inboundFlightDate.setText(flightVM.getDepartureDate().getValue());
+
+        flightVM = flightVMFactory.create(ticket.getOutboundFlight());
+
+        _outboundFlightNumber.setText(String.valueOf(ticket.getOutboundFlightNumber()));
+        _outboundDeparture.setText(flightVM.getDepartureLocale().getValue());
+        _outboundArrival.setText(flightVM.getArrivalLocale().getValue());
+        _outboundFlightDate.setText(flightVM.getDepartureDate().getValue());
+
+        _tripPrice.setText(String.valueOf(ticket.getPrice()));
     }
 
     private void updatePrice() {

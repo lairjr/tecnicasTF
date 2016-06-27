@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Mon Jun 27 20:06:43 BRT 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-0155-941d-67c2-00000533c308 
-on database directory /Users/ljunior/My_Projects/github/tecnicasTF/tecnicasDB with class loader sun.misc.Launcher$AppClassLoader@14dad5dc 
+Mon Jun 27 20:20:56 BRT 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-0155-942a-6d10-0000051cbf48 
+on database directory /Users/ljunior/My_Projects/github/tecnicasTF/tecnicasDB with class loader sun.misc.Launcher$AppClassLoader@610455d6 
 Loaded from file:/Users/ljunior/My_Projects/github/tecnicasTF/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_73-b02
