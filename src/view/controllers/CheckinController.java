@@ -95,10 +95,12 @@ public class CheckinController implements Initializable {
     }
 
     private void displayFlight(FlightDTO flight, List<CheckBox> checkboxes) {
-        for (SeatDTO seat: flight.getSeats()) {
-            CheckBox checkbox = checkboxes.get(seat.getNumber() - 1);
-            checkbox.setDisable(seat.getOccupied());
-            checkbox.setSelected(seat.getOccupied());
+        if (flight != null) {
+            for (SeatDTO seat: flight.getSeats()) {
+                CheckBox checkbox = checkboxes.get(seat.getNumber() - 1);
+                checkbox.setDisable(seat.getOccupied());
+                checkbox.setSelected(seat.getOccupied());
+            }
         }
     }
 
