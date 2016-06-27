@@ -1,8 +1,8 @@
 package domain;
 
 import dtos.FlightDTO;
-import dtos.SeatDTO;
 import dtos.TicketDTO;
+import dtos.factories.ITicketDTOFactory;
 
 import java.sql.Date;
 import java.util.List;
@@ -38,20 +38,8 @@ public class DomainFacede implements IDomainFacede {
     }
 
     @Override
-    public TicketDTO saveTicket(int number, String passengerName, String document, int outboundFlight, int outboundSeat, int inboundFlight, int inboundSeat, int status) {
-        //TODO: Trocar por factory
-        TicketDTO ticket = new TicketDTO(
-                number,
-                passengerName,
-                document,
-                outboundFlight,
-                outboundSeat,
-                inboundFlight,
-                inboundSeat,
-                status
-        );
-
-        return ticketService.save(ticket);
+    public TicketDTO saveTicket(int ticketId, String passenger, String document, int outboundFlightId, int outboundSeat, int inboundFlightId, int inboundSeat, int status) {
+        return ticketService.save(ticketId, passenger, document, outboundFlightId, outboundSeat, inboundFlightId, inboundSeat, status);
     }
 
     @Override

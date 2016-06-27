@@ -42,8 +42,9 @@ public class Database implements IDatabase {
 
     @Override
     public void createOrCheckDatabase() throws SQLException {
-        //dropTable(Constants.Seats.TABLE_NAME);
-        //dropTable(Constants.Seats.TABLE_NAME);
+//        dropTable(Constants.Seats.TABLE_NAME);
+//        dropTable(Constants.Flights.TABLE_NAME);
+//        dropTable(Constants.Tickets.TABLE_NAME);
         createOrCheckSeats();
         createOrCheckFlights();
         createOrCheckTickets();

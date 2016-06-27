@@ -26,23 +26,28 @@ public class TicketDTOFactory implements ITicketDTOFactory {
             int ticketId = rs.getInt(Constants.Tickets.TicketId);
             String passenger = rs.getString(Constants.Tickets.Passenger);
             String document = String.valueOf(rs.getInt(Constants.Tickets.Document));
-            int outboundFlightNumber = rs.getInt(Constants.Tickets.OutboundFlightId);
+            int outboundFlightId = rs.getInt(Constants.Tickets.OutboundFlightId);
             int outboundSeat = rs.getInt(Constants.Tickets.OutboundSeatId);
-            int inboundFlightNumber = rs.getInt(Constants.Tickets.InboundFlightId);
+            int inboundFlightId = rs.getInt(Constants.Tickets.InboundFlightId);
             int inboundSeat = rs.getInt(Constants.Tickets.InboundSeatId);
             int status = 0;
 
-            return new TicketDTO(
-                    ticketId,
-                    passenger,
-                    document,
-                    outboundFlightNumber,
-                    outboundSeat,
-                    inboundFlightNumber,
-                    inboundSeat,
-                    status);
+            return create(ticketId, passenger, document, outboundFlightId, outboundSeat, inboundFlightId, inboundSeat, status);
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public TicketDTO create(int ticketId, String passenger, String document, int outboundFlightId, int outboundSeat, int inboundFlightId, int inboundSeat, int status) {
+        return new TicketDTO(
+                ticketId,
+                passenger,
+                document,
+                outboundFlightId,
+                outboundSeat,
+                inboundFlightId,
+                inboundSeat,
+                status);
     }
 }
