@@ -9,9 +9,6 @@ import repository.ITicketDao;
 
 import java.util.List;
 
-/**
- * Created by ljunior on 6/28/16.
- */
 public class PromotionService implements IPromotionService {
     private static PromotionService instance;
     private IPromotionDao promotionDao;

@@ -8,9 +8,6 @@ import infrastructure.exceptions.RecordNotFoundException;
 import java.sql.Date;
 import java.util.List;
 
-/**
- * Created by ljunior on 6/1/16.
- */
 public class DomainFacede implements IDomainFacede {
     private static DomainFacede instance;
     private IFlightService flightService;

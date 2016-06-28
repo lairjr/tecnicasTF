@@ -11,9 +11,6 @@ import repository.ISeatDao;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by ljunior on 5/31/16.
- */
 public class FlightService implements IFlightService {
     private static FlightService instance;
     private final IFlightDao flightDao;

@@ -14,9 +14,6 @@ import repository.ITicketDao;
 
 import java.time.LocalDateTime;
 
-/**
- * Created by ljunior on 6/1/16.
- */
 public class TicketService implements ITicketService {
     private static TicketService instance;
     private ITicketDao ticketDao;
@@ -73,7 +70,7 @@ public class TicketService implements ITicketService {
     public TicketDTO saveInbountSeat(int ticketId, int flightId, int seatNumber) {
         TicketDTO ticketDTO = ticketDao.getByTicketId(ticketId);
 
-        int rowsAffected = updateSeat(flightId, seatNumber, true);
+        updateSeat(flightId, seatNumber, true);
         ticketDTO.setInboundSeat(seatNumber);
 
         return updateTicketInboundSeat(ticketDTO);
@@ -83,7 +80,7 @@ public class TicketService implements ITicketService {
     public TicketDTO saveOutbountSeat(int ticketId, int flightId, int seatNumber) {
         TicketDTO ticketDTO = ticketDao.getByTicketId(ticketId);
 
-        int rowsAffected = updateSeat(flightId, seatNumber, true);
+        updateSeat(flightId, seatNumber, true);
         ticketDTO.setOutboundSeat(seatNumber);
 
         return updateTicketOutboundSeat(ticketDTO);
