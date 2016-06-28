@@ -35,19 +35,38 @@ public class FlightGenerator {
                 "Santiago",
                 LocalDateTime.of(2016, 5, 1, 8, 0),
                 LocalDateTime.of(2016, 5, 1, 11, 0),
-                false, 1300));
+                true, 1300));
         generateFlights(new FlightDTO(0,
                 "Porto Alegre",
                 "Santiago",
                 LocalDateTime.of(2016, 5, 1, 13, 30),
                 LocalDateTime.of(2016, 5, 1, 16, 30),
-                false, 1300));
+                true, 1300));
         generateFlights(new FlightDTO(0,
                 "Porto Alegre",
                 "Santiago",
                 LocalDateTime.of(2016, 5, 1, 19, 0),
                 LocalDateTime.of(2016, 5, 1, 22, 0),
-                false, 1300));
+                true, 1300));
+
+        generateFlights(new FlightDTO(0,
+                "Santiago",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 8, 0),
+                LocalDateTime.of(2016, 5, 1, 11, 0),
+                true, 1300));
+        generateFlights(new FlightDTO(0,
+                "Santiago",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 13, 30),
+                LocalDateTime.of(2016, 5, 1, 16, 30),
+                true, 1300));
+        generateFlights(new FlightDTO(0,
+                "Santiago",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 19, 0),
+                LocalDateTime.of(2016, 5, 1, 22, 0),
+                true, 1300));
     }
 
     private void generateCuritiba() {
@@ -66,6 +85,25 @@ public class FlightGenerator {
         generateFlights(new FlightDTO(0,
                 "Porto Alegre",
                 "Curitiba",
+                LocalDateTime.of(2016, 5, 1, 21, 45),
+                LocalDateTime.of(2016, 5, 1, 23, 0),
+                false, 300));
+
+        generateFlights(new FlightDTO(0,
+                "Curitiba",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 8, 30),
+                LocalDateTime.of(2016, 5, 1, 9, 45),
+                false, 300));
+        generateFlights(new FlightDTO(0,
+                "Curitiba",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 13, 30),
+                LocalDateTime.of(2016, 5, 1, 14, 45),
+                false, 300));
+        generateFlights(new FlightDTO(0,
+                "Curitiba",
+                "Porto Alegre",
                 LocalDateTime.of(2016, 5, 1, 21, 45),
                 LocalDateTime.of(2016, 5, 1, 23, 0),
                 false, 300));
@@ -90,6 +128,25 @@ public class FlightGenerator {
                 LocalDateTime.of(2016, 5, 1, 21, 0),
                 LocalDateTime.of(2016, 5, 1, 22, 30),
                 false, 250));
+
+        generateFlights(new FlightDTO(0,
+                "São Paulo",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 10, 0),
+                LocalDateTime.of(2016, 5, 1, 11, 30),
+                false, 250));
+        generateFlights(new FlightDTO(0,
+                "São Paulo",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 15, 30),
+                LocalDateTime.of(2016, 5, 1, 17, 0),
+                false, 250));
+        generateFlights(new FlightDTO(0,
+                "São Paulo",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 21, 0),
+                LocalDateTime.of(2016, 5, 1, 22, 30),
+                false, 250));
     }
 
     private void generateBuenosAires() {
@@ -111,6 +168,25 @@ public class FlightGenerator {
                 LocalDateTime.of(2016, 5, 1, 20, 30),
                 LocalDateTime.of(2016, 5, 1, 22, 15),
                 true, 700));
+
+        generateFlights(new FlightDTO(0,
+                "Buenos Aires",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 9, 0),
+                LocalDateTime.of(2016, 5, 1, 1, 45),
+                true, 700));
+        generateFlights(new FlightDTO(0,
+                "Buenos Aires",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 17, 30),
+                LocalDateTime.of(2016, 5, 1, 19, 15),
+                true, 700));
+        generateFlights(new FlightDTO(0,
+                "Buenos Aires",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 20, 30),
+                LocalDateTime.of(2016, 5, 1, 22, 15),
+                true, 700));
     }
 
     private void generateFlorianopolis() {
@@ -129,6 +205,25 @@ public class FlightGenerator {
         generateFlights(new FlightDTO(0,
                 "Porto Alegre",
                 "Florianópolis",
+                LocalDateTime.of(2016, 5, 1, 19, 10),
+                LocalDateTime.of(2016, 5, 1, 19, 55),
+                false, 150));
+
+        generateFlights(new FlightDTO(0,
+                "Florianópolis",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 10, 15),
+                LocalDateTime.of(2016, 5, 1, 11, 0),
+                false, 150));
+        generateFlights(new FlightDTO(0,
+                "Florianópolis",
+                "Porto Alegre",
+                LocalDateTime.of(2016, 5, 1, 13, 15),
+                LocalDateTime.of(2016, 5, 1, 14, 0),
+                false, 150));
+        generateFlights(new FlightDTO(0,
+                "Florianópolis",
+                "Porto Alegre",
                 LocalDateTime.of(2016, 5, 1, 19, 10),
                 LocalDateTime.of(2016, 5, 1, 19, 55),
                 false, 150));

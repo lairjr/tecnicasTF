@@ -40,7 +40,7 @@ public class Database implements IDatabase {
         dropTable(Constants.Seats.TABLE_NAME);
         dropTable(Constants.Flights.TABLE_NAME);
         dropTable(Constants.Tickets.TABLE_NAME);
-        //dropTable(Constants.Promotions.TABLE_NAME);
+        dropTable(Constants.Promotions.TABLE_NAME);
         createOrCheckSeats();
         createOrCheckFlights();
         createOrCheckTickets();
