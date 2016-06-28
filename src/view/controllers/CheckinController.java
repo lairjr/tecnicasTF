@@ -4,19 +4,16 @@ import domain.IDomainFacede;
 import dtos.FlightDTO;
 import dtos.SeatDTO;
 import dtos.TicketDTO;
+import infrastructure.Constants;
 import infrastructure.ioc.IoCContainer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.Function;
 
 /**
  * Created by ljunior on 6/23/16.
@@ -28,6 +25,10 @@ public class CheckinController implements Initializable {
     private Label _passengerName;
     @FXML
     private TextField _ticketNumber;
+    @FXML
+    private Button btnCheckInInbound;
+    @FXML
+    private Button btnCheckInOutbound;
 
     private List<CheckBox> _outboundCheckboxes;
     private List<CheckBox> _inboundCheckboxes;
@@ -42,14 +43,6 @@ public class CheckinController implements Initializable {
 
     private void solveDependencies() {
         domainFacede = IoCContainer.getDomainFacede();
-    }
-
-    private int getSelectedCheckbox(List<CheckBox> checkboxes) {
-        for (CheckBox checkbox: checkboxes) {
-            if (checkbox.isSelected() && !checkbox.isDisable())
-                return checkboxes.indexOf(checkbox) + 1;
-        }
-        return -1;
     }
 
     public void searchTicket() {
@@ -80,10 +73,18 @@ public class CheckinController implements Initializable {
         }
     }
 
+    private int getSelectedCheckbox(List<CheckBox> checkboxes) {
+        for (CheckBox checkbox: checkboxes) {
+            if (checkbox.isSelected() && !checkbox.isDisable())
+                return checkboxes.indexOf(checkbox) + 1;
+        }
+        return -1;
+    }
+
     private void displayTicket() {
         _passengerName.setText(ticketDTO.getPassenger());
-        displayFlight(ticketDTO.getOutboundFlight(), _outboundCheckboxes);
-        displayFlight(ticketDTO.getInboundFlight(), _inboundCheckboxes);
+        displayFlight(ticketDTO.getOutboundFlight(), _outboundCheckboxes, btnCheckInOutbound, ticketDTO.getOutboundStatus());
+        displayFlight(ticketDTO.getInboundFlight(), _inboundCheckboxes, btnCheckInInbound, ticketDTO.getInboundStatus());
     }
 
     private void displaySelectSeatMsg() {
@@ -94,7 +95,8 @@ public class CheckinController implements Initializable {
         alert.showAndWait();
     }
 
-    private void displayFlight(FlightDTO flight, List<CheckBox> checkboxes) {
+    private void displayFlight(FlightDTO flight, List<CheckBox> checkboxes, Button checkinButton, Constants.TicketStatus flightStatus) {
+        checkinButton.setDisable(flightStatus != Constants.TicketStatus.OpenCheckin);
         if (flight != null) {
             for (SeatDTO seat: flight.getSeats()) {
                 CheckBox checkbox = checkboxes.get(seat.getNumber() - 1);
