@@ -1,5 +1,7 @@
 package dtos;
 
+import infrastructure.Constants;
+
 import java.time.LocalDateTime;
 import java.util.List;
 

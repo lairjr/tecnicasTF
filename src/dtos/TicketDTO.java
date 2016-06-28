@@ -1,5 +1,7 @@
 package dtos;
 
+import infrastructure.Constants;
+
 /**
  * Created by ljunior on 6/1/16.
  */
@@ -15,6 +17,8 @@ public class TicketDTO {
     private int inboundSeat;
     private int status;
     private int price;
+    private Constants.TicketStatus inboundStatus;
+    private Constants.TicketStatus outboundStatus;
 
     public TicketDTO() { }
 
@@ -91,4 +95,20 @@ public class TicketDTO {
     }
 
     public int getPrice() { return price; }
+
+    public Constants.TicketStatus getInboundStatus() {
+        return inboundStatus;
+    }
+
+    public Constants.TicketStatus getOutboundStatus() {
+        return outboundStatus;
+    }
+
+    public void setOutboundStatus(Constants.TicketStatus outboundStatus) {
+        this.outboundStatus = outboundStatus;
+    }
+
+    public void setInboundStatus(Constants.TicketStatus inboundStatus) {
+        this.inboundStatus = inboundStatus;
+    }
 }

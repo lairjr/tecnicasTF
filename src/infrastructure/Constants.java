@@ -21,6 +21,7 @@ public class Constants {
         public static final String ArrivalDate = "ARRIVAL_DATE";
         public static final String International = "INTERNATIONAL";
         public static final String Price = "PRICE";
+
     }
 
     public class Tickets {
@@ -33,5 +34,13 @@ public class Constants {
         public static final String InboundFlightId = "INBOUND_FLIGT_ID";
         public static final String InboundSeatId = "INBOUND_SEAT_ID";
         public static final String Price = "PRICE";
+    }
+
+    public enum TicketStatus {
+        Pending,
+        OpenCheckin,
+        OkCheckin,
+        Used,
+        NotUsed
     }
 }
