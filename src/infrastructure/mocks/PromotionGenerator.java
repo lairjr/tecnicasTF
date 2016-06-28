@@ -3,9 +3,6 @@ package infrastructure.mocks;
 import dtos.factories.IPromotionDTOFactory;
 import repository.IPromotionDao;
 
-/**
- * Created by ljunior on 6/28/16.
- */
 public class PromotionGenerator {
     private IPromotionDao promotionDao;
     private IPromotionDTOFactory promotionDTOFactory;

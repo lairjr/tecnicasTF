@@ -1,12 +1,8 @@
 package infrastructure;
 
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by ljunior on 6/25/16.
- */
 public class Constants {
     public class Seats {
         public static final String TABLE_NAME = "SEATS";

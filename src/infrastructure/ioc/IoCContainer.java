@@ -23,9 +23,6 @@ import view.factories.IFlightVMFactory;
 import view.factories.IPromotionVMFactory;
 import view.factories.PromotionVMFactory;
 
-/**
- * Created by ljunior on 6/23/16.
- */
 public class IoCContainer {
     private IoCContainer() { }
 

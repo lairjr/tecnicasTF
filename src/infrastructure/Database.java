@@ -3,21 +3,16 @@ package infrastructure;
 import org.apache.derby.jdbc.EmbeddedDataSourceInterface;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSet;
 
-/**
- * Created by ljunior on 5/31/16.
- */
 public class Database implements IDatabase {
     public static String DB_NAME = "tecnicasDB";
     public static String USER_NAME = "app";
     public static String PASSWORD = "app";
     private static IDatabase instance;
     private EmbeddedDataSourceInterface dataSource;
-    private Connection conn;
 
     private Database(EmbeddedDataSourceInterface dataSource) {
         this.dataSource = dataSource;

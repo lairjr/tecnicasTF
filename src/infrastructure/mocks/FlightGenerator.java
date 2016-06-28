@@ -5,9 +5,6 @@ import dtos.FlightDTO;
 
 import java.time.LocalDateTime;
 
-/**
- * Created by ljunior on 6/25/16.
- */
 public class FlightGenerator {
     private IFlightService flightService;
     private static FlightGenerator instance;
@@ -48,8 +45,8 @@ public class FlightGenerator {
         generateFlights(new FlightDTO(0,
                 "Porto Alegre",
                 "Santiago",
-                LocalDateTime.of(2016, 5, 1, 19, 00),
-                LocalDateTime.of(2016, 5, 1, 22, 00),
+                LocalDateTime.of(2016, 5, 1, 19, 0),
+                LocalDateTime.of(2016, 5, 1, 22, 0),
                 false, 1300));
     }
 
@@ -70,7 +67,7 @@ public class FlightGenerator {
                 "Porto Alegre",
                 "Curitiba",
                 LocalDateTime.of(2016, 5, 1, 21, 45),
-                LocalDateTime.of(2016, 5, 1, 23, 00),
+                LocalDateTime.of(2016, 5, 1, 23, 0),
                 false, 300));
     }
 
@@ -121,13 +118,13 @@ public class FlightGenerator {
                 "Porto Alegre",
                 "Florianópolis",
                 LocalDateTime.of(2016, 5, 1, 10, 15),
-                LocalDateTime.of(2016, 5, 1, 11, 00),
+                LocalDateTime.of(2016, 5, 1, 11, 0),
                 false, 150));
         generateFlights(new FlightDTO(0,
                 "Porto Alegre",
                 "Florianópolis",
                 LocalDateTime.of(2016, 5, 1, 13, 15),
-                LocalDateTime.of(2016, 5, 1, 14, 00),
+                LocalDateTime.of(2016, 5, 1, 14, 0),
                 false, 150));
         generateFlights(new FlightDTO(0,
                 "Porto Alegre",
