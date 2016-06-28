@@ -40,7 +40,7 @@ public class IoCContainer {
         ITicketDao ticketDao = TicketDao.getInstance(database, ticketDTOFactory);
         ISeatDao seatDao = SeatDao.getInstance(database, seatDTOFactory);
         IPromotionDao promotionDao = PromotionDao.getInstance(database, promotionDTOFactory);
-        IPromotionService promotionService = PromotionService.getInstance(promotionDao, promotionDTOFactory);
+        IPromotionService promotionService = PromotionService.getInstance(promotionDao, promotionDTOFactory, ticketDao);
         IFlightService flightService = FlightService.getInstance(flightDao, seatDao, seatDTOFactory);
         ITicketService ticketService = TicketService.getInstance(ticketDao, flightService, seatDao, seatDTOFactory, ticketDTOFactory);
 

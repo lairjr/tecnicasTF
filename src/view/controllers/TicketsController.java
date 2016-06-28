@@ -7,6 +7,7 @@ import domain.ITicketService;
 import domain.services.FlightService;
 import domain.services.TicketService;
 import dtos.FlightDTO;
+import dtos.PromotionDTO;
 import dtos.TicketDTO;
 import infrastructure.Constants;
 import infrastructure.Database;
@@ -63,19 +64,38 @@ public class TicketsController implements Initializable {
     @FXML
     private Label _tripPrice;
     @FXML
+    private Label _promotionText;
+    @FXML
     private TextField _inboundFlightNumber;
     @FXML
     private TextField _searchTicketId;
 
     private FlightDTO outboundFlight;
     private FlightDTO inboundFlight;
+    private PromotionDTO promotionDTO;
     private final String FLIGHT_NOT_FOUND = "Voo não encontrado!";
     private final String TICKET_NOT_FOUND_MSG = "Passagem não encontrada!";
+    private final String NO_PROMOTION = "Ainda não pode ter promoção!";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        solveDependencies();
+    }
+
+    private void solveDependencies() {
         flightVMFactory = IoCContainer.getFlightVMFactory();
         domainFacede = IoCContainer.getDomainFacede();
+    }
+
+    public void checkPromotion() {
+        try {
+            String passenger = _document.getText();
+            promotionDTO = domainFacede.getPromotionByPassenger(passenger);
+
+            updatePrice();
+        } catch (RecordNotFoundException e) {
+            displayAlert(NO_PROMOTION);
+        }
     }
 
     public void searchDeparture() {
@@ -170,6 +190,13 @@ public class TicketsController implements Initializable {
     private void updatePrice() {
         Integer price = outboundFlight != null ? outboundFlight.getPrice() : 0;
         price += inboundFlight != null ? inboundFlight.getPrice() : 0;
+
+        if (promotionDTO != null) {
+            Double discount = price * (promotionDTO.getPercentage() / 100);
+            price -= discount.intValue();
+
+            _promotionText.setText(promotionDTO.getText());
+        }
 
         _tripPrice.setText(price.toString());
     }

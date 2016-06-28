@@ -25,10 +25,10 @@
             <Label fx:id="_outboundFlightDate" layoutX="140.0" layoutY="160.0" prefHeight="17.0" prefWidth="271.0" />
             <Label layoutX="15.0" layoutY="190.0" text="Partida:" />
             <Label layoutX="13.0" layoutY="222.0" text="Destino:" />
-            <Label layoutX="13.0" layoutY="242.0" text="Status:" />
+            <Label layoutX="17.0" layoutY="251.0" text="Status:" />
             <Label fx:id="_outboundDeparture" layoutX="140.0" layoutY="190.0" prefHeight="17.0" prefWidth="271.0" />
             <Label fx:id="_outboundArrival" layoutX="140.0" layoutY="222.0" prefHeight="17.0" prefWidth="271.0" />
-            <Label fx:id="_outboundStatus" layoutX="140.0" layoutY="242.0" prefHeight="17.0" prefWidth="271.0" />
+            <Label fx:id="_outboundStatus" layoutX="139.0" layoutY="251.0" prefHeight="17.0" prefWidth="271.0" />
             <ToolBar layoutY="403.0" prefHeight="40.0" prefWidth="843.0">
               <items>
                 <Button mnemonicParsing="false" onAction="#saveTicket" text="Salvar" />
@@ -39,17 +39,19 @@
             <Label layoutX="421.0" layoutY="160.0" text="Data:" />
             <Label layoutX="423.0" layoutY="190.0" text="Partida:" />
             <Label layoutX="421.0" layoutY="222.0" text="Destino:" />
-            <Label layoutX="421.0" layoutY="242.0" text="Status:" />
+            <Label layoutX="425.0" layoutY="251.0" text="Status:" />
             <Label fx:id="_inboundFlightDate" layoutX="579.0" layoutY="160.0" prefHeight="17.0" prefWidth="242.0" text="" />
             <Label fx:id="_inboundDeparture" layoutX="579.0" layoutY="190.0" prefHeight="17.0" prefWidth="242.0" text="" />
             <Label fx:id="_inboundArrival" layoutX="579.0" layoutY="222.0" prefHeight="17.0" prefWidth="242.0" text="" />
-            <Label fx:id="_inboundStatus" layoutX="579.0" layoutY="242.0" prefHeight="17.0" prefWidth="242.0" text="" />
+            <Label fx:id="_inboundStatus" layoutX="579.0" layoutY="251.0" prefHeight="17.0" prefWidth="242.0" text="" />
             <Separator layoutY="277.0" prefHeight="3.0" prefWidth="843.0" />
             <Label layoutX="11.0" layoutY="286.0" text="Total da Viagem:" />
             <Label fx:id="_tripPrice" layoutX="146.0" layoutY="286.0" prefHeight="17.0" prefWidth="255.0" />
             <Label layoutX="13.0" layoutY="23.0" text="Localizador:" />
-            <TextField fx:id="_searchTicketId"  layoutX="143.0" layoutY="18.0" prefHeight="27.0" prefWidth="98.0" />
-            <Button layoutX="256.0" layoutY="18.0" mnemonicParsing="false" text="Buscar" onAction="#searchTicketId" />
+            <TextField fx:id="_searchTicketId" layoutX="143.0" layoutY="18.0" prefHeight="27.0" prefWidth="98.0" />
+            <Button layoutX="256.0" layoutY="18.0" mnemonicParsing="false" onAction="#searchTicketId" text="Buscar" />
+            <Button layoutX="418.0" layoutY="80.0" mnemonicParsing="false" onAction="#checkPromotion" text="Verifica Promocao" />
+            <Label fx:id="_promotionText" layoutX="140.0" layoutY="318.0" prefHeight="17.0" prefWidth="262.0" />
            </children>
    </AnchorPane>
    </children>

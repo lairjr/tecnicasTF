@@ -9,4 +9,5 @@ public interface ITicketDao {
     TicketDTO getByTicketId(int ticketId);
     TicketDTO insert(TicketDTO ticket);
     TicketDTO update(TicketDTO ticket);
+    int getNumberOfTicketsByPassenger(String document);
 }

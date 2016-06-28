@@ -139,5 +139,37 @@ public class TicketDao implements ITicketDao {
             System.out.println(e);
         }
 
-        return ticket; }
+        return ticket;
+    }
+
+    @Override
+    public int getNumberOfTicketsByPassenger(String document) {
+        StringBuilder sql = new StringBuilder();
+
+        sql.append(" SELECT COUNT(*) FROM " + Constants.Tickets.TABLE_NAME);
+
+        sql.append(" WHERE ");
+
+        sql.append(Constants.Tickets.Document + " = ? ");
+
+        try (Connection conn = db.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql.toString());
+
+            ps.setString(1, document);
+
+            ResultSet rs = ps.executeQuery();
+
+            rs.next();
+
+            int numberOfTickets = rs.getInt(1);
+
+            conn.close();
+
+            return numberOfTickets;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return 0;
+    }
 }

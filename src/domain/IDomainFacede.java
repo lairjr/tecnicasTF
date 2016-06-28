@@ -20,4 +20,5 @@ public interface IDomainFacede {
     TicketDTO saveOutboundSeat(int ticketId, int flightId, int seatNumber);
     List<PromotionDTO> getPromotions();
     PromotionDTO savePromotion(String text, int numberOfPurchases, double percentage);
+    PromotionDTO getPromotionByPassenger(String passenger) throws RecordNotFoundException;
 }

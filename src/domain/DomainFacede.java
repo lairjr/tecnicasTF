@@ -69,4 +69,9 @@ public class DomainFacede implements IDomainFacede {
     public PromotionDTO savePromotion(String text, int numberOfPurchases, double percentage) {
         return promotionService.insert(text, numberOfPurchases, percentage);
     }
+
+    @Override
+    public PromotionDTO getPromotionByPassenger(String passenger) throws RecordNotFoundException {
+        return promotionService.getPromotionByPassenger(passenger);
+    }
 }
