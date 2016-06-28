@@ -1,5 +1,9 @@
 package infrastructure;
 
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by ljunior on 6/25/16.
  */
@@ -34,6 +38,17 @@ public class Constants {
         public static final String InboundFlightId = "INBOUND_FLIGT_ID";
         public static final String InboundSeatId = "INBOUND_SEAT_ID";
         public static final String Price = "PRICE";
+    }
+
+    public static Map<TicketStatus, String> TicketStatusDecription;
+    static {
+        TicketStatusDecription = new HashMap<>();
+
+        TicketStatusDecription.put(TicketStatus.Pending, "Pendente");
+        TicketStatusDecription.put(TicketStatus.OpenCheckin, "Check-in aberto");
+        TicketStatusDecription.put(TicketStatus.OkCheckin, "Check-in fechado");
+        TicketStatusDecription.put(TicketStatus.Used, "Passagem utilizada");
+        TicketStatusDecription.put(TicketStatus.NotUsed, "Passagem não utilizada");
     }
 
     public enum TicketStatus {

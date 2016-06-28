@@ -8,7 +8,6 @@ import dtos.TicketDTO;
 import dtos.factories.ISeatDTOFactory;
 import dtos.factories.ITicketDTOFactory;
 import infrastructure.Constants;
-import org.mockito.cglib.core.Local;
 import repository.ISeatDao;
 import repository.ITicketDao;
 
@@ -53,8 +52,14 @@ public class TicketService implements ITicketService {
     @Override
     public TicketDTO getByNumber(int ticketNumber) {
         TicketDTO ticketDTO = ticketDao.getByNumber(ticketNumber);
-        ticketDTO.setInboundFlight(flightService.getFlightByNumber(ticketDTO.getInboundFlightNumber()));
-        ticketDTO.setOutboundFlight(flightService.getFlightByNumber(ticketDTO.getOutboundFlightNumber()));
+        FlightDTO inboundFlight = flightService.getFlightByNumber(ticketDTO.getInboundFlightNumber());
+        FlightDTO outboundFlight = flightService.getFlightByNumber(ticketDTO.getOutboundFlightNumber());
+
+        ticketDTO.setInboundFlight(inboundFlight);
+        ticketDTO.setInboundStatus(getFlightStatus(inboundFlight, ticketDTO.getInboundSeat()));
+
+        ticketDTO.setOutboundFlight(outboundFlight);
+        ticketDTO.setOutboundStatus(getFlightStatus(outboundFlight, ticketDTO.getOutboundSeat()));
 
         return ticketDTO;
     }
@@ -97,5 +102,19 @@ public class TicketService implements ITicketService {
         SeatDTO seatDTO = seatDTOFactory.create(flightId, number, occupied);
 
         return seatDao.update(seatDTO);
+    }
+
+    private Constants.TicketStatus getFlightStatus(FlightDTO flight, int seatNumber) {
+        boolean didCheckIn = seatNumber > 0;
+        boolean isBeforeDeparture = flight.getDepartureDate().isBefore(LocalDateTime.now());
+        boolean inTimeForCheckIn = flight.getDepartureDate().minusDays(3).isBefore(LocalDateTime.now());
+
+        if (isBeforeDeparture) {
+            return didCheckIn ? Constants.TicketStatus.Used : Constants.TicketStatus.NotUsed;
+        } else if (inTimeForCheckIn) {
+            return didCheckIn ? Constants.TicketStatus.OkCheckin : Constants.TicketStatus.OpenCheckin;
+        }
+
+        return Constants.TicketStatus.Pending;
     }
 }

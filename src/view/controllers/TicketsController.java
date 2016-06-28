@@ -8,6 +8,7 @@ import domain.services.FlightService;
 import domain.services.TicketService;
 import dtos.FlightDTO;
 import dtos.TicketDTO;
+import infrastructure.Constants;
 import infrastructure.Database;
 import infrastructure.IDatabase;
 import infrastructure.ioc.IoCContainer;
@@ -49,11 +50,15 @@ public class TicketsController implements Initializable {
     @FXML
     private Label _inboundArrival;
     @FXML
+    private Label _inboundStatus;
+    @FXML
     private Label _outboundFlightDate;
     @FXML
     private Label _outboundDeparture;
     @FXML
     private Label _outboundArrival;
+    @FXML
+    private Label _outboundStatus;
     @FXML
     private Label _tripPrice;
     @FXML
@@ -134,6 +139,7 @@ public class TicketsController implements Initializable {
         _inboundDeparture.setText(flightVM.getDepartureLocale().getValue());
         _inboundArrival.setText(flightVM.getArrivalLocale().getValue());
         _inboundFlightDate.setText(flightVM.getDepartureDate().getValue());
+        _inboundStatus.setText(Constants.TicketStatusDecription.get(ticket.getInboundStatus()));
 
         flightVM = flightVMFactory.create(ticket.getOutboundFlight());
 
@@ -141,6 +147,7 @@ public class TicketsController implements Initializable {
         _outboundDeparture.setText(flightVM.getDepartureLocale().getValue());
         _outboundArrival.setText(flightVM.getArrivalLocale().getValue());
         _outboundFlightDate.setText(flightVM.getDepartureDate().getValue());
+        _outboundStatus.setText(Constants.TicketStatusDecription.get(ticket.getOutboundStatus()));
 
         _tripPrice.setText(String.valueOf(ticket.getPrice()));
     }

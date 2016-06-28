@@ -49,7 +49,6 @@ public class TicketDTOFactory implements ITicketDTOFactory {
                 outboundSeat,
                 inboundFlightId,
                 inboundSeat,
-                status,
                 price);
     }
 }
