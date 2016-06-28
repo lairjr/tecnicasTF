@@ -33,6 +33,7 @@ public class PromotionDao implements IPromotionDao {
         List<PromotionDTO> promotionDTOs = new ArrayList<>();
 
         sql.append(" SELECT * FROM " + Constants.Promotions.TABLE_NAME);
+        sql.append(" ORDER BY " + Constants.Promotions.NumberOfPurchases + " DESC ");
 
         try (Connection conn = db.getConnection()) {
             PreparedStatement ps = conn.prepareStatement(sql.toString());
