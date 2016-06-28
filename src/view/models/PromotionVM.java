@@ -4,9 +4,6 @@ import dtos.PromotionDTO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-/**
- * Created by ljunior on 6/28/16.
- */
 public class PromotionVM {
     private StringProperty text;
     private StringProperty numberOfPurchases;

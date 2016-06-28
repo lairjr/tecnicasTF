@@ -5,9 +5,6 @@ import javafx.beans.property.*;
 
 import java.time.format.DateTimeFormatter;
 
-/**
- * Created by ljunior on 6/1/16.
- */
 public class FlightVM {
     private IntegerProperty number;
     private StringProperty arrivalLocale;
@@ -24,10 +21,6 @@ public class FlightVM {
         this.departureLocale = new SimpleStringProperty(flightDTO.getDepartureLocale());
         this.departureDate = new SimpleStringProperty(flightDTO.getDepartureDate().format(formatter));
         this.price = new SimpleIntegerProperty(flightDTO.getPrice());
-    }
-
-    public int getNumber() {
-        return number.get();
     }
 
     public IntegerProperty numberProperty() {

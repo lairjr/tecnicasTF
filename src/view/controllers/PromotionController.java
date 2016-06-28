@@ -11,16 +11,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import view.factories.IPromotionVMFactory;
-import view.models.FlightVM;
 import view.models.PromotionVM;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * Created by ljunior on 6/28/16.
- */
 public class PromotionController implements Initializable {
     private IDomainFacede domainFacede;
     private IPromotionVMFactory promotionVMFactory;

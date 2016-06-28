@@ -3,9 +3,6 @@ package view.factories;
 import dtos.PromotionDTO;
 import view.models.PromotionVM;
 
-/**
- * Created by ljunior on 6/28/16.
- */
 public class PromotionVMFactory implements IPromotionVMFactory {
     private static PromotionVMFactory instance;
 

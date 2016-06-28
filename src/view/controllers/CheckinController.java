@@ -16,9 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * Created by ljunior on 6/23/16.
- */
 public class CheckinController implements Initializable {
     private IDomainFacede domainFacede;
 

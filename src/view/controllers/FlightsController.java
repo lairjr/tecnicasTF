@@ -1,30 +1,16 @@
 package view.controllers;
 
-import domain.DomainFacede;
 import domain.IDomainFacede;
-import domain.IFlightService;
-import domain.ITicketService;
-import domain.services.FlightService;
-import domain.services.TicketService;
 import dtos.FlightDTO;
-import infrastructure.Database;
-import infrastructure.IDatabase;
 import infrastructure.ioc.IoCContainer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import org.apache.derby.jdbc.EmbeddedDataSource;
-import repository.IFlightDao;
-import repository.ITicketDao;
-import repository.dao.FlightDao;
-import repository.dao.TicketDao;
-import view.factories.FlightVMFactory;
 import view.factories.IFlightVMFactory;
 import view.models.FlightVM;
 
@@ -33,9 +19,6 @@ import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * Created by ljunior on 6/23/16.
- */
 public class FlightsController implements Initializable {
     private IDomainFacede domainFacede;
     private IFlightVMFactory flightVMFactory;
