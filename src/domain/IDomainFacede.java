@@ -1,6 +1,7 @@
 package domain;
 
 import dtos.FlightDTO;
+import dtos.PromotionDTO;
 import dtos.TicketDTO;
 import infrastructure.exceptions.RecordNotFoundException;
 
@@ -17,4 +18,6 @@ public interface IDomainFacede {
     TicketDTO getTicket(int ticketNumber) throws RecordNotFoundException;
     TicketDTO saveInbountSeat(int ticketId, int flightId, int seatNumber);
     TicketDTO saveOutboundSeat(int ticketId, int flightId, int seatNumber);
+    List<PromotionDTO> getPromotions();
+    PromotionDTO savePromotion(String text, int numberOfPurchases, double percentage);
 }

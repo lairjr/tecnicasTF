@@ -7,6 +7,8 @@ import infrastructure.IDatabase;
 import repository.IPromotionDao;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ljunior on 6/27/16.
@@ -26,6 +28,28 @@ public class PromotionDao implements IPromotionDao {
             instance = new PromotionDao(database, promotionDTOFactory);
 
         return instance;
+    }
+
+    @Override
+    public List<PromotionDTO> getAll() {
+        StringBuilder sql = new StringBuilder();
+        List<PromotionDTO> promotionDTOs = new ArrayList<>();
+
+        sql.append(" SELECT * FROM " + Constants.Promotions.TABLE_NAME);
+
+        try (Connection conn = db.getConnection()) {
+            PreparedStatement ps = conn.prepareStatement(sql.toString());
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                promotionDTOs.add(promotionDTOFactory.create(rs));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return promotionDTOs;
     }
 
     @Override

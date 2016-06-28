@@ -83,7 +83,7 @@ public class FlightsController implements Initializable {
         domainFacede = IoCContainer.getDomainFacede();
     }
 
-    public void searchFligths(ActionEvent actionEvent) {
+    public void searchFligths() {
         String arrivalLocal = _arrivalLocal.getText();
         Date arrivalDate = _arrivalDate.getValue() != null ? Date.valueOf(_arrivalDate.getValue()) : null;
         String departureLocal = _departureLocal.getText();

@@ -22,6 +22,11 @@
                    <fx:include fx:id="checkinTab" source="views/checkin.fxml" />
                </content>
           </Tab>
+        <Tab text="Promotions">
+            <content>
+                <fx:include fx:id="promotionTab" source="views/promotion.fxml" />
+            </content>
+        </Tab>
         </tabs>
       </TabPane>
    </children>

@@ -1,10 +1,8 @@
 package infrastructure.ioc;
 
-import domain.DomainFacede;
-import domain.IDomainFacede;
-import domain.IFlightService;
-import domain.ITicketService;
+import domain.*;
 import domain.services.FlightService;
+import domain.services.PromotionService;
 import domain.services.TicketService;
 import dtos.factories.*;
 import infrastructure.Database;
@@ -22,6 +20,8 @@ import repository.dao.SeatDao;
 import repository.dao.TicketDao;
 import view.factories.FlightVMFactory;
 import view.factories.IFlightVMFactory;
+import view.factories.IPromotionVMFactory;
+import view.factories.PromotionVMFactory;
 
 /**
  * Created by ljunior on 6/23/16.
@@ -35,13 +35,16 @@ public class IoCContainer {
         ISeatDTOFactory seatDTOFactory = SeatDTOFactory.getInstance();
         IFlightDTOFactory flightDTOFactory = FlightDTOFactory.getInstance();
         ITicketDTOFactory ticketDTOFactory = TicketDTOFactory.getInstance();
+        IPromotionDTOFactory promotionDTOFactory = PromotionDTOFactory.getInstance();
         IFlightDao flightDao = FlightDao.getInstance(database, flightDTOFactory);
         ITicketDao ticketDao = TicketDao.getInstance(database, ticketDTOFactory);
         ISeatDao seatDao = SeatDao.getInstance(database, seatDTOFactory);
+        IPromotionDao promotionDao = PromotionDao.getInstance(database, promotionDTOFactory);
+        IPromotionService promotionService = PromotionService.getInstance(promotionDao, promotionDTOFactory);
         IFlightService flightService = FlightService.getInstance(flightDao, seatDao, seatDTOFactory);
         ITicketService ticketService = TicketService.getInstance(ticketDao, flightService, seatDao, seatDTOFactory, ticketDTOFactory);
 
-        return DomainFacede.getInstance(flightService, ticketService);
+        return DomainFacede.getInstance(flightService, ticketService, promotionService);
     }
 
     public static IFlightVMFactory getFlightVMFactory() {
@@ -72,5 +75,9 @@ public class IoCContainer {
         IPromotionDao promotionDao = PromotionDao.getInstance(database, promotionDTOFactory);
 
         return PromotionGenerator.getInstance(promotionDao, promotionDTOFactory);
+    }
+
+    public static IPromotionVMFactory getPromotionVMFactory() {
+        return PromotionVMFactory.getInstance();
     }
 }
