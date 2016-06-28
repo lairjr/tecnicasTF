@@ -32,7 +32,7 @@ public class TicketDao implements ITicketDao {
     }
 
     @Override
-    public TicketDTO getByNumber(int ticketId) {
+    public TicketDTO getByTicketId(int ticketId) {
         StringBuilder sql = new StringBuilder();
 
         sql.append(" SELECT * FROM " + Constants.Tickets.TABLE_NAME);

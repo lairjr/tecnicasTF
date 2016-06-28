@@ -40,6 +40,14 @@ public class Constants {
         public static final String Price = "PRICE";
     }
 
+    public class Promotions {
+        public static final String TABLE_NAME = "PROMOTIONS";
+        public static final String PromotionId = "PROMOTION_ID";
+        public static final String Text = "NAME";
+        public static final String NumberOfPurchases = "NUMBER_OF_PURCHASES";
+        public static final String Percentage = "PERCENTAGE";
+    }
+
     public static Map<TicketStatus, String> TicketStatusDecription;
     static {
         TicketStatusDecription = new HashMap<>();

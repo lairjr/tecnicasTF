@@ -45,9 +45,11 @@ public class Database implements IDatabase {
         dropTable(Constants.Seats.TABLE_NAME);
         dropTable(Constants.Flights.TABLE_NAME);
         dropTable(Constants.Tickets.TABLE_NAME);
+        //dropTable(Constants.Promotions.TABLE_NAME);
         createOrCheckSeats();
         createOrCheckFlights();
         createOrCheckTickets();
+        createOrCheckPromotions();
     }
 
     private void dropTable(String table) {
@@ -119,5 +121,19 @@ public class Database implements IDatabase {
         sqlQuery.append(" ) ");
 
         createOrCheckTable(Constants.Tickets.TABLE_NAME, sqlQuery.toString());
+    }
+
+    private void createOrCheckPromotions() throws SQLException {
+        StringBuilder sqlQuery = new StringBuilder();
+
+        sqlQuery.append(" CREATE TABLE " + Constants.Promotions.TABLE_NAME +  " ( ");
+        sqlQuery.append(Constants.Promotions.PromotionId + " INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), ");
+        sqlQuery.append(Constants.Promotions.Text + " VARCHAR(50) NOT NULL, ");
+        sqlQuery.append(Constants.Promotions.NumberOfPurchases + " INT NOT NULL, ");
+        sqlQuery.append(Constants.Promotions.Percentage + " DECIMAL(5,2) NOT NULL ");
+
+        sqlQuery.append(" ) ");
+
+        createOrCheckTable(Constants.Promotions.TABLE_NAME, sqlQuery.toString());
     }
 }

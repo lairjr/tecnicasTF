@@ -52,7 +52,7 @@ public class TicketService implements ITicketService {
 
     @Override
     public TicketDTO getByNumber(int ticketNumber) throws RecordNotFoundException {
-        TicketDTO ticketDTO = ticketDao.getByNumber(ticketNumber);
+        TicketDTO ticketDTO = ticketDao.getByTicketId(ticketNumber);
 
         if (ticketDTO == null)
             throw new RecordNotFoundException();
@@ -71,7 +71,7 @@ public class TicketService implements ITicketService {
 
     @Override
     public TicketDTO saveInbountSeat(int ticketId, int flightId, int seatNumber) {
-        TicketDTO ticketDTO = ticketDao.getByNumber(ticketId);
+        TicketDTO ticketDTO = ticketDao.getByTicketId(ticketId);
 
         int rowsAffected = updateSeat(flightId, seatNumber, true);
         ticketDTO.setInboundSeat(seatNumber);
@@ -81,7 +81,7 @@ public class TicketService implements ITicketService {
 
     @Override
     public TicketDTO saveOutbountSeat(int ticketId, int flightId, int seatNumber) {
-        TicketDTO ticketDTO = ticketDao.getByNumber(ticketId);
+        TicketDTO ticketDTO = ticketDao.getByTicketId(ticketId);
 
         int rowsAffected = updateSeat(flightId, seatNumber, true);
         ticketDTO.setOutboundSeat(seatNumber);

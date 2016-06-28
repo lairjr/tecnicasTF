@@ -6,6 +6,7 @@ import infrastructure.Database;
 import infrastructure.IDatabase;
 import infrastructure.ioc.IoCContainer;
 import infrastructure.mocks.FlightGenerator;
+import infrastructure.mocks.PromotionGenerator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,11 +25,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        IDatabase database = IoCContainer.getDatabase();
-//        database.createOrCheckDatabase();
-//
-//        FlightGenerator flightGenerator = IoCContainer.getFlightGenerator();
-//        flightGenerator.generateFlightsMocks();
+        IDatabase database = IoCContainer.getDatabase();
+        database.createOrCheckDatabase();
+
+        FlightGenerator flightGenerator = IoCContainer.getFlightGenerator();
+        flightGenerator.generateFlightsMocks();
+
+        PromotionGenerator promotionGenerator = IoCContainer.getPromotionGenerator();
+        promotionGenerator.generatePromotionMocks();
 
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Trabalho Técnicas");

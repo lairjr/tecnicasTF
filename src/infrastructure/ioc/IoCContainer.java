@@ -10,11 +10,14 @@ import dtos.factories.*;
 import infrastructure.Database;
 import infrastructure.IDatabase;
 import infrastructure.mocks.FlightGenerator;
+import infrastructure.mocks.PromotionGenerator;
 import org.apache.derby.jdbc.EmbeddedDataSource;
 import repository.IFlightDao;
+import repository.IPromotionDao;
 import repository.ISeatDao;
 import repository.ITicketDao;
 import repository.dao.FlightDao;
+import repository.dao.PromotionDao;
 import repository.dao.SeatDao;
 import repository.dao.TicketDao;
 import view.factories.FlightVMFactory;
@@ -60,5 +63,14 @@ public class IoCContainer {
         IFlightService flightService = FlightService.getInstance(flightDao, seatDao, seatDTOFactory);
 
         return FlightGenerator.getInstance(flightService);
+    }
+
+    public static PromotionGenerator getPromotionGenerator() {
+        EmbeddedDataSource dataSource = new EmbeddedDataSource();
+        IDatabase database = Database.getInstance(dataSource);
+        IPromotionDTOFactory promotionDTOFactory = PromotionDTOFactory.getInstance();
+        IPromotionDao promotionDao = PromotionDao.getInstance(database, promotionDTOFactory);
+
+        return PromotionGenerator.getInstance(promotionDao, promotionDTOFactory);
     }
 }
