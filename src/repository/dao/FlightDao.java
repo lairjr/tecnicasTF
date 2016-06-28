@@ -7,14 +7,10 @@ import infrastructure.IDatabase;
 import repository.IFlightDao;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by ljunior on 5/31/16.
- */
 public class FlightDao implements IFlightDao {
     private static FlightDao instance;
     private IDatabase db;
@@ -96,7 +92,7 @@ public class FlightDao implements IFlightDao {
 
             flightDTO = flightDTOFactory.create(rs);
         } catch (Exception e) {
-
+            System.out.println(e);
         }
 
         return flightDTO;
@@ -121,7 +117,7 @@ public class FlightDao implements IFlightDao {
             conn.close();
 
         } catch (SQLException e) {
-
+            System.out.println(e);
         }
 
         return flightDTOs;

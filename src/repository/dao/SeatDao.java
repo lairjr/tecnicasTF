@@ -12,9 +12,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ljunior on 6/25/16.
- */
 public class SeatDao implements ISeatDao {
     private static SeatDao instance;
     private IDatabase db;

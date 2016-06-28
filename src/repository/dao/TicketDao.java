@@ -1,6 +1,5 @@
 package repository.dao;
 
-import dtos.FlightDTO;
 import dtos.TicketDTO;
 import dtos.factories.ITicketDTOFactory;
 import infrastructure.Constants;
@@ -8,12 +7,7 @@ import infrastructure.IDatabase;
 import repository.ITicketDao;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Created by ljunior on 6/2/16.
- */
 public class TicketDao implements ITicketDao {
     private static TicketDao instance;
     private IDatabase db;

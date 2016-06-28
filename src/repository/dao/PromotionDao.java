@@ -10,9 +10,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by ljunior on 6/27/16.
- */
 public class PromotionDao implements IPromotionDao {
     private static PromotionDao instance;
     private IDatabase db;
@@ -50,32 +47,6 @@ public class PromotionDao implements IPromotionDao {
         }
 
         return promotionDTOs;
-    }
-
-    @Override
-    public PromotionDTO getByPromotionId(int promotionId) {
-        StringBuilder sql = new StringBuilder();
-
-        sql.append(" SELECT * FROM " + Constants.Promotions.TABLE_NAME);
-
-        sql.append(" WHERE ");
-
-        sql.append(Constants.Promotions.PromotionId + " = ? ");
-
-        try (Connection conn = db.getConnection()) {
-            PreparedStatement ps = conn.prepareStatement(sql.toString());
-            ps.setInt(1, promotionId);
-
-            ResultSet rs = ps.executeQuery();
-
-            rs.next();
-
-            return promotionDTOFactory.create(rs);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-
-        return null;
     }
 
     @Override
