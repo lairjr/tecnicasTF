@@ -11,6 +11,7 @@ import dtos.TicketDTO;
 import infrastructure.Constants;
 import infrastructure.Database;
 import infrastructure.IDatabase;
+import infrastructure.exceptions.RecordNotFoundException;
 import infrastructure.ioc.IoCContainer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -68,6 +69,8 @@ public class TicketsController implements Initializable {
 
     private FlightDTO outboundFlight;
     private FlightDTO inboundFlight;
+    private final String FLIGHT_NOT_FOUND = "Voo não encontrado!";
+    private final String TICKET_NOT_FOUND_MSG = "Passagem não encontrada!";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,27 +81,35 @@ public class TicketsController implements Initializable {
     public void searchDeparture() {
         int flightId = Integer.parseInt(_outboundFlightNumber.getText());
 
-        outboundFlight = domainFacede.getFlightByNumber(flightId);
-        FlightVM flightVM = flightVMFactory.create(outboundFlight);
+        try {
+            outboundFlight = domainFacede.getFlightByNumber(flightId);
+            FlightVM flightVM = flightVMFactory.create(outboundFlight);
 
-        _outboundDeparture.setText(flightVM.getDepartureLocale().getValue());
-        _outboundArrival.setText(flightVM.getArrivalLocale().getValue());
-        _outboundFlightDate.setText(flightVM.getDepartureDate().getValue());
+            _outboundDeparture.setText(flightVM.getDepartureLocale().getValue());
+            _outboundArrival.setText(flightVM.getArrivalLocale().getValue());
+            _outboundFlightDate.setText(flightVM.getDepartureDate().getValue());
 
-        updatePrice();
+            updatePrice();
+        } catch (RecordNotFoundException e) {
+            displayAlert(FLIGHT_NOT_FOUND);
+        }
     }
 
     public void searchArrival() {
         int flightId = Integer.parseInt(_inboundFlightNumber.getText());
 
-        inboundFlight = domainFacede.getFlightByNumber(flightId);
-        FlightVM flightVM = flightVMFactory.create(inboundFlight);
+        try {
+            inboundFlight = domainFacede.getFlightByNumber(flightId);
+            FlightVM flightVM = flightVMFactory.create(inboundFlight);
 
-        _inboundDeparture.setText(flightVM.getDepartureLocale().getValue());
-        _inboundArrival.setText(flightVM.getArrivalLocale().getValue());
-        _inboundFlightDate.setText(flightVM.getDepartureDate().getValue());
+            _inboundDeparture.setText(flightVM.getDepartureLocale().getValue());
+            _inboundArrival.setText(flightVM.getArrivalLocale().getValue());
+            _inboundFlightDate.setText(flightVM.getDepartureDate().getValue());
 
-        updatePrice();
+            updatePrice();
+        } catch (RecordNotFoundException e) {
+            displayAlert(FLIGHT_NOT_FOUND);
+        }
     }
 
     public void saveTicket() {
@@ -128,28 +139,32 @@ public class TicketsController implements Initializable {
     public void searchTicketId() {
         int ticketId = Integer.parseInt(_searchTicketId.getText());
 
-        TicketDTO ticket = domainFacede.getTicket(ticketId);
+        try {
+            TicketDTO ticket = domainFacede.getTicket(ticketId);
 
-        _passengerName.setText(ticket.getPassenger());
-        _document.setText(ticket.getDocument());
+            _passengerName.setText(ticket.getPassenger());
+            _document.setText(ticket.getDocument());
 
-        FlightVM flightVM = flightVMFactory.create(ticket.getInboundFlight());
+            FlightVM flightVM = flightVMFactory.create(ticket.getInboundFlight());
 
-        _inboundFlightNumber.setText(String.valueOf(ticket.getInboundFlightNumber()));
-        _inboundDeparture.setText(flightVM.getDepartureLocale().getValue());
-        _inboundArrival.setText(flightVM.getArrivalLocale().getValue());
-        _inboundFlightDate.setText(flightVM.getDepartureDate().getValue());
-        _inboundStatus.setText(Constants.TicketStatusDecription.get(ticket.getInboundStatus()));
+            _inboundFlightNumber.setText(String.valueOf(ticket.getInboundFlightNumber()));
+            _inboundDeparture.setText(flightVM.getDepartureLocale().getValue());
+            _inboundArrival.setText(flightVM.getArrivalLocale().getValue());
+            _inboundFlightDate.setText(flightVM.getDepartureDate().getValue());
+            _inboundStatus.setText(Constants.TicketStatusDecription.get(ticket.getInboundStatus()));
 
-        flightVM = flightVMFactory.create(ticket.getOutboundFlight());
+            flightVM = flightVMFactory.create(ticket.getOutboundFlight());
 
-        _outboundFlightNumber.setText(String.valueOf(ticket.getOutboundFlightNumber()));
-        _outboundDeparture.setText(flightVM.getDepartureLocale().getValue());
-        _outboundArrival.setText(flightVM.getArrivalLocale().getValue());
-        _outboundFlightDate.setText(flightVM.getDepartureDate().getValue());
-        _outboundStatus.setText(Constants.TicketStatusDecription.get(ticket.getOutboundStatus()));
+            _outboundFlightNumber.setText(String.valueOf(ticket.getOutboundFlightNumber()));
+            _outboundDeparture.setText(flightVM.getDepartureLocale().getValue());
+            _outboundArrival.setText(flightVM.getArrivalLocale().getValue());
+            _outboundFlightDate.setText(flightVM.getDepartureDate().getValue());
+            _outboundStatus.setText(Constants.TicketStatusDecription.get(ticket.getOutboundStatus()));
 
-        _tripPrice.setText(String.valueOf(ticket.getPrice()));
+            _tripPrice.setText(String.valueOf(ticket.getPrice()));
+        } catch (RecordNotFoundException e) {
+            displayAlert(TICKET_NOT_FOUND_MSG);
+        }
     }
 
     private void updatePrice() {
@@ -157,5 +172,13 @@ public class TicketsController implements Initializable {
         price += inboundFlight != null ? inboundFlight.getPrice() : 0;
 
         _tripPrice.setText(price.toString());
+    }
+
+    private void displayAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Malandrinho");
+        alert.setHeaderText(message);
+
+        alert.showAndWait();
     }
 }

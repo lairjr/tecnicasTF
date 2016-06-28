@@ -5,6 +5,7 @@ import dtos.FlightDTO;
 import dtos.SeatDTO;
 import dtos.TicketDTO;
 import infrastructure.Constants;
+import infrastructure.exceptions.RecordNotFoundException;
 import infrastructure.ioc.IoCContainer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,6 +34,8 @@ public class CheckinController implements Initializable {
     private List<CheckBox> _outboundCheckboxes;
     private List<CheckBox> _inboundCheckboxes;
     private TicketDTO ticketDTO;
+    private final String SELECT_SEAT_MSG = "Seleciona um voo malandrinho!";
+    private final String TICKET_NOT_FOUND_MSG = "Passagem não encontrada!";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -48,15 +51,20 @@ public class CheckinController implements Initializable {
     public void searchTicket() {
         int ticketNumber = Integer.parseInt(_ticketNumber.getText());
 
-        ticketDTO = domainFacede.getTicket(ticketNumber);
+        try {
+            ticketDTO = domainFacede.getTicket(ticketNumber);
+            displayTicket();
+        } catch (RecordNotFoundException e) {
+            displayAlert(TICKET_NOT_FOUND_MSG);
+        }
 
-        displayTicket();
     }
 
     public void checkInInbound() {
         int selectedSeat = getSelectedCheckbox(_inboundCheckboxes);
+
         if (selectedSeat == 0) {
-            displaySelectSeatMsg();
+            displayAlert(SELECT_SEAT_MSG);
         } else {
             ticketDTO = domainFacede.saveInbountSeat(ticketDTO.getTicketId(), ticketDTO.getInboundFlightNumber(), selectedSeat);
             displayTicket();
@@ -65,8 +73,9 @@ public class CheckinController implements Initializable {
 
     public void checkInOutbound() {
         int selectedSeat = getSelectedCheckbox(_outboundCheckboxes);
+
         if (selectedSeat == 0) {
-            displaySelectSeatMsg();
+            displayAlert(SELECT_SEAT_MSG);
         } else {
             ticketDTO = domainFacede.saveOutboundSeat(ticketDTO.getTicketId(), ticketDTO.getOutboundFlightNumber(), selectedSeat);
             displayTicket();
@@ -87,10 +96,10 @@ public class CheckinController implements Initializable {
         displayFlight(ticketDTO.getInboundFlight(), _inboundCheckboxes, btnCheckInInbound, ticketDTO.getInboundStatus());
     }
 
-    private void displaySelectSeatMsg() {
+    private void displayAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Malandrinho");
-        alert.setHeaderText("Seleciona um voo malandrinho!");
+        alert.setHeaderText(message);
 
         alert.showAndWait();
     }

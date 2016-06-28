@@ -8,6 +8,7 @@ import dtos.TicketDTO;
 import dtos.factories.ISeatDTOFactory;
 import dtos.factories.ITicketDTOFactory;
 import infrastructure.Constants;
+import infrastructure.exceptions.RecordNotFoundException;
 import repository.ISeatDao;
 import repository.ITicketDao;
 
@@ -50,8 +51,12 @@ public class TicketService implements ITicketService {
     }
 
     @Override
-    public TicketDTO getByNumber(int ticketNumber) {
+    public TicketDTO getByNumber(int ticketNumber) throws RecordNotFoundException {
         TicketDTO ticketDTO = ticketDao.getByNumber(ticketNumber);
+
+        if (ticketDTO == null)
+            throw new RecordNotFoundException();
+
         FlightDTO inboundFlight = flightService.getFlightByNumber(ticketDTO.getInboundFlightNumber());
         FlightDTO outboundFlight = flightService.getFlightByNumber(ticketDTO.getOutboundFlightNumber());
 
@@ -86,14 +91,24 @@ public class TicketService implements ITicketService {
 
     private TicketDTO updateTicketOutboundSeat(TicketDTO ticketDTO) {
         ticketDTO = ticketDao.update(ticketDTO);
-        ticketDTO.setOutboundFlight(flightService.getFlightByNumber(ticketDTO.getOutboundFlightNumber()));
+
+        try {
+            ticketDTO.setOutboundFlight(flightService.getFlightByNumber(ticketDTO.getOutboundFlightNumber()));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         return ticketDTO;
     }
 
     private TicketDTO updateTicketInboundSeat(TicketDTO ticketDTO) {
         ticketDTO = ticketDao.update(ticketDTO);
-        ticketDTO.setInboundFlight(flightService.getFlightByNumber(ticketDTO.getInboundFlightNumber()));
+
+        try {
+            ticketDTO.setInboundFlight(flightService.getFlightByNumber(ticketDTO.getInboundFlightNumber()));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
         return ticketDTO;
     }

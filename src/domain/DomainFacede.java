@@ -2,6 +2,7 @@ package domain;
 
 import dtos.FlightDTO;
 import dtos.TicketDTO;
+import infrastructure.exceptions.RecordNotFoundException;
 
 import java.sql.Date;
 import java.util.List;
@@ -27,7 +28,7 @@ public class DomainFacede implements IDomainFacede {
     }
 
     @Override
-    public FlightDTO getFlightByNumber(int flightNumber) {
+    public FlightDTO getFlightByNumber(int flightNumber) throws RecordNotFoundException {
         return flightService.getFlightByNumber(flightNumber);
     }
 
@@ -42,7 +43,7 @@ public class DomainFacede implements IDomainFacede {
     }
 
     @Override
-    public TicketDTO getTicket(int ticketNumber) {
+    public TicketDTO getTicket(int ticketNumber) throws RecordNotFoundException {
         return ticketService.getByNumber(ticketNumber);
     }
 

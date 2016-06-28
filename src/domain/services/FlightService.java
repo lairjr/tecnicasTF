@@ -4,6 +4,7 @@ import domain.IFlightService;
 import dtos.FlightDTO;
 import dtos.SeatDTO;
 import dtos.factories.ISeatDTOFactory;
+import infrastructure.exceptions.RecordNotFoundException;
 import repository.IFlightDao;
 import repository.ISeatDao;
 
@@ -33,8 +34,11 @@ public class FlightService implements IFlightService {
     }
 
     @Override
-    public FlightDTO getFlightByNumber(int flightNumber) {
+    public FlightDTO getFlightByNumber(int flightNumber) throws RecordNotFoundException {
         FlightDTO flightDTO = flightDao.getFlightById(flightNumber);
+
+        if (flightDTO == null)
+            throw new RecordNotFoundException();
 
         List<SeatDTO> seats = seatDao.getSeatsByFlightId(flightDTO.getFlightId());
         flightDTO.setSeats(seats);
