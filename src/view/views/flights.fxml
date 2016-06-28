@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+
 <GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.controllers.FlightsController">
     <children>
         <AnchorPane prefHeight="443.0" prefWidth="843.0">
@@ -21,14 +23,14 @@
                                 <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
-                                <Label prefHeight="18.0" prefWidth="108.0" text="Data Embarque" />
-                                <Label text="Data Retorno" GridPane.columnIndex="2" />
+                                <Label prefHeight="18.0" prefWidth="108.0" text="Data Inicio" />
+                                <Label text="Data Fim" GridPane.columnIndex="2" />
                                 <Label text="Local Embarque" GridPane.rowIndex="1" />
                                 <DatePicker fx:id="_departureDate" GridPane.columnIndex="1" />
                                 <DatePicker fx:id="_arrivalDate" GridPane.columnIndex="3" />
                                 <TextField fx:id="_departureLocal" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                 <Button mnemonicParsing="false" onAction="#searchFligths" text="Pesquisar" GridPane.columnIndex="4" />
-                                <Label text="Local Retorno" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                                <Label text="Local Chegada" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                 <TextField fx:id="_arrivalLocal" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                             </children>
                         </GridPane>

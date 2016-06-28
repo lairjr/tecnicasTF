@@ -16,6 +16,7 @@ import view.models.FlightVM;
 
 import java.net.URL;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -50,6 +51,12 @@ public class FlightsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         solveDependencies();
         bindTableCollumns();
+        setDefaultDate();
+    }
+
+    private void setDefaultDate() {
+        _departureDate.setValue(LocalDate.now().minusDays(15));
+        _arrivalDate.setValue(LocalDate.now().plusDays(15));
     }
 
     private void bindTableCollumns() {
