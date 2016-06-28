@@ -5,9 +5,6 @@ import infrastructure.Constants;
 
 import java.sql.ResultSet;
 
-/**
- * Created by ljunior on 6/25/16.
- */
 public class SeatDTOFactory implements ISeatDTOFactory {
     private static SeatDTOFactory instance;
 

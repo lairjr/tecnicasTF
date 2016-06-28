@@ -6,9 +6,6 @@ import infrastructure.Constants;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 
-/**
- * Created by ljunior on 6/25/16.
- */
 public class FlightDTOFactory implements IFlightDTOFactory {
     private static FlightDTOFactory instance;
 
@@ -32,7 +29,7 @@ public class FlightDTOFactory implements IFlightDTOFactory {
             boolean international = rs.getInt(Constants.Flights.International) == 1;
             int price = rs.getInt(Constants.Flights.Price);
 
-            FlightDTO flightDTO = new FlightDTO(
+            return new FlightDTO(
                     flightId,
                     departureLocal,
                     arrivalLocal,
@@ -40,8 +37,6 @@ public class FlightDTOFactory implements IFlightDTOFactory {
                     flightArrivalDate,
                     international,
                     price);
-
-            return flightDTO;
         }
         catch (Exception e) {
             return null;

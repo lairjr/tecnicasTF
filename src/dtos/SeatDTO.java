@@ -1,8 +1,5 @@
 package dtos;
 
-/**
- * Created by ljunior on 6/25/16.
- */
 public class SeatDTO {
     private final int seatId;
     private final int flightId;
@@ -27,6 +24,4 @@ public class SeatDTO {
     public int getFlightId() {
         return flightId;
     }
-
-    public int getSeatId() { return seatId; }
 }

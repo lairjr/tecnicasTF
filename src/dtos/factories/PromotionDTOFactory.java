@@ -5,9 +5,6 @@ import infrastructure.Constants;
 
 import java.sql.ResultSet;
 
-/**
- * Created by ljunior on 6/28/16.
- */
 public class PromotionDTOFactory implements IPromotionDTOFactory {
     private static PromotionDTOFactory instance;
 

@@ -1,8 +1,5 @@
 package dtos;
 
-/**
- * Created by ljunior on 6/27/16.
- */
 public class PromotionDTO {
     private int promotionId;
     private String text;
@@ -18,10 +15,6 @@ public class PromotionDTO {
 
     public void setPromotionId(int promotionId) {
         this.promotionId = promotionId;
-    }
-
-    public int getPromotionId() {
-        return promotionId;
     }
 
     public String getText() {

@@ -5,9 +5,6 @@ import infrastructure.Constants;
 
 import java.sql.ResultSet;
 
-/**
- * Created by ljunior on 6/27/16.
- */
 public class TicketDTOFactory implements ITicketDTOFactory {
     private static TicketDTOFactory instance;
 

@@ -1,13 +1,8 @@
 package dtos;
 
-import infrastructure.Constants;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * Created by ljunior on 5/31/16.
- */
 public class FlightDTO {
     private int flightId;
     private String departureLocale;
@@ -36,16 +31,8 @@ public class FlightDTO {
         return departureLocale;
     }
 
-    public void setDepartureLocale(String departureLocale) {
-        this.departureLocale = departureLocale;
-    }
-
     public String getArrivalLocale() {
         return arrivalLocale;
-    }
-
-    public void setArrivalLocale(String arrivalLocale) {
-        this.arrivalLocale = arrivalLocale;
     }
 
     public LocalDateTime getDepartureDate() {

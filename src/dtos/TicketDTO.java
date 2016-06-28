@@ -2,9 +2,6 @@ package dtos;
 
 import infrastructure.Constants;
 
-/**
- * Created by ljunior on 6/1/16.
- */
 public class TicketDTO {
     private int ticketId;
     private String passenger;
